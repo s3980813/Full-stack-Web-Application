@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="aboutUs.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--Display navigation bar-->
+    <%- include("partials/navbar.ejs", {title: "Order Placement" }) %>
+        <!-- Search Modal -->
+        <div class="modal_search" id="search">
+            <a href="#" class="close_search"></a>
+            <div class="search_body">
+                <input class="search_button" type="text" placeholder="Search" name="search">
+            </div>
+        </div>
+
+        <main>
+            <div class="intro">
+                <h1>About us</h1>
+                <p>Our group have four member and we are from RMIT University. This project are created to help newbie
+                    approach to programming more easy.</p>
+                <p>We are welcome everyone join with us in both role instructor and learner</p>
+                <h1>Here are the project Co-founder</h1>
+            </div>
+            <section>
+                <a class="image" href="#giadinh">
+                    <img src="A_small_cup_of_coffee.JPG" alt="coffee cup">
+                    <h1>Luu Gia Dinh</h1>
+                </a>
+                <a class="image" href="#phuoc">
+                    <img src="A_small_cup_of_coffee.JPG" alt="coffee cup">
+                    <h1>Luu Gia Dinh</h1>
+                </a>
+                <a class="image" href="#phung">
+                    <img src="A_small_cup_of_coffee.JPG" alt="coffee cup">
+                    <h1>Luu Gia Dinh</h1>
+                </a>
+                <a class="image" href="#phi">
+                    <img src="A_small_cup_of_coffee.JPG" alt="coffee cup">
+                    <h1>Luu Gia Dinh</h1>
+                </a>
+                <a class="image" href="#phu">
+                    <img src="A_small_cup_of_coffee.JPG" alt="coffee cup">
+                    <h1>Luu Gia Dinh</h1>
+                </a>
+            </section>
+        </main>
+
+        <!-- Modal -->
+        <div class="modal overlay" id="giadinh">
+            <a href="#" class="overlay-close"></a>
+            <div class="modal-body">
+                <p>Name: Luu Gia Dinh</p>
+                <p>Age: 21</p>
+                <p>Career: IT</p>
+                <p>I want to create a website to help the beginner improve their coding skill
+                    as well as approach with programming earlier
+                    which can help them define their future road more detail</p>
+            </div>
+        </div>
+        <div class="modal overlay" id="phuoc">
+            <a href="#" class="overlay-close"></a>
+            <div class="modal-body">
+                <p>Name: Luu Gia Dinh</p>
+                <p>Age: 21</p>
+                <p>Career: IT</p>
+                <p>I want to create a website to help the beginner improve their coding skill
+                    as well as approach with programming earlier
+                    which can help them define their future road more detail</p>
+            </div>
+        </div>
+        <div class="modal overlay" id="phung">
+            <a href="#" class="overlay-close"></a>
+            <div class="modal-body">
+                <p>Name: Luu Gia Dinh</p>
+                <p>Age: 21</p>
+                <p>Career: IT</p>
+                <p>I want to create a website to help the beginner improve their coding skill
+                    as well as approach with programming earlier
+                    which can help them define their future road more detail2</p>
+            </div>
+        </div>
+        <div class="modal overlay" id="phi">
+            <a href="#" class="overlay-close"></a>
+            <div class="modal-body">
+                <p>Name: Luu Gia Dinh</p>
+                <p>Age: 21</p>
+                <p>Career: IT</p>
+                <p>I want to create a website to help the beginner improve their coding skill
+                    as well as approach with programming earlier
+                    which can help them define their future road more detail3</p>
+            </div>
+        </div>
+        <div class="modal overlay" id="phu">
+            <a href="#" class="overlay-close"></a>
+            <div class="modal-body">
+                <p>Name: Luu Gia Dinh</p>
+                <p>Age: 21</p>
+                <p>Career: IT</p>
+                <p>I want to create a website to help the beginner improve their coding skill
+                    as well as approach with programming earlier
+                    which can help them define their future road more detail3</p>
+            </div>
+        </div>
+
+        <!-- Display footer -->
+        <%- include("partials/footer.ejs") %>
+</body>
+
+</html>
