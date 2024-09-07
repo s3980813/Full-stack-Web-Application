@@ -86,10 +86,16 @@
             <!--This class will show the details such as course name, instructor name and role, course price, and total payment of the order-->
             <div class="OrderSummary">
                 <div class="InstructorInfo">
-                    <img src="character.jpg" alt="John Doe">
+                    <img src="<%= user.profileImage %>" alt="<%= user.fullName %> Profile picture">
                     <div class="InstructorName">
-                        <h2 id="InstructorName">John Doe</h2>
-                        <p id="Role">Instructor
+                        <% if (User) { %>
+                            <h2 id="InstructorName">
+                                <%= user.fullName %>
+                            </h2>
+                            <% } else { %>
+                                <% window.location.assign("/login") %>
+                                    <% } %>
+                                        <p id="Role">Instructor
                     </div>
                 </div>
                 <hr>

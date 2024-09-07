@@ -42,15 +42,15 @@ app.get('*', checkUser);
 
 // Setting up session
 app.use(
-    session({
-      secret: 'your-secret-key',
-      resave: false,
-      saveUninitialized: true,
-      cookie: { 
-        maxAge: 60 * 60 * 24 * 24 * 7,
-        secure: false 
-      },
-    })
+  session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 60 * 60 * 24 * 24 * 7,
+      secure: false
+    },
+  })
 );
 
 // Setting up routes
@@ -62,31 +62,35 @@ app.use(dealRoutes);
 const mongoURI = 'mongodb+srv://Creasic:wY3v3xh7FuM059vM@cluster0.c0ofkzi.mongodb.net/';
 
 mongoose.connect(mongoURI)
-.then(() => console.log('Connected to MongoDB Atlas'))
-.catch((error) => console.log(error.message));
+  .then(() => console.log('Connected to MongoDB Atlas'))
+  .catch((error) => console.log(error.message));
 
 // Middleware for image upload
 const userImgStorage = multer.diskStorage({
-  destination: function(req, file, cb) {
-      cb(null, 'frontend/images/');
+  destination: function (req, file, cb) {
+    cb(null, 'frontend/images/');
   },
-  filename: function(req, file, cb) {
-      const token = req.cookies.jwt;
-      const decodedToken = jwt.verify(token, 'your-secret-key');
-      const userId = decodedToken.id;
-      const date = new Date();
-      const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`;
-      const newFilename = `${formattedDate}-${userId}-${file.originalname}`;
-      cb(null, newFilename);
+  filename: function (req, file, cb) {
+    const token = req.cookies.jwt;
+    const decodedToken = jwt.verify(token, 'your-secret-key');
+    const userId = decodedToken.id;
+    const date = new Date();
+    const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`;
+    const newFilename = `${formattedDate}-${userId}-${file.originalname}`;
+    cb(null, newFilename);
   }
 });
 
+// Define and setup ejs files
+app.set("view engine", "ejs");
+app.set("views", "./views");
+
 const userImgUpload = multer({ storage: userImgStorage });
 
-app.get('/', function (req, res) {
-    res.render("home.ejs")
+app.get('/', (req, res) => {
+  res.render("home");
 });
 
 app.listen(port, () => {
-    console.log(`Server started on port ${port}`);
-  });
+  console.log(`Server started on port ${port}`);
+});
