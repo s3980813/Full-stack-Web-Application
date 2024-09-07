@@ -38,5 +38,12 @@ const courseSchema = new Schema({
     }
 }, { timestamps: true });
 
+// courseModel.virtual('imageCoverData').get(function () {
+//     if (this.coverImage != null && this.coverImageType != null) {
+//         return `data:${this.coverImageType};charset=utf-8;base64,${this.coverImage.toString('base64')}`
+//     }
+//     return "https://www.wowpatterns.com/assets/files/resource_images/diagonal-lines-vector-pattern.jpg"
+// })
+
 // Export the Course model
 module.exports = mongoose.model('Course', courseSchema);
