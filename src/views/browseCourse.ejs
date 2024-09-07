@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Browse Courses</title>
+    <!-- Link to external CSS file for styling -->
+    <link rel="stylesheet" href="browseCourse.css" />
+</head>
+
+<body>
+    <!-- NavBar -->
+    <!-- This section creates a navigation bar at the top of the page -->
+    <!-- <nav class="navBar">
+        <div class="logo">
+            Logo section with an image that links to the home page -->
+    <!-- <a href="#"><img
+                    src="https://cdn.glitch.global/a8735179-2600-4365-b449-07d7da34204c/A_small_cup_of_coffee.JPG?v=1724821966750"
+                    alt="coffee cupss" /></a>
+        </div>
+        <div class="nav"> -->
+    <!-- Navigation links for different sections of the website -->
+    <!-- <a class="navButton" href="#">Home</a>
+            <a class="navButton" href="#">About Us</a>
+            <a class="navButton" href="#">Pricing</a>
+            <a class="navButton" href="#search">Search</a>
+            <a class="navButton" href="#">FAQ</a>
+            <a class="navButton" href="#">Contact</a>
+            <a class="navButton" href="#">My Account</a>
+        </div>
+    </nav> -->
+
+    <!--Display navigation bar-->
+    <%- include("partials/navbar.ejs", {title: "Order Placement" }) %>
+        <!-- End of NavBar -->
+
+        <!-- Search Modal -->
+        <!-- This section creates a modal for the search functionality -->
+        <div class="modal_search" id="search">
+            <!-- Close button for the search modal -->
+            <a href="#" class="close_search"></a>
+            <div class="search_body">
+                <!-- Input field for search queries -->
+                <input class="search_button" type="text" placeholder="Search" name="search" />
+            </div>
+        </div>
+        <!-- End of Search Modal -->
+
+        <!-- Header -->
+        <!-- This section displays the main heading of the page -->
+        <header>
+            <h1>Browse Courses</h1>
+        </header>
+
+        <!-- Course Container -->
+        <!-- This section holds all the course offerings -->
+        <div class="container">
+            <!-- Each course is displayed as a card -->
+            <div class="course">
+                <h2>AI Puzzle</h2>
+                <ul>
+                    <li>Train a model to solve CAPTCHA with Google.</li>
+                    <li>
+                        This series focuses on AI applications, training AI using Python.
+                        You can use Google Colab to speed up training.
+                    </li>
+                    <li>Object detection - Find objects in images with TensorFlow.</li>
+                </ul>
+                <!-- Image associated with the AI Puzzle course -->
+                <img src="https://cdn.glitch.global/a8735179-2600-4365-b449-07d7da34204c/AI-puzzle-Lottie-JSON-animation.gif?v=1724823890046"
+                    alt="AI Puzzle Course Image" />
+                <!-- Button that could link to more details about the course -->
+                <button>Click here to learn more</button>
+            </div>
+
+            <div class="course">
+                <h2>Web Development</h2>
+                <p>
+                    This course is designed for beginners who want to enter the world of
+                    web development. You will learn how to structure web pages using HTML,
+                    style them with CSS, and add interactive elements with JavaScript.
+                </p>
+                <!-- Image associated with the Web Development course -->
+                <img src="https://cdn.glitch.me/a8735179-2600-4365-b449-07d7da34204c/Java.gif?v=1724836630307"
+                    alt="Web Development Course Image" />
+                <!-- Button that could link to more details about the course -->
+                <button>Click here to learn more</button>
+            </div>
+
+            <div class="course">
+                <h2>App Development</h2>
+                <ul>
+                    <li>
+                        Learn to create powerful and user-friendly mobile applications from
+                        scratch.
+                    </li>
+                    <li>
+                        This course is perfect for aspiring developers who want to dive into
+                        mobile app development. You will learn the fundamentals of app
+                        design, coding, and deployment for both iOS and Android platforms.
+                    </li>
+                </ul>
+                <!-- Image associated with the App Development course -->
+                <img src="https://cdn.glitch.global/a8735179-2600-4365-b449-07d7da34204c/2019-10-01-13-58-44-5d935b94dd6b5-app-development.gif?v=1724822662135"
+                    alt="App Development Course Image" />
+                <!-- Button that could link to more details about the course -->
+                <button>Click here to learn more</button>
+            </div>
+
+            <div class="course">
+                <h2>Artificial Intelligence and Machine Learning</h2>
+                <ul>
+                    <li>
+                        Explore the world of AI and Machine Learning with hands-on projects
+                        and expert guidance.
+                    </li>
+                    <li>
+                        This course is designed for those who want to dive deep into AI and
+                        Machine Learning. You will learn the fundamental concepts, tools,
+                        and techniques used in the industry, including neural networks,
+                        natural language processing, and computer vision.
+                    </li>
+                </ul>
+
+                <img src="https://cdn.glitch.global/a8735179-2600-4365-b449-07d7da34204c/imgpsh_fullsize_anim.gif?v=1724822883626"
+                    alt="Artificial Intelligence and Machine Learning Course Image" />
+                <!-- Button that could link to more details about the course -->
+                <button>Click here to learn more</button>
+            </div>
+            <div class="course">
+                <h2>Basic JavaScript</h2>
+                <ul>
+                    <li>
+                        This course will teach you concepts like variables, functions,
+                        loops, conditions, events, functions in JavaScript, and many other
+                        basic and advanced concepts.
+                    </li>
+                    <li>
+                        In addition, the author will guide you through the basic concepts
+                        and provide practice exercises to help you master the knowledge.
+                    </li>
+                </ul>
+                <!-- Image associated with the AI and Machine Learning course -->
+                <img src="https://cdn.glitch.global/a8735179-2600-4365-b449-07d7da34204c/Java.gif?v=1724836151020"
+                    alt="Basic JavaScript Course Image" />
+                <!-- Button that could link to more details about the course -->
+                <button>Click here to learn more</button>
+            </div>
+        </div>
+
+        <!-- <footer>
+        <div class="footer-nav">
+            Links in the footer for additional pages like Terms, and Privacy -->
+        <!-- <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+        </div> -->
+        <!-- Adding the CourseMasterTeam © 2024 text to the footer -->
+        <!-- <p>CourseMasterTeam © 2024</p>
+    </footer> -->
+
+        <!-- Display footer -->
+        <%- include("partials/footer.ejs") %>
+            <!-- End of Footer -->
+
+            <!-- Link to external JavaScript file for interactivity -->
+            <script src="coursedetail.js"></script>
+</body>
+
+</html>
