@@ -1,0 +1,315 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.navBar {
+    background: linear-gradient(29deg, #1b5ac3, #df5aa5);
+    background-size: 400% 400%;
+    -webkit-animation: AnimationName 30s ease infinite;
+    -moz-animation: AnimationName 30s ease infinite;
+    -o-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+}
+
+body {
+    background-color: #FFD0D0;
+}
+
+
+@-webkit-keyframes AnimationName {
+    0% {
+        background-position: 0% 24%
+    }
+
+    50% {
+        background-position: 100% 77%
+    }
+
+    100% {
+        background-position: 0% 24%
+    }
+}
+
+@-moz-keyframes AnimationName {
+    0% {
+        background-position: 0% 24%
+    }
+
+    50% {
+        background-position: 100% 77%
+    }
+
+    100% {
+        background-position: 0% 24%
+    }
+}
+
+@-o-keyframes AnimationName {
+    0% {
+        background-position: 0% 24%
+    }
+
+    50% {
+        background-position: 100% 77%
+    }
+
+    100% {
+        background-position: 0% 24%
+    }
+}
+
+@keyframes AnimationName {
+    0% {
+        background-position: 0% 24%
+    }
+
+    50% {
+        background-position: 100% 77%
+    }
+
+    100% {
+        background-position: 0% 24%
+    }
+}
+
+
+.logo a img {
+    width: 70px;
+    height: 70px;
+}
+
+
+.navBar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 74px;
+}
+
+
+.nav {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.navButton {
+    padding: 22px 28px;
+    display: block;
+    height: 100%;
+}
+
+
+.navButton {
+    text-decoration: none;
+}
+
+
+.navButton:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Search Modal */
+nav {
+    position: relative;
+}
+
+#search {
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+    display: none;
+}
+
+#search {
+    background-color: rgba(0, 0, 0, 0.5);
+    ;
+}
+
+#search:target {
+    display: flex;
+}
+
+
+.search_button {
+    display: block;
+    border-radius: 15px;
+    position: relative;
+    border-style: none;
+    padding: 10px;
+    width: 100%;
+}
+
+
+.close_search {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    cursor: default;
+}
+
+
+.search_body {
+    width: 20%;
+}
+
+.OrderPlacement {
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    flex-basis: 25%;
+}
+
+.OrderSummary {
+    background-color: #FF9EAA;
+    color: white;
+    font-size: large;
+    border: 1px solid black;
+}
+
+.OrderSummary img {
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    padding: 10px;
+}
+
+.CourseGroup {
+    display: flex;
+    justify-content: space-between;
+    padding: 5%;
+}
+
+.CourseGroup #courseName {
+    font-weight: bold;
+}
+
+.Confirmation {
+    display: flex;
+    justify-content: space-between;
+    padding: 5%;
+}
+
+.Confirmation #paymentConfirmation {
+    font-weight: bold;
+}
+
+.InstructorInfo {
+    display: flex;
+}
+
+.InstructorName {
+    padding: 0;
+    margin-top: 5.5px;
+}
+
+.InstructorName #Role {
+    font-style: oblique;
+}
+
+.PaymentMethods {
+    font-weight: 30%;
+    margin-right: 7px;
+}
+
+.PaymentMethods .MethodsSelection button {
+    background-color: lightgray;
+    border-radius: 5%;
+    width: 200px;
+    height: 50px;
+    padding: 0;
+    margin: 5px 0px;
+}
+
+.PaymentMethods .SubmitButtons button {
+    border-radius: 10rem;
+    width: 100px;
+    height: 30px;
+}
+
+.PaymentMethods .Policies {
+    font-weight: 30%;
+    margin: 5px 0px;
+}
+
+.PaymentMethods form label {
+    font-weight: 30%;
+    margin: 10px 0px;
+}
+
+.PaymentMethods form {
+    display: none;
+    animation: slideInOut 1.75s ease-in-out;
+}
+
+@keyframes slideInOut {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-200px);
+    }
+
+    50% {
+        opacity: 0.5;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}
+
+input {
+    width: 175px;
+    padding: 0;
+    margin: 1px 0px;
+    outline: none;
+    height: 23.5px;
+}
+
+.courseCertificates {
+    padding: 0;
+    margin: 5px 0px;
+}
+
+.courseOptions {
+    padding: 0;
+    margin: 5px 0px;
+}
+
+/* Footer Styling */
+footer {
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+    background: linear-gradient(29deg, #1b5ac3, #df5aa5);
+    background-size: 400% 400%;
+    -webkit-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+}
+
+.footer-nav a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer-nav a:hover {
+    text-decoration: underline;
+}

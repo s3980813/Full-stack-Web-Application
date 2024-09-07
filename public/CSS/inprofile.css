@@ -1,0 +1,140 @@
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Header and Footer */
+.instructor-header{
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(29deg, #1b5ac3, #df5aa5);
+    background-size: 400% 400%;
+    -webkit-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+}
+
+.instructor-header .profile-image, .instructor-footer .footer-profile-image {
+    margin-right: 20px;
+}
+
+.instructor-header img, .instructor-footer img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.instructor-info h1, .footer-info h2 {
+    margin: 0;
+}
+
+.instructor-info p {
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* Main Section */
+main {
+    padding: 20px;
+}
+
+/* About Section */
+.about-section {
+    margin-bottom: 40px;
+}
+
+.about-section h2 {
+    margin-bottom: 10px;
+}
+
+/* Add Course Button Section */
+.add-course-section {
+    margin-bottom: 40px;
+    text-align: right;
+}
+
+.add-course-button {
+    background-color: #1b5ac3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-course-button:hover {
+    background-color: #0e3d92;
+}
+
+/* Courses Section */
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.course-card {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.course-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.course-card h3 {
+    margin: 10px 0;
+}
+
+.course-card p {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Footer Section */
+footer {
+    bottom: 0;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+    background: linear-gradient(29deg, #1b5ac3, #df5aa5);
+    background-size: 400% 400%;
+    -webkit-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+}
+
+.footer-nav a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer-nav a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .instructor-header, .instructor-footer {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-info {
+        text-align: center;
+        margin-top: 20px;
+    }
+}

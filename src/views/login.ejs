@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="login.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Logged-in user info -->
+        <div class="profile" id="profile">
+            <img src="profile picture.png" alt="Profile Picture">
+            <h2 id="fullName">
+                <%= fullName %>
+            </h2>
+            <p id="email">
+                <%= email %>
+            </p>
+            <p id="password">
+                <%= password %>
+            </p>
+        </div>
+
+        <!-- Login form -->
+        <div class="form-container log-in">
+            <form id="log_in">
+                <h1>Log In</h1>
+                <input type="email" name="email" id="email" placeholder="Email" required>
+                <div class="email error"></div>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <div class="password error"></div>
+                <a href="#">Forget Your Password?</a>
+                <button type="submit">Log In</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-nav">
+            <a href="#">Copyright</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+    </footer>
+
+    <script src="login.js"></script>
+</body>
+
+</html>

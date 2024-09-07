@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Detail</title>
+    <link rel="stylesheet" href="coursedetail.css">
+</head>
+
+<body>
+    <!-- NavBar Partial -->
+    <% include('partials/navbar') %>
+
+        <!-- Search Modal -->
+        <div class="modal_search" id="search">
+            <a href="#" class="close_search"></a>
+            <div class="search_body">
+                <input class="search_button" type="text" placeholder="Search" name="search">
+            </div>
+        </div>
+        <!-- End NavBar -->
+
+        <!-- Main Section -->
+        <main class="course-detail-container">
+            <div class="course-image">
+                <img src="course.jpg" alt="Course Image">
+            </div>
+            <div class="course-info">
+                <h2 id="courseTitle">
+                    <%= course.title %>
+                </h2>
+                <p id="courseInstructor">Instructor: <%= course.instructor %>
+                </p>
+                <p id="coursePrice">$<%= course.price %>
+                </p>
+                <p id="courseDescription">
+                    <%= course.description %>
+                </p>
+
+                <div id="actionButtons">
+                    <!-- JavaScript will dynamically insert the appropriate buttons here -->
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer Partial -->
+        <% include('partials/footer') %>
+
+            <script src="coursedetail.js"></script>
+</body>
+
+</html>

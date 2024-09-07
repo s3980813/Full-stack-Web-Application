@@ -1,0 +1,77 @@
+<!--Acknowledgement: FlowBite-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="thankyou.css" type="text/css">
+</head>
+
+<body>
+    <nav class="navBar">
+        <div class="logo"><a href="#"><img src="A_small_cup_of_coffee.JPG" alt="coffee cup"></a></div>
+        <div class="nav">
+            <a class="navButton" href="home.html">Home</a>
+            <a class="navButton" href="modal.html">About Us</a>
+            <a class="navButton" href="#">Pricing</a>
+            <a class="navButton" href="login.html">My Account</a>
+            <a class="navButton" href="#search">Search</a>
+            <a class="navButton" href="FAQ.html">FAQ</a>
+            <a class="navButton" href="contact.html">Contact</a>
+        </div>
+    </nav>
+    <!-- Search Modal -->
+    <div class="modal_search" id="search">
+        <a href="#" class="close_search"></a>
+        <div class="search_body">
+            <input class="search_button" type="text" placeholder="Search" name="search">
+        </div>
+    </div>
+    <!--End of navigation bar-->
+    <div class="Container">
+        <div class="HeadMessage">
+            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                width="24" height="50" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd"
+                    d="M12 2c-.791 0-1.55.314-2.11.874l-.893.893a.985.985 0 0 1-.696.288H7.04A2.984 2.984 0 0 0 4.055 7.04v1.262a.986.986 0 0 1-.288.696l-.893.893a2.984 2.984 0 0 0 0 4.22l.893.893a.985.985 0 0 1 .288.696v1.262a2.984 2.984 0 0 0 2.984 2.984h1.262c.261 0 .512.104.696.288l.893.893a2.984 2.984 0 0 0 4.22 0l.893-.893a.985.985 0 0 1 .696-.288h1.262a2.984 2.984 0 0 0 2.984-2.984V15.7c0-.261.104-.512.288-.696l.893-.893a2.984 2.984 0 0 0 0-4.22l-.893-.893a.985.985 0 0 1-.288-.696V7.04a2.984 2.984 0 0 0-2.984-2.984h-1.262a.985.985 0 0 1-.696-.288l-.893-.893A2.984 2.984 0 0 0 12 2Zm3.683 7.73a1 1 0 1 0-1.414-1.413l-4.253 4.253-1.277-1.277a1 1 0 0 0-1.415 1.414l1.985 1.984a1 1 0 0 0 1.414 0l4.96-4.96Z"
+                    clip-rule="evenodd" />
+            </svg>
+            <h1>Thank You!</h1>
+        </div>
+        <div class="Message">
+            <p>Thanks for your order, Mr./Miss./Mrs.___!</p>
+            <p>A digital receipt will be sent to your e-mail.
+                If you have any problems, please contact to the customer service team </p>
+
+            <div class="OrderSummary">
+                <div class="courseInfo">
+                    <img src="character.jpg" alt="John Doe">
+                    <br>
+                    <div class="courseDetails">
+                        <h3 id="courseName">Introduction to Web Development</h3>
+                        <p id="Instructor">John Doe</p>
+                    </div>
+                </div>
+                <label for="Total" id="Total">Total:</label>
+                <label for="coursePrice" id="Price">$99.99</label>
+                <br>
+                <label for="PaymentMethod" id="MethodDetails">Payment Method:</label>
+                <label for="MethodChoice" id="MethodChoice">Credit card</label>
+            </div>
+            <button onclick="redirectMainPage()" type="button" id="Return"> Back to home page</a></button>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-nav">
+            <a href="#">Copyright</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+    </footer>
+    <script src="thankyou.js"></script>
+</body>
+
+</html>

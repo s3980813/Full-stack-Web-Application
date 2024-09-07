@@ -1,0 +1,178 @@
+/* General Styles */
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f8fc;
+  color: #333333;
+}
+
+/* NavBar */
+.navBar {
+  background-color: #1a73e8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo styles in the navigation bar */
+.logo img {
+  width: 50px;
+}
+
+/* Footer navigation links styling */
+.footer-nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9em;
+}
+
+/* Navigation links styling */
+.nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+/* Hover effect for navigation links */
+.nav a:hover {
+  background-color: #135aba;
+}
+
+/* Search Modal */
+.modal_search {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+/* Styles for the search input field within the modal */
+.search_body {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.search_button {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.2em;
+  border: 2px solid #1a73e8;
+  border-radius: 5px;
+}
+
+/* Header */
+header {
+  background-color: #1a73e8;
+  color: white;
+  text-align: center;
+  padding: 40px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 3em;
+  margin: 0;
+}
+
+/* Course Container */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+.course {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  width: 300px;
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.course:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.course h2 {
+  background-color: #ff6f61;
+  color: white;
+  padding: 15px 0;
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.course ul,
+.course p {
+  padding: 20px;
+  margin: 0;
+  font-size: 1em;
+  color: #555555;
+  text-align: left;
+}
+
+.course ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.course ul li {
+  margin: 10px 0;
+}
+
+.course img {
+  width: 100%;
+  height: auto;
+}
+
+.course button {
+  background-color: #ff6f61;
+  color: white;
+  padding: 15px;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s;
+}
+
+.course button:hover {
+  background-color: #e8584c;
+}
+
+footer {
+  background-color: #1a73e8;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.footer-nav a:hover {
+  text-decoration: underline;
+}

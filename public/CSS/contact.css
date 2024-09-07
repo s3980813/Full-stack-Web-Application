@@ -1,0 +1,215 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navBar {
+    background: linear-gradient(29deg, #1b5ac3, #df5aa5);
+    background-size: 400% 400%;
+    -webkit-animation: AnimationName 30s ease infinite;
+    -moz-animation: AnimationName 30s ease infinite;
+    -o-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+    padding: 0 20px; /* Added padding to the navbar for better spacing */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for a modern look */
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 24%}
+    50%{background-position:100% 77%}
+    100%{background-position:0% 24%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 24%}
+    50%{background-position:100% 77%}
+    100%{background-position:0% 24%}
+}
+@-o-keyframes AnimationName {
+    0%{background-position:0% 24%}
+    50%{background-position:100% 77%}
+    100%{background-position:0% 24%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 24%}
+    50%{background-position:100% 77%}
+    100%{background-position:0% 24%}
+}
+
+.logo a img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%; /* Makes the logo circular */
+    border: 2px solid white; /* Adds a white border around the logo for better contrast */
+}
+
+.navBar {
+    display: flex;
+    justify-content: space-between; /* Adjusted for better spacing */
+    align-items: center;
+    height: 74px;
+}
+
+.nav {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+
+.navButton {
+    padding: 20px 25px; /* Slightly adjusted padding for better spacing */
+    display: block;
+    height: 100%;
+    text-decoration: none;
+    font-weight: 600; /* Added boldness for better readability */
+    font-family: 'Arial', sans-serif;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effects */
+    border-radius: 5px; /* Rounded corners for a softer look */
+}
+
+.navButton:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Changed to a lighter overlay for better contrast */
+    transform: translateY(-3px); /* Adds a subtle lift effect on hover */
+}
+
+.navButton:hover{
+    background-color: rgba(0,0,0,0.5);
+}
+
+.navButton:active {
+    transform: translateY(0); /* Resets the lift effect when active */
+}
+
+/* Search Modal */
+#search {
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#search:target {
+    display: flex;
+}
+
+.search_button {
+    display: block;
+    border-radius: 15px;
+    position: relative;
+    border-style: none;
+    padding: 10px;
+    width: 100%;
+}
+
+.close_search {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    cursor: default;
+}
+
+.search_body {
+    width: 20%;
+}
+
+@media(max-width: 800px) {
+    .navBar {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+    }
+    .nav {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+    }
+    .navButton {
+        width: 100%;
+        text-align: center;
+    }
+    main {
+        margin-top: 20px;
+    }
+}
+
+/* Contact Form Styling */
+.contact-form-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+form label {
+    display: block;
+    margin-top: 1rem;
+}
+
+form input, form select, form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+fieldset {
+    margin-top: 1rem;
+}
+
+fieldset legend {
+    font-weight: bold;
+}
+
+.buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    padding: 0.75rem 1.5rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Footer Styling */
+footer {
+    bottom: 0;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+    background: linear-gradient(29deg, #1b5ac3, #df5aa5);
+    background-size: 400% 400%;
+    -webkit-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+}
+
+.footer-nav a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer-nav a:hover {
+    text-decoration: underline;
+}

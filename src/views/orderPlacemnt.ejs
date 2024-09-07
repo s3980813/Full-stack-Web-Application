@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="orderPlacement.css" type="text/css">
+</head>
+
+
+<body>
+    <!--Display navigation bar-->
+    <nav class="navBar">
+        <div class="logo"><a href="#"><img src="A_small_cup_of_coffee.JPG" alt="coffee cup"></a></div>
+        <div class="nav">
+            <a class="navButton" href="home.html">Home</a>
+            <a class="navButton" href="modal.html">About Us</a>
+            <a class="navButton" href="#">Pricing</a>
+            <a class="navButton" href="login.html">My Account</a>
+            <a class="navButton" href="#search">Search</a>
+            <a class="navButton" href="FAQ.html">FAQ</a>
+            <a class="navButton" href="contact.html">Contact</a>
+        </div>
+    </nav>
+    <!-- Search Modal -->
+    <div class="modal_search" id="search">
+        <a href="#" class="close_search"></a>
+        <div class="search_body">
+            <input class="search_button" type="text" placeholder="Search" name="search">
+        </div>
+    </div>
+    <!--End of navigation bar-->
+
+    <!--Start of the Order Placement page's content-->
+    <div class="OrderPlacement">
+        <div class="OrderPayment">
+            <div class="PaymentMethods">
+                <h1>Payment details</h1>
+                <!--Choice of certificates-->
+                <div class="courseCertificates">
+                    <label for="Certificates">Choice of Certificates:</label>
+                    <br>
+                    <input type="radio" id="Receive" name="Certificates" value="Receive">
+                    <label for="Receive">Send certificates at the end of the course</label>
+                    <input type="radio" id="noReceive" name="Certificates" value="noReceive">
+                    <label for="noReceive">Don't need certificates</label>
+                </div>
+                <!--Access Duration-->
+                <div class="courseOptions">
+                    <label for="Accessibility">Access Duration:</label>
+                    <select name="AccessDuration" id="AccessDuration">
+                        <option value="7-dayAccess">7-day access</option>
+                        <option value="1-monthAccess">3-month access</option>
+                        <option value="PermanentAccess">Permanent access</option>
+                    </select>
+                </div>
+                <!--Payment Methods-->
+                <div class="MethodsSelection">
+                    <p>Payment Method</p>
+                    <button onclick="pay_by_Card()" type="button" id="CreditCard">Credit Card</button>
+                    <button onclick="pay_by_E_wallet()" type="button" id="E-wallet">E-wallet</button>
+                    <button onclick="pay_by_Paypal()" type="button" id="Paypal">Paypal</button>
+                </div>
+                <br>
+                <!--Form to fill out relevant information after choosing certain payment method-->
+                <form action="">
+                    <label for="NameCard">Name on card</label>
+                    <br>
+                    <input type="text" id="NameCard" name="NameCard" required>
+                    <br>
+                    <label for="CardDetail">Card details</label>
+                    <br>
+                    <input type="number" id="CardNumber" name="CardNumber" required maxlength="16" required>
+                    <br>
+                    <input type="month" id="ValidDates" placeholder="MM/YYYY" name="ValidDates" required>
+                    <input type="number" id="CVV" placeholder="CVV" name="CVV" required maxlength="3" required>
+                    <br>
+                    <label for="Postcode">Billing postcode</label>
+                    <br>
+                    <input type="text" id="Postcode">
+                </form>
+                <!--A declaration message before approach the final step of the order-->
+                <p class="Policies">By clicking Order below, you agree to the CourseMaster <span style="color: blue;"><a
+                            href="#">Terms of Use
+                        </a></span> and
+                    <span style="color: blue;"><a href="#">Privacy Policy</a></span>.
+                </p>
+                <!--Two buttons are responsible for return to the previous detail page or submit and pay for the order respectively-->
+                <div class="SubmitButtons">
+                    <button onclick="goBack()" type="button" id="Cancel">Cancel</button>
+                    <button onclick="redirect()" type="button" id="Order">Order</button>
+                </div>
+
+            </div>
+        </div>
+        <!--This class will show the details such as course name, instructor name and role, course price, and total payment of the order-->
+        <div class="OrderSummary">
+            <div class="InstructorInfo">
+                <img src="character.jpg" alt="John Doe">
+                <div class="InstructorName">
+                    <h2 id="InstructorName">John Doe</h2>
+                    <p id="Role">Instructor</->
+                </div>
+            </div>
+            <hr>
+            <div class="CourseGroup">
+                <p id="courseName">Introduction to Web Development</p>
+                <p id="coursePrice">$99.99</p>
+            </div>
+            <hr>
+            <div class="Confirmation">
+                <p id="paymentConfirmation">Total payment</p>
+                <p id="coursePrice">$99.99</p>
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer>
+            <div class="footer-nav">
+                <a href="#">Copyright</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+        </footer>
+
+        <script src="OrderPlacement.js"></script>
+</body>
+
+</html>
