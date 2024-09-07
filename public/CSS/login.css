@@ -69,6 +69,42 @@ input[type="password"] {
     text-decoration: underline;
 }
 
+a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 20px;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+button[type="submit"]:focus,
+a:focus {
+    outline: 2px solid #0056b3;
+    outline-offset: 2px;
+}
+
+
 /* Footer Styling */
 footer {
     position: absolute;
