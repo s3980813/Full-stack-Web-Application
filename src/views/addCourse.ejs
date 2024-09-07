@@ -9,78 +9,62 @@
 
 <body>
     <!--Display navigation bar-->
-    <nav class="navBar">
-        <div class="logo"><a href="#"><img src="A_small_cup_of_coffee.JPG" alt="coffee cup"></a></div>
-        <div class="nav">
-            <a class="navButton" href="home.html">Home</a>
-            <a class="navButton" href="modal.html">About Us</a>
-            <a class="navButton" href="#">Pricing</a>
-            <a class="navButton" href="login.html">My Account</a>
-            <a class="navButton" href="#search">Search</a>
-            <a class="navButton" href="FAQ.html">FAQ</a>
-            <a class="navButton" href="contact.html">Contact</a>
-        </div>
-    </nav>
-    <!-- Search Modal -->
-    <div class="modal_search" id="search">
-        <a href="#" class="close_search"></a>
-        <div class="search_body">
-            <input class="search_button" type="text" placeholder="Search" name="search">
-        </div>
-    </div>
-    <!--End of navigation bar-->
+    <%- include("partials/navbar.ejs", {title: "Order Placement" }) %>
 
-    <!-- page title -->
-    <div class="PageTitle">
-        <h1>Course Update</h1>
-        <hr>
-    </div>
-
-
-    <!-- Start of main content -->
-    <div class="mainContent">
-        <div class="ProfileSection">
-            <img src="character.jpg" alt="Profile Picture">
-            <div class="InstructorName">
-                <h2 id="InstructorName">John Doe</h2>
-                <p id="Role">Instructor</p>
+        <!-- Search Modal -->
+        <div class="modal_search" id="search">
+            <a href="#" class="close_search"></a>
+            <div class="search_body">
+                <input class="search_button" type="text" placeholder="Search" name="search">
             </div>
         </div>
-        <div class="addCourseForm">
-            <form action="#" id="addCourse">
-                <label for="courseName">Course Name:</label>
-                <input type="text" id="courseName" name="courseName" required>
-                <br>
+        <!--End of navigation bar-->
 
-                <label for="Price">Price:</label>
-                <span class="dollarSign">$<input type="number" id="Price" name="Price" required></span>
-                <br>
-
-                <label for="coursePicture">Course Image:</label>
-                <input type="file" id="coursePicture" name="coursePicture" accept="image/*" required>
-                <br>
-
-                <label for="Description">Description:</label><br>
-                <textarea id="Description" name="Description" cols="50" rows="10"
-                    placeholder="write description here..." required></textarea>
-                <br>
-
-                <button type="reset" class="reset">Reset</button>
-                <button type="submit" class="submit" onclick="redirectCourseDetailPage()">Submit</button>
-            </form>
+        <!-- page title -->
+        <div class="PageTitle">
+            <h1>Course Update</h1>
+            <hr>
         </div>
 
-    </div>
-    <!-- End of main content -->
-    <!-- Footer -->
-    <footer>
-        <div class="footer-nav">
-            <a href="#">Copyright</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Privacy Policy</a>
+
+        <!-- Start of main content -->
+        <div class="mainContent">
+            <div class="ProfileSection">
+                <img src="character.jpg" alt="Profile Picture">
+                <div class="InstructorName">
+                    <h2 id="InstructorName">John Doe</h2>
+                    <p id="Role">Instructor</p>
+                </div>
+            </div>
+            <div class="addCourseForm">
+                <form action="#" id="addCourse">
+                    <label for="courseName">Course Name:</label>
+                    <input type="text" id="courseName" name="courseName" required>
+                    <br>
+
+                    <label for="Price">Price:</label>
+                    <span class="dollarSign">$<input type="number" id="Price" name="Price" required></span>
+                    <br>
+
+                    <label for="coursePicture">Course Image:</label>
+                    <input type="file" id="coursePicture" name="coursePicture" accept="image/*" required>
+                    <br>
+
+                    <label for="Description">Description:</label><br>
+                    <textarea id="Description" name="Description" cols="50" rows="10"
+                        placeholder="write description here..." required></textarea>
+                    <br>
+
+                    <button type="reset" class="reset">Reset</button>
+                    <button type="submit" class="submit" onclick="redirectCourseDetailPage()">Submit</button>
+                </form>
+            </div>
+
         </div>
-    </footer>
-    <script src="addCourse.js"></script>
+        <!-- End of main content -->
+        <!-- Display footer -->
+        <%- include("partials/footer.ejs") %>
+            <script src="addCourse.js"></script>
 </body>
 
 </html>
