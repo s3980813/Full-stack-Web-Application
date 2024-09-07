@@ -9,46 +9,29 @@ const users = [
 
 ];
 
-document.addEventListener("DOMContentLoaded", () => {
-    const loggedIn = false;
+document.getElementById("loginForm").addEventListener("submit", async function (e) {
+    e.preventDefault(); // Prevent the default form submission
 
-    if (loggedIn) {
-        document.getElementById('profile').style.display = 'block';
-        document.getElementById('loginForm').style.display = 'none';
-    } else {
-        document.getElementById('profile').style.display = 'none';
-        document.getElementById('loginForm').style.display = 'block';
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try {
+        const response = await fetch("/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+        if (data.success) {
+            alert("Login Successful!");
+            // Optionally redirect the user to another page
+        } else {
+            alert("Login Failed: " + data.message);
+        }
+    } catch (error) {
+        console.error("Error:", error);
     }
 });
-
-function login() {
-    const usernameInput = document.getElementById('username').value;
-    const passwordInput = document.getElementById('password').value;
-
-    if (usernameInput === '' || passwordInput === '') {
-        alert("Please enter both username and password.");
-        return;
-    }
-
-    const user = users.find(u => (u.email === usernameInput || u.phone === usernameInput) && u.password === passwordInput);
-
-    if (user) {
-        // Successful login
-        document.getElementById('fullName').textContent = user.fullName;
-        document.getElementById('email').textContent = user.email;
-        document.getElementById('phone').textContent = user.phone;
-        document.querySelector('.profile img').src = user.profilePicture;
-
-        // Show profile, hide login form
-        document.getElementById('profile').style.display = 'block';
-        document.getElementById('loginForm').style.display = 'none';
-    } else {
-        // Failed login
-        alert("Incorrect username or password.Please try again.");
-    }
-}
-
-// function login() {
-//     // Redirect to the dashboard page
-//     window.location.href = "Browse Course/index.html";
-// }
