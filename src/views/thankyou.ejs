@@ -59,7 +59,11 @@
         </div>
         <!-- Display footer -->
         <%- include("partials/footer.ejs") %>
-            <script src="../public/JS/thankyou.js"></script>
+            <script>
+                function redirectMainPage() {
+                    window.location.assign("home.ejs")
+                }
+            </script>
 </body>
 
 </html>

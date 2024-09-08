@@ -30,9 +30,11 @@
         <!-- Start of main content -->
         <div class="mainContent">
             <div class="ProfileSection">
-                <img src="character.jpg" alt="Profile Picture">
+                <img src="<%= user.picture %>" alt="<%= user.name %> Profile picture">
                 <div class="InstructorName">
-                    <h2 id="InstructorName">John Doe</h2>
+                    <h2 id="InstructorName">
+                        <%= Instructor.name %>
+                    </h2>
                     <p id="Role">Instructor</p>
                 </div>
             </div>
@@ -64,7 +66,12 @@
         <!-- End of main content -->
         <!-- Display footer -->
         <%- include("partials/footer.ejs") %>
-            <script src="addCourse.js"></script>
+            <script>
+                function redirectCourseDetailPage() {
+                    alert("Adding course to the server successfully!")
+                    window.location.assign("#")
+                }
+            </script>
 </body>
 
 </html>
