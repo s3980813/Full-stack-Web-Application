@@ -20,10 +20,10 @@ const { getUserById, getPlayerById } = require('./middleware/nameMiddleware');
 
 
 // Importing models
-const User = require('./models/userModel');
-const Team = require('./models/team');
-const Player = require('./models/player');
-const Deal = require('./models/deal');
+const Learner = require('./models/learnerModel');
+const Teacher = require('./models/teacherModel');
+const Admin = require('./models/adminModel');
+const Course = require('./models/couresModel');
 
 
 const app = express();
@@ -60,7 +60,7 @@ app.use(playerRoutes);
 app.use(dealRoutes);
 
 // Database Connection
-const mongoURI = 'mongodb+srv://Creasic:wY3v3xh7FuM059vM@cluster0.c0ofkzi.mongodb.net/';
+const mongoURI = 'mongodb+srv://Creasic:wY3v3xh7FuM059vM@cluster0.c0ofkzi.mongodb.net/test';
 
 mongoose.connect(mongoURI)
   .then(() => console.log('Connected to MongoDB Atlas'))
