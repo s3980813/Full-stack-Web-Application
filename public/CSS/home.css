@@ -1,5 +1,5 @@
-*{
-    margin:0;
+* {
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
@@ -14,132 +14,174 @@
 }
 
 @-webkit-keyframes AnimationName {
-    0%{background-position:0% 24%}
-    50%{background-position:100% 77%}
-    100%{background-position:0% 24%}
+    0% {
+        background-position: 0% 24%
+    }
+
+    50% {
+        background-position: 100% 77%
+    }
+
+    100% {
+        background-position: 0% 24%
+    }
 }
+
 @-moz-keyframes AnimationName {
-    0%{background-position:0% 24%}
-    50%{background-position:100% 77%}
-    100%{background-position:0% 24%}
+    0% {
+        background-position: 0% 24%
+    }
+
+    50% {
+        background-position: 100% 77%
+    }
+
+    100% {
+        background-position: 0% 24%
+    }
 }
+
 @-o-keyframes AnimationName {
-    0%{background-position:0% 24%}
-    50%{background-position:100% 77%}
-    100%{background-position:0% 24%}
+    0% {
+        background-position: 0% 24%
+    }
+
+    50% {
+        background-position: 100% 77%
+    }
+
+    100% {
+        background-position: 0% 24%
+    }
 }
+
 @keyframes AnimationName {
-    0%{background-position:0% 24%}
-    50%{background-position:100% 77%}
-    100%{background-position:0% 24%}
+    0% {
+        background-position: 0% 24%
+    }
+
+    50% {
+        background-position: 100% 77%
+    }
+
+    100% {
+        background-position: 0% 24%
+    }
 }
 
-.logo a img{
-    width:70px;
-    height:70px;
+.logo a img {
+    width: 70px;
+    height: 70px;
 }
 
-.navBar{
+.navBar {
     display: flex;
     justify-content: space-around;
     align-items: center;
     height: 74px;
 }
 
-.nav{
+.nav {
     display: flex;
-    height:100%;
+    height: 100%;
     align-items: center;
 }
 
 
-.navButton{
+.navButton {
     padding: 22px 28px;
     display: block;
     height: 100%;
 }
 
-.navButton{
+.navButton {
     text-decoration: none;
 }
 
-.navButton:hover{
-    background-color: rgba(0,0,0,0.5);
+.navButton:hover {
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Search Modal */
 /* nav{
     position:relative;
 } */
-#search{
+#search {
     align-items: center;
     justify-content: center;
     position: fixed;
-    top:0;
-    right:0;
-    left:0;
-    bottom:0;
-    z-index:10;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
     display: none;
 }
 
 
-#search{
-    background-color: rgba(0,0,0,0.5);;
+#search {
+    background-color: rgba(0, 0, 0, 0.5);
+    ;
 }
-#search:target{
+
+#search:target {
     display: flex;
 }
 
-.search_button{
-    display:block;
+.search_button {
+    display: block;
     border-radius: 15px;
-    position:relative;
+    position: relative;
     border-style: none;
-    padding:10px;
-    width:100%;
+    padding: 10px;
+    width: 100%;
 }
 
-.close_search{
-    position:absolute;
-    height:100%;
+.close_search {
+    position: absolute;
+    height: 100%;
     width: 100%;
     cursor: default;
 }
 
-.search_body{
-    width:20%;
+.search_body {
+    width: 20%;
 }
 
-@media(max-width:800px){
-    .navBar{
+@media(max-width:800px) {
+    .navBar {
         flex-direction: column;
         width: 100%;
-        height: auto; 
+        height: auto;
     }
-    .nav{
+
+    .nav {
         flex-direction: column;
         width: 100%;
-        height: auto; 
+        height: auto;
     }
-    .navButton{
+
+    .navButton {
         width: 100%;
         text-align: center;
     }
-    .container{
+
+    .container {
         flex-direction: column;
         align-items: center;
     }
 
-    
+
 }
+
 /* navbar end */
 
-.Lecture h2{
+.Lecture h2 {
     text-align: center;
-    padding:10px;
+    padding: 10px;
 }
-.container{
+
+.container {
     display: flex;
     justify-content: center;
     margin-top: 10px;
@@ -149,7 +191,7 @@
     width: 200px;
     height: 300px;
     border-radius: 10px;
-    border:1px solid rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.6);
     margin-top: 10px;
     margin-right: 20px;
     display: flex;
@@ -162,57 +204,99 @@
 .info {
     padding: 10px;
     margin: 10px;
-    background-color: rgba(0, 0, 0, 0.6); 
-    color: white; 
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
     border-radius: 8px;
 }
-.Lecture{
+
+.Lecture {
     padding-bottom: 20px;
 }
-.Lecture:nth-child(1){
+
+.Lecture:nth-child(1) {
     background-color: rgb(255, 127, 80);
 }
-.Lecture:nth-child(2){
+
+.Lecture:nth-child(2) {
     background-color: green;
 }
 
 /* footer */
-footer img{
+footer img {
     width: 200px;
     height: 200px;
 }
 
-footer{
+footer {
     background-color: rgb(60, 60, 60);
     display: flex;
-    height:300px;
+    height: 300px;
     align-items: center;
     justify-content: space-around;
     margin-top: 20px;
 }
 
-.footerInfo{
+.footerInfo {
     display: flex;
 }
 
-.footerInfo a{
+.footerInfo a {
     text-decoration: none;
-    color:white;
-    padding:20px;
+    color: white;
+    padding: 20px;
 }
 
-@media(max-width:800px){
-    footer{
+@media(max-width:800px) {
+    footer {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height:auto;
+        height: auto;
     }
-    .footerInfo{
+
+    .footerInfo {
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
-    
+
 }
 
+/* Desktop (1200px or higher) */
+@media (min-width: 1200px) {
+    body {
+        background-color: #fff;
+        font-size: 1.2em;
+    }
+
+    .Home {
+        width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+/* Tablet (768px to 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+    body {
+        background-color: #e0e0e0;
+    }
+
+    .Home {
+        width: 95%;
+        margin: 0 auto;
+    }
+}
+
+/* Smartphone (767px or lower) */
+@media (max-width: 767px) {
+    body {
+        background-color: #d0d0d0;
+    }
+
+    .Home {
+        width: 100%;
+        margin: 0 auto;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+}

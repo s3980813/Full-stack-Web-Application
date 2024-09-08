@@ -7,7 +7,7 @@
 }
 
 /* Header and Footer */
-.instructor-header{
+.instructor-header {
     color: #fff;
     display: flex;
     align-items: center;
@@ -18,17 +18,20 @@
     animation: AnimationName 30s ease infinite;
 }
 
-.instructor-header .profile-image, .instructor-footer .footer-profile-image {
+.instructor-header .profile-image,
+.instructor-footer .footer-profile-image {
     margin-right: 20px;
 }
 
-.instructor-header img, .instructor-footer img {
+.instructor-header img,
+.instructor-footer img {
     width: 80px;
     height: 80px;
     border-radius: 50%;
 }
 
-.instructor-info h1, .footer-info h2 {
+.instructor-info h1,
+.footer-info h2 {
     margin: 0;
 }
 
@@ -128,13 +131,54 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 600px) {
-    .instructor-header, .instructor-footer {
+
+    .instructor-header,
+    .instructor-footer {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .footer-info {
         text-align: center;
         margin-top: 20px;
+    }
+}
+
+/* Desktop (1200px or higher) */
+@media (min-width: 1200px) {
+    body {
+        background-color: #fff;
+        font-size: 1.2em;
+    }
+
+    .InProfile {
+        width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+/* Tablet (768px to 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+    body {
+        background-color: #e0e0e0;
+    }
+
+    .InProfile {
+        width: 95%;
+        margin: 0 auto;
+    }
+}
+
+/* Smartphone (767px or lower) */
+@media (max-width: 767px) {
+    body {
+        background-color: #d0d0d0;
+    }
+
+    .InProfile {
+        width: 100%;
+        margin: 0 auto;
+        flex-wrap: wrap;
+        flex-direction: column;
     }
 }
