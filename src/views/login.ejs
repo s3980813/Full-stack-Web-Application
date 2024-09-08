@@ -12,38 +12,23 @@
     <!-- NavBar Partial -->
     <% include('partials/navbar') %>
 
-        <div class="container">
-            <!-- Logged-in user info -->
-            <div class="profile" id="profile">
-                <img src="profile picture.png" alt="Profile Picture">
-                <h2 id="fullName">
-                    <%= fullName %>
-                </h2>
-                <p id="email">
-                    <%= email %>
-                </p>
-                <p id="password">
-                    <%= password %>
-                </p>
-            </div>
-
-            <!-- Login form -->
-            <div class="form-container log-in">
-                <form id="log_in">
-                    <h1>Log In</h1>
-                    <input type="email" name="email" id="email" placeholder="Email" required>
-                    <div class="email error"></div>
-                    <input type="password" name="password" id="password" placeholder="Password" required>
-                    <div class="password error"></div>
-                    <a href="#">Forget Your Password?</a>
-                    <button type="submit">Log In</button>
-                </form>
-            </div>
+    <div class="container" id="container">
+        <!-- Login form -->
+        <div class="form-container log-in">
+            <form id="sign_in">
+                <h1>Log In</h1>
+                <input type="email" name="email" id="email" placeholder="Email" required>
+                <div class="email error"></div>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <div class="password error"></div>
+                <a href="#">Forget Your Password?</a>
+                <button type="submit">Log In</button>
+            </form>
         </div>
-        <!-- Footer Partial -->
-        <% include('partials/footer') %>
+    <!-- Footer Partial -->
+    <% include('partials/footer') %>
 
-            <script src="../public/JS/login.js"></script>
+            <script src="login.js"></script>
 </body>
 
 </html>

@@ -1,37 +1,34 @@
-const users = [
-    {
-        email: "vinhkhang@gmail.com",
-        phone: "123456",
-        password: "123456",
-        fullName: "Vinh Khang",
-        profilePicture: "profile picture.png"
-    },
+const container = document.getElementById('container');
+const sign_in = document.querySelector('#sign_in');
 
-];
-
-document.getElementById("loginForm").addEventListener("submit", async function (e) {
-    e.preventDefault(); // Prevent the default form submission
-
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+sign_in.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = sign_in.email.value;
+    const password = sign_in.password.value;
 
     try {
-        const response = await fetch("/login", {
+        const res = await fetch('/login', {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ email, password }),
+            headers: { 'Content-Type': 'application/json' }
         });
 
-        const data = await response.json();
-        if (data.success) {
-            alert("Login Successful!");
-            // Optionally redirect the user to another page
-        } else {
-            alert("Login Failed: " + data.message);
+        const data = await res.json();
+        if (!data) {
+            throw new Error('No response data');
         }
-    } catch (error) {
-        console.error("Error:", error);
+        if (data.error) {
+            let errorMessage = '';
+            if (data.error.email || data.error.password) {
+                errorMessage += 'Invalid email or password';
+            }
+            alert(errorMessage);
+        }
+        if (data.user) {
+            location.assign('/');
+        }
+    } catch (err) {
+        console.log(err);
+        alert(err);
     }
 });
