@@ -86,31 +86,31 @@
             <!--This class will show the details such as course name, instructor name and role, course price, and total payment of the order-->
             <div class="OrderSummary">
                 <div class="InstructorInfo">
-                    <img src="<%= user.profileImage %>" alt="<%= user.fullName %> Profile picture">
+                    <img src="<%= user.picture %>" alt="<%= user.name %> Profile picture">
                     <div class="InstructorName">
-                        <% if (User) { %>
-                            <h2 id="InstructorName">
-                                <%= user.fullName %>
-                            </h2>
-                            <% } else { %>
-                                <% window.location.assign("/login") %>
-                                    <% } %>
-                                        <p id="Role">Instructor
+                        <h2 id="InstructorName">
+                            <%= Instructor.name %>
+                        </h2>
+                        <p id="Role">Instructor
                     </div>
                 </div>
                 <hr>
                 <div class="CourseGroup">
-                    <p id="courseName">Introduction to Web Development</p>
-                    <p id="coursePrice">$99.99</p>
+                    <p id="courseName">
+                        <%= courseModel.name %>
+                    </p>
+                    <p id="coursePrice">$<%= courseModel.price %>
+                    </p>
                 </div>
                 <hr>
                 <div class="Confirmation">
                     <p id="paymentConfirmation">Total payment</p>
-                    <p id="coursePrice">$99.99</p>
+                    <p id="coursePrice">$<%= courseModel.price %>
+                    </p>
                 </div>
             </div>
 
-            <script src="OrderPlacement.js"></script>
+            <script src="../public/JS/OrderPlacement.js"></script>
         </div>
         <!-- Display footer -->
         <%- include("partials/footer.ejs") %>

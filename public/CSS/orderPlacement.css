@@ -313,3 +313,42 @@ footer {
 .footer-nav a:hover {
     text-decoration: underline;
 }
+
+/* Desktop (1200px or higher) */
+@media (min-width: 1200px) {
+    body {
+        background-color: #fff;
+        font-size: 1.2em;
+    }
+
+    .OrderPlacement {
+        width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+/* Tablet (768px to 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+    body {
+        background-color: #e0e0e0;
+    }
+
+    .OrderPlacement {
+        width: 95%;
+        margin: 0 auto;
+    }
+}
+
+/* Smartphone (767px or lower) */
+@media (max-width: 767px) {
+    body {
+        background-color: #d0d0d0;
+    }
+
+    .OrderPlacement {
+        width: 100%;
+        margin: 0 auto;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+}

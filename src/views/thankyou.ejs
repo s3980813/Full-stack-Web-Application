@@ -31,21 +31,25 @@
                 <h1>Thank You!</h1>
             </div>
             <div class="Message">
-                <p>Thanks for your order, Mr./Miss./Mrs.___!</p>
+                <p>Thanks for your order, Mr./Miss./Mrs. <%= userModel.name %>!</p>
                 <p>A digital receipt will be sent to your e-mail.
                     If you have any problems, please contact to the customer service team </p>
 
                 <div class="OrderSummary">
                     <div class="courseInfo">
-                        <img src="character.jpg" alt="John Doe">
+                        <img src="<%= user.picture %>" alt="<%= user.name %> Profile picture">
                         <br>
                         <div class="courseDetails">
-                            <h3 id="courseName">Introduction to Web Development</h3>
-                            <p id="Instructor">John Doe</p>
+                            <h3 id="courseName">
+                                <%= courseModel.name %>
+                            </h3>
+                            <p id="Instructor">
+                                <%= Instructor.name %>
+                            </p>
                         </div>
                     </div>
                     <label for="Total" id="Total">Total:</label>
-                    <label for="coursePrice" id="Price">$99.99</label>
+                    <label for="coursePrice" id="Price">$<%= courseModel.price %></label>
                     <br>
                     <label for="PaymentMethod" id="MethodDetails">Payment Method:</label>
                     <label for="MethodChoice" id="MethodChoice">Credit card</label>
@@ -55,7 +59,7 @@
         </div>
         <!-- Display footer -->
         <%- include("partials/footer.ejs") %>
-            <script src="thankyou.js"></script>
+            <script src="../public/JS/thankyou.js"></script>
 </body>
 
 </html>

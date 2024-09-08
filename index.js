@@ -10,7 +10,7 @@ const cookieParser = require('cookie-parser');
 const Agenda = require('agenda');
 
 // Importing routes
-const authRoutes = require('./routes/authRoutes');
+const authRoutes = require('./routes/Authentication');
 const playerRoutes = require('./routes/playerRoutes');
 const dealRoutes = require('./routes/dealRoutes');
 
@@ -20,7 +20,7 @@ const { getUserById, getPlayerById } = require('./middleware/nameMiddleware');
 
 
 // Importing models
-const User = require('./models/user');
+const User = require('./models/userModel');
 const Team = require('./models/team');
 const Player = require('./models/player');
 const Deal = require('./models/deal');
@@ -35,6 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.set('view engine', 'ejs');
+app.set("views", "./views");
 app.use(express.static('frontend'));
 
 // Checking user for all routes
@@ -80,10 +81,6 @@ const userImgStorage = multer.diskStorage({
     cb(null, newFilename);
   }
 });
-
-// Define and setup ejs files
-app.set("view engine", "ejs");
-app.set("views", "./views");
 
 const userImgUpload = multer({ storage: userImgStorage });
 
