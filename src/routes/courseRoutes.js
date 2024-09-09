@@ -1,7 +1,7 @@
 const express = require('express');
-const { getCourseById } = require('../middleware/nameMiddleware');
-const { requireAuth } = require('../middleware/authMiddleware');
-const courseController = require('../controllers/courseController');
+const { getCourseById } = require('../middlewares/nameMiddleware');
+const { requireAuth } = require('../middlewares/authMiddleware');
+const courseController = require('../controllers/courseControllers');
 
 const router = express.Router();
 

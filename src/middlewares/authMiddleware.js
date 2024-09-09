@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/user');  // Includes Learner and Teacher
-const Admin = require('../models/adminModel');  // Import Admin model
+const Learner = require('../models/learnerModel');  // Includes Learner and Teacher
+const Teacher = require('../models/teacherModel');  // Import Admin model
 
 // Middleware to require authentication for any route
 const requireAuth = (req, res, next) => {

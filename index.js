@@ -10,24 +10,24 @@ const cookieParser = require('cookie-parser');
 const Agenda = require('agenda');
 
 // Importing routes
-const authRoutes = require('./routes/Authentication');
-const playerRoutes = require('./routes/playerRoutes');
-const dealRoutes = require('./routes/dealRoutes');
+const authRoutes = require('./src/routes/authRoutes');
+const courseRoutes = require('./src/routes/courseRoutes');
 
 // Importing middleware
-const { requireAuth, checkUser } = require('./middleware/authMiddleware');
-const { getUserById, getPlayerById } = require('./middleware/nameMiddleware');
+const { requireAuth, checkUser } = require('./src/middlewares/authMiddleware');
+const { getUserById, getCourseById, getTeacherById, getLearnerById } = require('./src/middlewares/nameMiddleware');
+
 
 
 // Importing models
-const Learner = require('./models/learnerModel');
-const Teacher = require('./models/teacherModel');
-const Admin = require('./models/adminModel');
-const Course = require('./models/couresModel');
+const Learner = require('./src/models/learnerModel');
+const Teacher = require('./src/models/teacherModel');
+const Admin = require('./src/models/adminModel');
+const Course = require('./src/models/courseModel');
 
 
 const app = express();
-const port = 5000;
+const port = 8000;
 
 
 // Setting up middleware
@@ -36,7 +36,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set("views", "./views");
-app.use(express.static('frontend'));
+app.use(express.static('public'));
+
 
 // Checking user for all routes
 app.get('*', checkUser);
@@ -56,8 +57,7 @@ app.use(
 
 // Setting up routes
 app.use(authRoutes);
-app.use(playerRoutes);
-app.use(dealRoutes);
+app.use(courseRoutes);
 
 // Database Connection
 const mongoURI = 'mongodb+srv://Creasic:wY3v3xh7FuM059vM@cluster0.c0ofkzi.mongodb.net/test';
@@ -87,6 +87,7 @@ const userImgUpload = multer({ storage: userImgStorage });
 app.get('/', (req, res) => {
   res.render("home");
 });
+
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);

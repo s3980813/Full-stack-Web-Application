@@ -4,7 +4,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const session = require('express-session');
 const fs = require('fs');
-const User = require('../models/user');  // Learners and Teachers
+const Learner = require('../models/learnerModel');  // Learners and Teachers
+const Teacher = require('../models/teacherModel');
 const Admin = require('../models/adminModel');  // Admins
 
 // Define the maximum age for the JWT token (3 days)

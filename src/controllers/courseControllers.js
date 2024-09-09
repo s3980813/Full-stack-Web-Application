@@ -1,4 +1,4 @@
-const { getCourseById } = require('../middleware/nameMiddleware');
+const { getCourseById } = require('../middlewares/nameMiddleware');
 
 // Controller for fetching course details
 const getCourseDetails = async (req, res) => {
