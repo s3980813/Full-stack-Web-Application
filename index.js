@@ -103,6 +103,32 @@ app.get('/signup', (req, res) => {
   res.render('signup');
 });
 
+app.post('/signup', (req, res) => {
+    var username = req.body.username
+    var password = req.body.password
+    var email = req.body.email
+    var phone = req.body.phone
+    var address = req.body.address
+    var picture = req.body.profilePicture
+    console.log(username, password);
+    Learner.findOne({
+        username:username
+    })
+    .then(data=>{
+        if(data){
+            res.send("tài khoản đã tồn tại")
+        }else{
+            return Leanrer.create({username:username, password:password, email:email, phone:phone, picture:picture})
+        }
+    })//thay vì viết .then trong user.create thì xài return thì nguyên function data.then res.json thành công
+    .then(data=>{
+        res.json("tạo tài khoản thành công")
+    })
+    .catch(err=>{
+        res.json("thất bại")
+    })
+
+});
 app.get('/aboutUs', (req, res) => {
   res.render('aboutUs');
 });
