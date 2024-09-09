@@ -108,14 +108,14 @@ app.post('/signup', (req, res) => {
     var address = req.body.address
     var picture = req.body.profilePicture
     console.log(username, password);
-    User.findOne({
+    Learner.findOne({
         username:username
     })
     .then(data=>{
         if(data){
             res.send("tài khoản đã tồn tại")
         }else{
-            return User.create({username:username, password:password, email:email, phone:phone, picture:picture})
+            return Leanrer.create({username:username, password:password, email:email, phone:phone, picture:picture})
         }
     })//thay vì viết .then trong user.create thì xài return thì nguyên function data.then res.json thành công
     .then(data=>{
