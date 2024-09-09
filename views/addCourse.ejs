@@ -39,18 +39,21 @@
                 </div>
             </div>
             <div class="addCourseForm">
-                <form action="#" id="addCourse">
+                <form action="/addCourse" method="POST" id="addCourse">
                     <label for="courseName">Course Name:</label>
                     <input type="text" id="courseName" name="courseName" required>
                     <br>
 
                     <label for="Price">Price:</label>
-                    <span class="dollarSign">$<input type="number" id="Price" name="Price" required></span>
+                    <span class="dollarSign">$<input type="number" id="Price" name="price" required></span>
                     <br>
 
                     <label for="coursePicture">Course Image:</label>
-                    <input type="file" id="coursePicture" name="coursePicture" accept="image/*" required>
+                    <input type="file" id="coursePicture" name="picture" accept="image/*" required>
                     <br>
+
+                    <label for="Date">Date Start:</label>
+                    <input type="date" id="DateStart" name="dateStart" required>
 
                     <label for="Description">Description:</label><br>
                     <textarea id="Description" name="Description" cols="50" rows="10"
@@ -66,11 +69,7 @@
         <!-- End of main content -->
         <!-- Display footer -->
         <%- include("partials/footer.ejs") %>
-            <script>
-                function redirectCourseDetailPage() {
-                    alert("Adding course to the server successfully!")
-                    window.location.assign("coursedetail.ejs")
-                }
+            <script src="/public/JS/addCourse.js">
             </script>
 </body>
 

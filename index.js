@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const Agenda = require('agenda');
+const bodyParser = require('body-parser')
 
 // Importing routes
 const authRoutes = require('./src/routes/authRoutes');
@@ -29,6 +30,8 @@ const Course = require('./src/models/courseModel');
 const app = express();
 const port = 8000;
 
+// Setting up Body-Parser for reading form
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Setting up middleware
 app.use(express.urlencoded({ extended: true }));
@@ -103,6 +106,10 @@ app.get('/signup', (req, res) => {
 app.get('/aboutUs', (req, res) => {
   res.render('aboutUs');
 });
+
+// app.post('/addCourse', function (req, res) {
+//   res.render()
+// });
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
