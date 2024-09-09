@@ -4,13 +4,6 @@
     box-sizing: border-box;
 }
 
-.logo a img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    border: 2px solid white;
-}
-
 .navBar {
     background: linear-gradient(29deg, #1b5ac3, #df5aa5);
     background-size: 400% 400%;
@@ -19,12 +12,80 @@
     -o-animation: AnimationName 30s ease infinite;
     animation: AnimationName 30s ease infinite;
     padding: 0 20px;
+    /* Added padding to the navbar for better spacing */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for a modern look */
+}
+
+@-webkit-keyframes AnimationName {
+    0% {
+        background-position: 0% 24%
+    }
+
+    50% {
+        background-position: 100% 77%
+    }
+
+    100% {
+        background-position: 0% 24%
+    }
+}
+
+@-moz-keyframes AnimationName {
+    0% {
+        background-position: 0% 24%
+    }
+
+    50% {
+        background-position: 100% 77%
+    }
+
+    100% {
+        background-position: 0% 24%
+    }
+}
+
+@-o-keyframes AnimationName {
+    0% {
+        background-position: 0% 24%
+    }
+
+    50% {
+        background-position: 100% 77%
+    }
+
+    100% {
+        background-position: 0% 24%
+    }
+}
+
+@keyframes AnimationName {
+    0% {
+        background-position: 0% 24%
+    }
+
+    50% {
+        background-position: 100% 77%
+    }
+
+    100% {
+        background-position: 0% 24%
+    }
+}
+
+.logo a img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    /* Makes the logo circular */
+    border: 2px solid white;
+    /* Adds a white border around the logo for better contrast */
 }
 
 .navBar {
     display: flex;
     justify-content: space-between;
+    /* Adjusted for better spacing */
     align-items: center;
     height: 74px;
 }
@@ -38,19 +99,25 @@
 
 .navButton {
     padding: 20px 25px;
+    /* Slightly adjusted padding for better spacing */
     display: block;
     height: 100%;
     text-decoration: none;
     font-weight: 600;
+    /* Added boldness for better readability */
     font-family: 'Arial', sans-serif;
     color: white;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    /* Smooth transition for hover effects */
     border-radius: 5px;
+    /* Rounded corners for a softer look */
 }
 
 .navButton:hover {
     background-color: rgba(255, 255, 255, 0.2);
+    /* Changed to a lighter overlay for better contrast */
     transform: translateY(-3px);
+    /* Adds a subtle lift effect on hover */
 }
 
 .navButton:hover {
@@ -59,6 +126,7 @@
 
 .navButton:active {
     transform: translateY(0);
+    /* Resets the lift effect when active */
 }
 
 #search {
