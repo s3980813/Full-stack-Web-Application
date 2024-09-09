@@ -7,6 +7,8 @@
 .logo a img {
     width: 70px;
     height: 70px;
+    border-radius: 50%;
+    border: 2px solid white;
 }
 
 .navBar {
@@ -16,11 +18,13 @@
     -moz-animation: AnimationName 30s ease infinite;
     -o-animation: AnimationName 30s ease infinite;
     animation: AnimationName 30s ease infinite;
+    padding: 0 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .navBar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     height: 74px;
 }
@@ -33,17 +37,28 @@
 
 
 .navButton {
-    padding: 22px 28px;
+    padding: 20px 25px;
     display: block;
     height: 100%;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 5px;
 }
 
-.navButton {
-    text-decoration: none;
+.navButton:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
 }
 
 .navButton:hover {
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+.navButton:active {
+    transform: translateY(0);
 }
 
 #search {
@@ -56,6 +71,7 @@
     bottom: 0;
     z-index: 10;
     display: none;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 
@@ -88,7 +104,7 @@
     width: 20%;
 }
 
-@media(max-width:800px) {
+@media(max-width: 800px) {
     .navBar {
         flex-direction: column;
         width: 100%;
@@ -106,11 +122,9 @@
         text-align: center;
     }
 
-    .container {
-        flex-direction: column;
-        align-items: center;
+    main {
+        margin-top: 20px;
     }
-
 }
 
 body {
@@ -173,42 +187,25 @@ a:hover {
     text-decoration: underline;
 }
 
-footer img {
-    width: 200px;
-    height: 200px;
-}
-
 footer {
-    background-color: rgb(60, 60, 60);
-    display: flex;
-    height: 300px;
-    align-items: center;
-    justify-content: space-around;
-    margin-top: 20px;
+    bottom: 0;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+    background: linear-gradient(29deg, #1b5ac3, #df5aa5);
+    background-size: 400% 400%;
+    -webkit-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
 }
 
-.footerInfo {
-    display: flex;
-}
-
-.footerInfo a {
+.footer-nav a {
+    color: #fff;
+    margin: 0 10px;
     text-decoration: none;
-    color: white;
-    padding: 20px;
 }
 
-@media(max-width:800px) {
-    footer {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: auto;
-    }
-
-    .footerInfo {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
+.footer-nav a:hover {
+    text-decoration: underline;
 }
