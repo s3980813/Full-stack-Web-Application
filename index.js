@@ -13,6 +13,8 @@ const bodyParser = require('body-parser')
 // Importing routes
 const authRoutes = require('./src/routes/authRoutes');
 const courseRoutes = require('./src/routes/courseRoutes');
+const learnerRoutes = require('./src/routes/learnerRoutes');
+const teacherRoutes = require('./src/routes/teacherRoutes');
 
 // Importing middleware
 const { requireAuth, checkUser } = require('./src/middlewares/authMiddleware');
@@ -61,6 +63,8 @@ app.use(
 // Setting up routes
 app.use(authRoutes);
 app.use(courseRoutes);
+app.use(learnerRoutes); 
+
 
 // Database Connection
 const mongoURI = 'mongodb+srv://Creasic:wY3v3xh7FuM059vM@cluster0.c0ofkzi.mongodb.net/test';
@@ -72,7 +76,7 @@ mongoose.connect(mongoURI)
 // Middleware for image upload
 const userImgStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'frontend/images/');
+    cb(null, 'public/images/');
   },
   filename: function (req, file, cb) {
     const token = req.cookies.jwt;
@@ -80,11 +84,10 @@ const userImgStorage = multer.diskStorage({
     const userId = decodedToken.id;
     const date = new Date();
     const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`;
-    const newFilename = `${formattedDate}-${userId}-${file.originalname}`;
+    const newFilename = `${formattedDate}-${file.originalname}`;
     cb(null, newFilename);
   }
 });
-
 const userImgUpload = multer({ storage: userImgStorage });
 
 app.get('/', (req, res) => {
@@ -132,10 +135,6 @@ app.post('/signup', (req, res) => {
 app.get('/aboutUs', (req, res) => {
   res.render('aboutUs');
 });
-
-// app.post('/addCourse', (req, res) {
-//   
-// });
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
