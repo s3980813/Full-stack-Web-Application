@@ -38,10 +38,6 @@ const learnerSchema = new mongoose.Schema({
         zipcode: { type: String, match: [/^\d{4,6}$/, 'Please enter a valid zipcode'], required: true },
         country: { type: String, required: true }
     },
-    dateCreated: {
-        type: Date,
-        default: Date.now
-    }
 }, { timestamps: true });
 
 learnerSchema.pre('save', async function (next) {

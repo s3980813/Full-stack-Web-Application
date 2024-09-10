@@ -4,9 +4,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const session = require('express-session');
 const fs = require('fs');
-const Learner = require('../models/learnerModel');  // Learners and Teachers
-const Teacher = require('../models/teacherModel');
-const Admin = require('../models/adminModel');  // Admins
+const User = require('../models/user');  // Learners and Teachers
+const { isAdmin } = require('../middlewares/authMiddleware')
+const { isTeacher } = require('../middlewares/authMiddleware')
 
 // Define the maximum age for the JWT token (3 days)
 const maxAge = 3 * 24 * 60 * 60;
@@ -39,10 +39,16 @@ const handleErrors = (err) => {
         return errors;
     }
 
-    // Validation Errors
+    /// Validation Errors
     if (err.message.includes('User validation failed')) {
+        console.log('err.errors:', err.errors); // Log the err.errors array
+    
         Object.values(err.errors).forEach(({ properties }) => {
-            errors[properties.path] = properties.message;
+            console.log('properties:', properties); // Log each properties object
+    
+            if (properties) {
+                errors[properties.path] = properties.message;
+            }
         });
     }
 
@@ -55,10 +61,28 @@ module.exports.signUpGet = (req, res) => {
 };
 
 module.exports.signUpPost = async (req, res) => {
-    const { fullName, email, password, accountType, schoolName, jobTitle, specialization } = req.body;
+    const { firstName,lastName, email, password, accountType, schoolName, jobTitle, specialization } = req.body;
 
     try {
-        let newUser;
+        const newUser = new User({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            phone: req.body.phone,
+            password: req.body.password,
+            address: req.body.address,
+            role: accountType === 'instructor' ? 'teacher' : 'learner', // Assign role from request or default to 'user  
+            isAdmin: Boolean(req.body.isAdmin),
+        })
+
+        if (accountType === 'instructor') {
+            newUser = new Teacher({
+                ...newUser._doc, // Spread the existing user data
+                schoolName, // Additional instructor data
+                jobTitle, // Additional instructor data
+                specialization // Additional instructor data (assuming it's an array)
+            });
+        }
 
         if (accountType === 'learner') {
             // Create a new learner

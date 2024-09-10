@@ -15,16 +15,21 @@
     <div class="container" id="container">
         <!-- Login form -->
         <div class="form-container log-in">
-            <form id="sign_in">
+            <form id="sign_in" action="/login" method="POST">
                 <h1>Log In</h1>
                 <input type="email" name="email" id="email" placeholder="Email" required>
                 <div class="email error"></div>
                 <input type="password" name="password" id="password" placeholder="Password" required>
                 <div class="password error"></div>
-                <a href="#">Forget Your Password?</a>
                 <button type="submit">Log In</button>
+                <div class="links">
+                    <a href="#">Forget Your Password?</a>
+                    <a href="/signup">Create an Account</a>
+                </div>
             </form>
         </div>
+    </div>
+
     <!-- Footer Partial -->
     <% include('partials/footer') %>
 

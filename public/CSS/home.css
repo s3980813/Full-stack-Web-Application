@@ -1,139 +1,185 @@
+/* General Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.navBar {
-    background: linear-gradient(29deg, #1b5ac3, #df5aa5);
-    background-size: 400% 400%;
-    -webkit-animation: AnimationName 30s ease infinite;
-    -moz-animation: AnimationName 30s ease infinite;
-    -o-animation: AnimationName 30s ease infinite;
-    animation: AnimationName 30s ease infinite;
-    padding: 0 20px;
-    /* Added padding to the navbar for better spacing */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow for a modern look */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4; /* Subtle background to contrast with the navbar and footer */
+    color: #333; /* Standard color for text */
+    font-size: 1em;
 }
 
-@-webkit-keyframes AnimationName {
-    0% {
-        background-position: 0% 24%
-    }
-
-    50% {
-        background-position: 100% 77%
-    }
-
-    100% {
-        background-position: 0% 24%
-    }
+h2, h3 {
+    font-family: 'Helvetica', sans-serif;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333; /* Keep headings dark for better readability */
 }
 
-@-moz-keyframes AnimationName {
-    0% {
-        background-position: 0% 24%
-    }
-
-    50% {
-        background-position: 100% 77%
-    }
-
-    100% {
-        background-position: 0% 24%
-    }
+p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555; /* Lighter color for paragraph text */
 }
 
-@-o-keyframes AnimationName {
-    0% {
-        background-position: 0% 24%
-    }
-
-    50% {
-        background-position: 100% 77%
-    }
-
-    100% {
-        background-position: 0% 24%
-    }
-}
-
-@keyframes AnimationName {
-    0% {
-        background-position: 0% 24%
-    }
-
-    50% {
-        background-position: 100% 77%
-    }
-
-    100% {
-        background-position: 0% 24%
-    }
-}
-
-.logo a img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    /* Makes the logo circular */
-    border: 2px solid white;
-    /* Adds a white border around the logo for better contrast */
-}
-
+/* NavBar Styles */
 .navBar {
     display: flex;
     justify-content: space-between;
-    /* Adjusted for better spacing */
     align-items: center;
     height: 74px;
+    background: linear-gradient(29deg, #1b5ac3, #df5aa5);
+    background-size: 400% 400%;
+    padding: 0 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    animation: AnimationName 30s ease infinite;
+}
+
+.logo img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 2px solid white;
 }
 
 .nav {
     display: flex;
-    height: 100%;
     align-items: center;
 }
 
-
 .navButton {
     padding: 20px 25px;
-    /* Slightly adjusted padding for better spacing */
-    display: block;
-    height: 100%;
     text-decoration: none;
     font-weight: 600;
-    /* Added boldness for better readability */
-    font-family: 'Arial', sans-serif;
     color: white;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    /* Smooth transition for hover effects */
     border-radius: 5px;
-    /* Rounded corners for a softer look */
 }
 
 .navButton:hover {
     background-color: rgba(255, 255, 255, 0.2);
-    /* Changed to a lighter overlay for better contrast */
     transform: translateY(-3px);
-    /* Adds a subtle lift effect on hover */
 }
 
-.navButton:hover {
-    background-color: rgba(0, 0, 0, 0.5);
+/* Quote Section Styling */
+.quote-section {
+    position: relative;
+    background-color: #f4f4f4;
+    padding: 60px 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    color: white;
+    overflow: hidden;
+    height: 400px;
 }
 
-.navButton:active {
-    transform: translateY(0);
-    /* Resets the lift effect when active */
+.quote-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/images/quote.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+.quote-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.quote-text {
+    text-align: left; /* Align the text to the left */
+    padding-left: 20px; /* Add padding for spacing on the left */
+    padding-right: 20px; /* Optional padding for spacing on the right */
+}
+
+.quote-text h2 {
+    font-size: 50px;
+    font-family: 'Georgia', serif;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    color: #341d69;
+}
+
+.quote-text p {
+    font-size: 30px;
+    font-style: italic;
+    margin-top: 10px;
+    color: #341d69;
+}
+
+
+/* Container for lecture sections */
+.Lecture {
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1200px;
+}
+
+.Lecture h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #1b5ac3; /* Color for headings to match navbar */
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* Lecture card styling */
+.lecInfo {
+    width: 30%;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lecInfo:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.lecInfo .info {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-top: 2px solid #1b5ac3;
+    border-radius: 0 0 10px 10px;
+}
+
+.lecInfo .info h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.lecInfo .info p {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #555;
 }
 
 /* Search Modal */
-/* nav{
-    position:relative;
-} */
 #search {
+    display: none;
     align-items: center;
     justify-content: center;
     position: fixed;
@@ -141,51 +187,33 @@
     right: 0;
     left: 0;
     bottom: 0;
-    z-index: 10;
-    display: none;
-}
-
-
-#search {
     background-color: rgba(0, 0, 0, 0.5);
-    ;
+    z-index: 10;
 }
 
 #search:target {
     display: flex;
 }
 
-.search_button {
-    display: block;
-    border-radius: 15px;
-    position: relative;
-    border-style: none;
-    padding: 10px;
-    width: 100%;
-}
-
-.close_search {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    cursor: default;
-}
-
 .search_body {
     width: 20%;
 }
 
-@media(max-width:800px) {
+.search_button {
+    display: block;
+    padding: 10px;
+    width: 100%;
+    border-radius: 15px;
+    border: none;
+}
+
+@media (max-width: 800px) {
     .navBar {
         flex-direction: column;
-        width: 100%;
-        height: auto;
     }
 
     .nav {
         flex-direction: column;
-        width: 100%;
-        height: auto;
     }
 
     .navButton {
@@ -198,101 +226,35 @@
         align-items: center;
     }
 
-
+    .lecInfo {
+        width: 100%;
+    }
 }
 
-/* navbar end */
-
-.Lecture h2 {
-    text-align: center;
-    padding: 10px;
-}
-
-.container {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.lecInfo {
-    width: 200px;
-    height: 300px;
-    border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.6);
-    margin-top: 10px;
-    margin-right: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    background-image: url('character.jpg');
-    background-size: 200px 300px;
-}
-
-.info {
-    padding: 10px;
-    margin: 10px;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    border-radius: 8px;
-}
-
-.Lecture {
-    padding-bottom: 20px;
-}
-
-.Lecture:nth-child(1) {
-    background-color: rgb(255, 127, 80);
-}
-
-.Lecture:nth-child(2) {
-    background-color: green;
-}
-
-/* footer */
-footer img {
-    width: 200px;
-    height: 200px;
-}
-
+/* Footer Styling */
 footer {
-    background-color: rgb(60, 60, 60);
-    display: flex;
-    height: 300px;
-    align-items: center;
-    justify-content: space-around;
-    margin-top: 20px;
+    bottom: 0;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    width: 100%;
+    background: linear-gradient(29deg, #1b5ac3, #df5aa5);
+    background-size: 400% 400%;
+    animation: AnimationName 30s ease infinite;
 }
 
-.footerInfo {
-    display: flex;
-}
-
-.footerInfo a {
+.footer-nav a {
+    color: #fff;
+    margin: 0 10px;
     text-decoration: none;
-    color: white;
-    padding: 20px;
 }
 
-@media(max-width:800px) {
-    footer {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: auto;
-    }
-
-    .footerInfo {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
+.footer-nav a:hover {
+    text-decoration: underline;
 }
 
-/* Desktop (1200px or higher) */
 @media (min-width: 1200px) {
     body {
-        background-color: #fff;
         font-size: 1.2em;
     }
 
@@ -302,28 +264,15 @@ footer {
     }
 }
 
-/* Tablet (768px to 1199px) */
-@media (min-width: 768px) and (max-width: 1199px) {
-    body {
-        background-color: #e0e0e0;
-    }
-
-    .Home {
-        width: 95%;
-        margin: 0 auto;
-    }
-}
-
-/* Smartphone (767px or lower) */
 @media (max-width: 767px) {
-    body {
-        background-color: #d0d0d0;
-    }
-
     .Home {
         width: 100%;
         margin: 0 auto;
         flex-wrap: wrap;
-        flex-direction: column;
+    }
+
+    .lecInfo {
+        width: 100%;
+        margin-bottom: 20px;
     }
 }
