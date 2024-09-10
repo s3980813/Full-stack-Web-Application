@@ -37,16 +37,16 @@
                 <input type="text" id="lastName" name="lastName" required>
 
                 <label for="address[street]">Street:</label>
-                <input type="text" id="street" name="address[street]">
+                <input type="text" id="street" name="street">
             
                 <label for="address[city]">City:</label>
-                <input type="text" id="city" name="address[city]" required>
+                <input type="text" id="city" name="city" required>
             
-                <!-- <label for="zipcode">Zipcode:</label>
-                <input type="text" id="zipcode" name="address[zipcode]" pattern="[0-9]{4,6}" required>
+                <label for="zipcode">Zipcode:</label>
+                <input type="text" id="zipcode" name="zipcode" pattern="[0-9]{4,6}" required>
             
                 <label for="country">Country:</label>
-                <select name="address[country]" id="country" required>
+                <select name="country" id="country" required>
                     <option value="AF">Choose your country</option>
                     <option value="AF">Afghanistan</option>
                     <option value="AX">Åland Islands</option>
@@ -296,12 +296,12 @@
                     <option value="YE">Yemen</option>
                     <option value="ZM">Zambia</option>
                     <option value="ZW">Zimbabwe</option>
-                </select> -->
+                </select>
                 <p id="selectedCountry"></p>
 
                 <label>Account Type:</label>
                 <label><input type="radio" name="accountType" value="learner" required> Learner</label>
-                <label><input type="radio" name="accountType" value="instructor" required> Instructor</label>
+                <label><input type="radio" name="accountType" value="teacher" required> Instructor</label>
                 <div id="instructorFields" style="display:none;">
                     <label for="schoolName">School Name:</label>
                     <input type="text" id="schoolName" name="schoolName">
@@ -336,7 +336,7 @@
             // Function to toggle the instructor fields
             function toggleInstructorFields() {
                 const selectedAccountType = document.querySelector('input[name="accountType"]:checked').value;
-                if (selectedAccountType === 'instructor') {
+                if (selectedAccountType === 'teacher') {
                     instructorFields.style.display = 'block';
                 } else {
                     instructorFields.style.display = 'none';

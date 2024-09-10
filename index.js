@@ -27,6 +27,7 @@ const Learner = require('./src/models/learnerModel');
 const Teacher = require('./src/models/teacherModel');
 const Admin = require('./src/models/adminModel');
 const Course = require('./src/models/courseModel');
+const { errorMonitor } = require('events');
 
 
 const app = express();
@@ -108,21 +109,39 @@ app.post('/signup', (req, res) => {
   var password = req.body.password
   var email = req.body.email
   var phone = req.body.phone
-  // var phone = req.body.phone
   var city = req.body.city
   var street= req.body.street
+  var address= street+ " "+city
   var picture = req.body.profilePicture
   var type = req.body.accountType
-  // var firstName = req.body.firstName
-  // var lastName = req.body.lastName
-  console.log(email, password, type,phone,picture,street, city)
-  Learner.create({email:email, password:password, city: city, street:street})
-  .then(data=>{
-    res.json("success")
-  })
-  .catch(err=>{
-    res.json("gg")
-  })
+  var country= req.body.country
+  var firstName = req.body.firstName
+  var lastName = req.body.lastName
+  var schoolName = req.body.schoolName
+  var jobTitle = req.body.jobTitle
+  var specialization = req.body.specialization
+  console.log(email, password, type,phone,picture,address,country,firstName,lastName,schoolName,jobTitle,specialization)
+  if(type==='learner'){
+    Learner.create({email:email, password:password,address:address,firstName:firstName,lastName:lastName,phone:phone})
+    .then(data=>{
+      res.json("success")
+    })
+    .catch(err=>{
+      console.log(err)
+      res.json("gg")
+    })
+  }
+  if(type==='teacher'){
+    Teacher.create({email:email, password:password,address:address,firstName:firstName,lastName:lastName,phone:phone,schoolName:schoolName,jobTitle:jobTitle,specialization:specialization})
+    .then(data=>{
+      res.json("success")
+    })
+    .catch(err=>{
+      console.log(err)
+      res.json("gg")
+    })
+  }
+
 
 
 });
