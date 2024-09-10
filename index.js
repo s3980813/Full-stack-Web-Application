@@ -61,7 +61,7 @@ app.use(
 );
 
 // Setting up routes
-app.use(authRoutes);
+// app.use(authRoutes);
 app.use(courseRoutes);
 app.use(learnerRoutes);
 
@@ -101,58 +101,82 @@ app.get('/contact', (req, res) => {
 app.get('/login', (req, res) => {
   res.render('login');
 });
-
 app.get('/signup', (req, res) => {
   res.render('signup');
 });
-
 app.post('/signup', (req, res) => {
   var password = req.body.password
   var email = req.body.email
   var phone = req.body.phone
-  var address = req.body.address
+  // var phone = req.body.phone
+  var city = req.body.city
+  var street= req.body.street
   var picture = req.body.profilePicture
   var type = req.body.accountType
-  var firstName = req.body.firstName
-  var lastName = req.body.lastName
-  console.log(email, password, type)
-  if (type === 'learner') {
-    Learner.findOne({
-      email: email
-    })
-      .then(data => {
-        if (data) {
-          res.send("tài khoản đã tồn tại")
-        } else {
-          return Learner.create({ firstName: firstName, lastName: lastName, password: password, email: email, phone: phone, picture: picture, address: address })
-        }
-      })//thay vì viết .then trong user.create thì xài return thì nguyên function data.then res.json thành công
-      .then(data => {
-        res.json("tạo tài khoản thành công")
-      })
-      .catch(err => {
-        res.json("thất bại")
-      })
-  }
-  if (type === 'instructor') {
-    Teacher.findOne({
-      email: email
-    })
-      .then(data => {
-        if (data) {
-          res.send("tài khoản đã tồn tại")
-        } else {
-          return Teacher.create({ firstName: firstName, lastName: lastName, password: password, email: email, phone: phone, picture: picture, address: address })
-        }
-      })//thay vì viết .then trong user.create thì xài return thì nguyên function data.then res.json thành công
-      .then(data => {
-        res.json("tạo tài khoản thành công")
-      })
-      .catch(err => {
-        res.json("thất bại")
-      })
-  }
+  // var firstName = req.body.firstName
+  // var lastName = req.body.lastName
+  console.log(email, password, type,phone,picture,street, city)
+  Learner.create({email:email, password:password, city: city, street:street})
+  .then(data=>{
+    res.json("success")
+  })
+  .catch(err=>{
+    res.json("gg")
+  })
+
+
 });
+// app.get('/register', (req, res) => {
+//   res.render('register');
+// });
+
+// app.post('/register', (req, res) => {
+//   var password = req.body.password
+//   var email = req.body.email
+//   // var phone = req.body.phone
+//   // var address = req.body.address
+//   // var picture = req.body.profilePicture
+//   var type = req.body.accountType
+//   // var firstName = req.body.firstName
+//   // var lastName = req.body.lastName
+//   console.log(email, password, type)
+//   if (type === 'learner') {
+//     Learner.findOne({
+//       email: email
+//     })
+//       .then(data => {
+//         if (data) {
+//           res.send("tài khoản đã tồn tại")
+//         } else {
+//           return Learner.create({password: password, email: email})
+//         }
+//       })//thay vì viết .then trong user.create thì xài return thì nguyên function data.then res.json thành công
+//       .then(data => {
+//         res.json("tạo tài khoản thành công")
+//       })
+//       .catch(err => {
+//         res.json("thất bại")
+//       })
+//   }
+//   if (type === 'instructor') {
+//     Teacher.findOne({
+//       email: email
+//     })
+//       .then(data => {
+//         if (data) {
+//           res.send("tài khoản đã tồn tại")
+//         } else {
+//           return Teacher.create({ password: password, email: email })
+//         }
+//       })//thay vì viết .then trong user.create thì xài return thì nguyên function data.then res.json thành công
+//       .then(data => {
+//         res.json("tạo tài khoản thành công")
+//       })
+//       .catch(err => {
+//         res.json("thất bại")
+//       })
+//   }
+// });
 app.get('/aboutUs', (req, res) => {
   res.render('aboutUs');
 });
