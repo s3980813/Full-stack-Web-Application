@@ -10,29 +10,8 @@
 </head>
 
 <body>
-    <!-- NavBar -->
-    <!-- This section creates a navigation bar at the top of the page -->
-    <!-- <nav class="navBar">
-        <div class="logo">
-            Logo section with an image that links to the home page -->
-    <!-- <a href="#"><img
-                    src="https://cdn.glitch.global/a8735179-2600-4365-b449-07d7da34204c/A_small_cup_of_coffee.JPG?v=1724821966750"
-                    alt="coffee cupss" /></a>
-        </div>
-        <div class="nav"> -->
-    <!-- Navigation links for different sections of the website -->
-    <!-- <a class="navButton" href="#">Home</a>
-            <a class="navButton" href="#">About Us</a>
-            <a class="navButton" href="#">Pricing</a>
-            <a class="navButton" href="#search">Search</a>
-            <a class="navButton" href="#">FAQ</a>
-            <a class="navButton" href="#">Contact</a>
-            <a class="navButton" href="#">My Account</a>
-        </div>
-    </nav> -->
-
     <!--Display navigation bar-->
-    <%- include("partials/navbar.ejs", {title: "Order Placement" }) %>
+    <%- include("partials/navbar.ejs") %>
         <!-- End of NavBar -->
 
         <!-- Search Modal -->
@@ -149,22 +128,12 @@
             </div>
         </div>
 
-        <!-- <footer>
-        <div class="footer-nav">
-            Links in the footer for additional pages like Terms, and Privacy -->
-        <!-- <a href="#">Terms of Service</a>
-            <a href="#">Privacy Policy</a>
-        </div> -->
-        <!-- Adding the CourseMasterTeam © 2024 text to the footer -->
-        <!-- <p>CourseMasterTeam © 2024</p>
-    </footer> -->
-
         <!-- Display footer -->
         <%- include("partials/footer.ejs") %>
             <!-- End of Footer -->
 
             <!-- Link to external JavaScript file for interactivity -->
-            <script>
+            <script src="/public/JS/BrowseCourse.js">
                 document.addEventListener('DOMContentLoaded', function () {
                     // Simulated user status (could be 'learner', 'instructor', or 'guest')
                     const userStatus = 'learner';  // Change this to 'instructor' or 'guest' to see different views

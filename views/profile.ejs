@@ -1,63 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Account</title>
     <link rel="stylesheet" href="/css/profile.css">
 </head>
+
 <body>
     <!-- NavBar -->
-    <nav class="navBar">
-        <div class="logo">
-            <a href="#"><img src="/images/A_small_cup_of_coffee.JPG" alt="coffee cup"></a>
-        </div>
-        <div class="nav">
-            <a class="navButton" href="/">Home</a>
-            <a class="navButton" href="/about">About Us</a>
-            <a class="navButton" href="/pricing">Pricing</a>
-            <a class="navButton" href="/faq">FAQ</a>
-            <a class="navButton" href="/contact">Contact</a>
-            <a class="navButton" href="/profile">My Account</a>
-        </div>
-    </nav>
-    <!-- End NavBar -->
+    <%- include("partials/navbar.ejs") %>
+        <!-- End NavBar -->
 
-    <!-- My Account Content -->
-    <div class="account-container" id="accountContainer">
-        <% if (isLoggedIn) { %>
-            <!-- If user is logged in -->
-            <div class="account-info">
-                <img src="/images/<%= learner.profileImage %>" alt="Profile Picture" class="profile-image">
-                <h2><%= learner.firstName %> <%= learner.lastName %></h2>
-                <p><strong>Email:</strong> <%= learner.email %></p>
-                <p><strong>Phone:</strong> <%= learner.phone %></p>
-            </div>
-        <% } else { %>
-            <!-- If user is not logged in -->
-            <div class="login-box">
-                <h2>Login to Your Account</h2>
-                <form action="/login" method="POST">
-                    <input type="text" name="emailOrPhone" placeholder="Email or Phone Number" required>
-                    <input type="password" name="password" placeholder="Password" required>
-                    <button type="submit">Login</button>
-                </form>
-                <a href="/forgot-password">Forgot Password?</a>
-                <a href="/register">Register</a>
-            </div>
-        <% } %>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-nav">
-            <a href="#">Copyright</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Privacy Policy</a>
+        <!-- My Account Content -->
+        <div class="account-container" id="accountContainer">
+            <% if (isLoggedIn) { %>
+                <!-- If user is logged in -->
+                <div class="account-info">
+                    <img src="/images/<%= learner.profileImage %>" alt="Profile Picture" class="profile-image">
+                    <h2>
+                        <%= learner.firstName %>
+                            <%= learner.lastName %>
+                    </h2>
+                    <p><strong>Email:</strong>
+                        <%= learner.email %>
+                    </p>
+                    <p><strong>Phone:</strong>
+                        <%= learner.phone %>
+                    </p>
+                </div>
+                <% } else { %>
+                    <!-- If user is not logged in -->
+                    <div class="login-box">
+                        <h2>Login to Your Account</h2>
+                        <form action="/login" method="POST">
+                            <input type="text" name="emailOrPhone" placeholder="Email or Phone Number" required>
+                            <input type="password" name="password" placeholder="Password" required>
+                            <button type="submit">Login</button>
+                        </form>
+                        <a href="/forgot-password">Forgot Password?</a>
+                        <a href="/register">Register</a>
+                    </div>
+                    <% } %>
         </div>
-    </footer>
 
-    <script src="/scripts/profile.js"></script>
+        <!-- Footer -->
+        <%- include("partials/footer.ejs") %>
+
+            <script src="/scripts/profile.js"></script>
 </body>
-</html>
 
+</html>

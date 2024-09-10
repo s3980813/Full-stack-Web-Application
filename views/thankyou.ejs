@@ -6,12 +6,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/thankyou.css" type="text/css">
+    <link rel="stylesheet" href="/public/CSS/thankyou.css" type="text/css">
+    <title></title>
 </head>
 
 <body>
     <!--Display navigation bar-->
-    <%- include("partials/navbar.ejs", {title: "Order Placement" }) %>
+    <%- include("partials/navbar.ejs") %>
         <!-- Search Modal -->
         <div class="modal_search" id="search">
             <a href="#" class="close_search"></a>
@@ -31,7 +32,7 @@
                 <h1>Thank You!</h1>
             </div>
             <div class="Message">
-                <p>Thanks for your order, Mr./Miss./Mrs. <%= userModel.name %>!</p>
+                <p>Thanks for your order, Mr./Miss./Mrs. <%= learnerModel.firstName %>!</p>
                 <p>A digital receipt will be sent to your e-mail.
                     If you have any problems, please contact to the customer service team </p>
 
@@ -44,7 +45,7 @@
                                 <%= courseModel.name %>
                             </h3>
                             <p id="Instructor">
-                                <%= Instructor.name %>
+                                <%= Teacher.firstName + Teacher.lastName %>
                             </p>
                         </div>
                     </div>
