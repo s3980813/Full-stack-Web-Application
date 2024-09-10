@@ -2,54 +2,54 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const teacherSchema = new mongoose.Schema({
-    firstName: {
-        type: String,
-        required: true,
-        minlength: 2
-    },
-    lastName: {
-        type: String,
-        required: true,
-        minlength: 2
-    },
+    // firstName: {
+    //     type: String,
+    //     required: true,
+    //     minlength: 2
+    // },
+    // lastName: {
+    //     type: String,
+    //     required: true,
+    //     minlength: 2
+    // },
     email: {
         type: String,
         required: true,
         unique: true,
         match: [/.+\@.+\..+/, 'Please enter a valid email address']
     },
-    phone: {
-        type: String,
-        required: true,
-        match: [/^\d{9,11}$/, 'Please enter a valid phone number with 9 to 11 digits']
-    },
+    // phone: {
+    //     type: String,
+    //     required: true,
+    //     match: [/^\d{9,11}$/, 'Please enter a valid phone number with 9 to 11 digits']
+    // },
     password: {
         type: String,
         required: true,
         minlength: 6
     },
-    picture: {
-        type: String,
-        default: 'default-avatar.jpg'
-    },
-    address: {
-        street: { type: String, required: false },
-        city: { type: String, required: false },
-        zipcode: { type: String, match: [/^\d{4,6}$/, 'Please enter a valid zipcode'] },
-        country: { type: String, required: true }
-    },
-    schoolName: {
-        type: String,
-        required: true
-    },
-    jobTitle: {
-        type: String,
-        required: true
-    },
-    specialization: {
-        type: [String],
-        required: true
-    },
+    // picture: {
+    //     type: String,
+    //     default: 'default-avatar.jpg'
+    // },
+    // address: {
+    //     street: { type: String, required: false },
+    //     city: { type: String, required: false },
+    //     zipcode: { type: String, match: [/^\d{4,6}$/, 'Please enter a valid zipcode'] },
+    //     country: { type: String, required: true }
+    // },
+    // schoolName: {
+    //     type: String,
+    //     required: true
+    // },
+    // jobTitle: {
+    //     type: String,
+    //     required: true
+    // },
+    // specialization: {
+    //     type: [String],
+    //     required: true
+    // },
     dateCreated: {
         type: Date,
         default: Date.now
