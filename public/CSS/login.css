@@ -85,3 +85,62 @@ a:focus {
     outline: 2px solid #0056b3;
     outline-offset: 2px;
 }
+
+
+/* Footer Styling */
+footer {
+    position: fixed;
+    bottom: 0;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+    background: linear-gradient(29deg, #1b5ac3, #df5aa5);
+    background-size: 400% 400%;
+    -webkit-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+}
+
+.footer-nav a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer-nav a:hover {
+    text-decoration: underline;
+}
+
+/* Desktop (1200px or higher) */
+@media (min-width: 1200px) {
+    body {
+        font-size: 1.2em;
+    }
+
+    .Login {
+        width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+/* Tablet (768px to 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+
+
+    .Login {
+        width: 95%;
+        margin: 0 auto;
+    }
+}
+
+/* Smartphone (767px or lower) */
+@media (max-width: 767px) {
+
+    .Login {
+        width: 100%;
+        margin: 0 auto;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+}
