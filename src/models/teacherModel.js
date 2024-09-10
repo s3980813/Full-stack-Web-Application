@@ -2,6 +2,16 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const teacherSchema = new mongoose.Schema({
+    firstName: {
+        type: String,
+        required: true,
+        minlength: 2
+    },
+    lastName: {
+        type: String,
+        required: true,
+        minlength: 2
+    },
     email: {
         type: String,
         required: true,
@@ -67,3 +77,4 @@ teacherSchema.statics.login = async function(email, password) {
 
 const Teacher = mongoose.model('Teacher', teacherSchema, 'teachers');
 module.exports = Teacher;
+

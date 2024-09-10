@@ -64,7 +64,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #757070;
     margin: 0;
     padding: 0;
 }
@@ -160,10 +160,7 @@ footer {
 
 /* Desktop (1200px or higher) */
 @media (min-width: 1200px) {
-    body {
-        background-color: #fff;
-        font-size: 1.2em;
-    }
+
 
     .Register {
         width: 1200px;
@@ -173,9 +170,7 @@ footer {
 
 /* Tablet (768px to 1199px) */
 @media (min-width: 768px) and (max-width: 1199px) {
-    body {
-        background-color: #e0e0e0;
-    }
+
 
     .Register {
         width: 95%;
@@ -185,9 +180,7 @@ footer {
 
 /* Smartphone (767px or lower) */
 @media (max-width: 767px) {
-    body {
-        background-color: #d0d0d0;
-    }
+
 
     .Register {
         width: 100%;

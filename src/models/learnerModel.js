@@ -2,6 +2,16 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const learnerSchema = new mongoose.Schema({
+    firstName: {
+        type: String,
+        required: true,
+        minlength: 2
+    },
+    lastName: {
+        type: String,
+        required: true,
+        minlength: 2
+    },
     email: {
         type: String,
         required: true,
@@ -20,12 +30,12 @@ const learnerSchema = new mongoose.Schema({
     },
     picture: {
         type: String,
-        default: 'default-avatar.jpg'
+        default: 'profile-1.png'
     },
     address: {
-        street: { type: String, required: false },
-        city: { type: String, required: false },
-        zipcode: { type: String, match: [/^\d{4,6}$/, 'Please enter a valid zipcode'] },
+        street: { type: String, required: true },
+        city: { type: String, required: true },
+        zipcode: { type: String, match: [/^\d{4,6}$/, 'Please enter a valid zipcode'], required: true },
         country: { type: String, required: true }
     },
     dateCreated: {
@@ -35,7 +45,7 @@ const learnerSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 learnerSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) next();
+    if (!this.isModified('password')) return next();  // This was missing the return statement
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
     next();
@@ -55,4 +65,5 @@ learnerSchema.statics.login = async function(email, password) {
 
 const Learner = mongoose.model('Learner', learnerSchema, 'learners');
 module.exports = Learner;
+
 

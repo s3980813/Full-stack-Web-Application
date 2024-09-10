@@ -6,7 +6,67 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #df5aa5;
+    background: linear-gradient(29deg, #1b5ac3, #df5aa5);
+    -webkit-animation: AnimationName 30s ease infinite;
+    -moz-animation: AnimationName 30s ease infinite;
+    -o-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0% {
+        background-position: 0% 24%
+    }
+
+    50% {
+        background-position: 100% 77%
+    }
+
+    100% {
+        background-position: 0% 24%
+    }
+}
+
+@-moz-keyframes AnimationName {
+    0% {
+        background-position: 0% 24%
+    }
+
+    50% {
+        background-position: 100% 77%
+    }
+
+    100% {
+        background-position: 0% 24%
+    }
+}
+
+@-o-keyframes AnimationName {
+    0% {
+        background-position: 0% 24%
+    }
+
+    50% {
+        background-position: 100% 77%
+    }
+
+    100% {
+        background-position: 0% 24%
+    }
+}
+
+@keyframes AnimationName {
+    0% {
+        background-position: 0% 24%
+    }
+
+    50% {
+        background-position: 100% 77%
+    }
+
+    100% {
+        background-position: 0% 24%
+    }
 }
 
 .container {
@@ -32,7 +92,7 @@ body {
     display: none;
 }
 
-input[type="text"],
+input[type="email"],
 input[type="password"] {
     width: 94%;
     padding: 10px;
@@ -133,7 +193,6 @@ footer {
 /* Desktop (1200px or higher) */
 @media (min-width: 1200px) {
     body {
-        background-color: #fff;
         font-size: 1.2em;
     }
 
@@ -145,9 +204,7 @@ footer {
 
 /* Tablet (768px to 1199px) */
 @media (min-width: 768px) and (max-width: 1199px) {
-    body {
-        background-color: #e0e0e0;
-    }
+
 
     .Login {
         width: 95%;
@@ -157,9 +214,6 @@ footer {
 
 /* Smartphone (767px or lower) */
 @media (max-width: 767px) {
-    body {
-        background-color: #d0d0d0;
-    }
 
     .Login {
         width: 100%;
