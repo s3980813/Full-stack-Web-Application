@@ -5,6 +5,7 @@ const teacherController = require('../controllers/teacherControllers');
 const multer = require('multer');
 const jwt = require('jsonwebtoken');
 const Teacher = require('../models/teacherModel');  // Import the Teacher model
+// import { Course } from '../models/courseModel.js'
 
 // Initialize the Express router
 const router = express.Router();
@@ -64,4 +65,62 @@ module.exports = router;
 // route index router.post(form detail) router.get(render addcourse)
 // course se phai luu id lecture
 
+// lectureRouter.post("/addCourse", async (req, res) => {
+//   const courseData = req.body;
+//   const instructor = req.user;
+//   const actionUrl = `/users/vendor/newCourse`
+//   const formAction = 'Create!'
+//   // console.log(productData.tags);
+
+//   // error checking
+//   let errors = []
+
+//   if (!courseData.name) {
+//     errors.push({ msg: "Product name cant be empty" })
+//   }
+
+//   if (!courseData.price) {
+//     errors.push({ msg: "Price cant be empty" })
+//   }
+
+//   if (courseData.price < 0) {
+//     errors.push({ msg: "Price cant be a negative number" })
+//   }
+
+//   if (!courseData.description) {
+//     errors.push({ msg: "Description cant be empty" })
+//   }
+
+//   if (!courseData.stock) {
+//     errors.push({ msg: "Stock cant be empty" })
+//   }
+
+//   // Add new course
+//   try {
+//     if (errors.length > 0) throw new Error("Failed adding new course")
+//     const newCourse = await Course.create({
+//       name: courseData.name,
+//       price: courseData.price,
+//       description: courseData.description,
+//       picture: courseData.picture,
+//       Instructor: instructor,
+//     })
+//     saveCourseCover(newCourse, courseData.image)
+//     await courseData.save()
+
+//     res.redirect("/users/vendor")
+//   } catch (e) {
+//     errors.splice(0, 0, { msg: e.message })
+//     res.render("", {
+//       courseData, picture,
+//       price,
+//       description,
+//       errors,
+//       actions: {
+//         actionUrl,
+//         formAction
+//       }
+//     })
+//   }
+// });
 
