@@ -113,21 +113,21 @@ app.get('/signup', (req, res) => {
 app.get('/login', (req, res) => {
   res.render('login');
 });
-app.post('/login',(req,res)=>{
-  // var type = req.body.type
-  var email = req.body.email
-  var password = req.body.password
-  console.log(email,password)
-  Learner.findOne({
-    email:email,
-    password:password
-  }).then(()=>{
-    res.render('home')
-  }).catch(err=>{
-    console.log(err)
-    res.json("wrong")
-  })
-})
+// app.post('/login',(req,res)=>{
+//   // var type = req.body.type
+//   var email = req.body.email
+//   var password = req.body.password
+//   console.log(email,password)
+//   Learner.findOne({
+//     email:email,
+//     password:password
+//   }).then(()=>{
+//     res.render('home')
+//   }).catch(err=>{
+//     console.log(err)
+//     res.json("wrong")
+//   })
+// })
 
 
 app.post('/signup', async (req, res) => {
@@ -153,7 +153,8 @@ app.post('/signup', async (req, res) => {
       })
       .catch(err => {
         console.log(err)
-        res.json("gg")
+        // res.json("gg")
+        alert("email existed")
       })
   }
   if (type === 'teacher') {
@@ -163,17 +164,53 @@ app.post('/signup', async (req, res) => {
       })
       .catch(err => {
         console.log(err)
-        res.json("gg")
+        alert("email existed")
       })
   }
   const existingLearner = await Learner.findOne({ email });
-        const existingTeacher = await Teacher.findOne({ email });
-        
-        if (existingLearner || existingTeacher) {
-            return res.status(400).json({ error: 'Email already exists' });
-        }
+  const existingTeacher = await Teacher.findOne({ email });
+
+  if (existingLearner || existingTeacher) {
+    return res.status(400).json({ error: 'Email already exists' });
+  }
   res.redirect('/login');
 });
+
+app.post('/login', async (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  var type = req.body.accountType
+
+  try {
+    // First, try to log in the user as a learner
+    const learner = await Learner.login(email, password);
+    if (type = 'learner') {
+      console.log('Learner logged in');
+      return res.render('home');  // Redirect to learner's homepage (home.ejs)
+    }
+
+    // If not a learner, try logging in the user as a teacher
+    const teacher = await Teacher.login(email, password);
+    if (type = 'teacher') {
+      console.log('Teacher logged in');
+      return res.render('inhome');  // Redirect to teacher's homepage (inhome.ejs)
+    }
+
+  } catch (err) {
+    console.error(err.message);
+
+    if (err.message === 'Incorrect email' || err.message === 'Incorrect password') {
+      return res.status(400).json({ error: 'Invalid email or password' });
+    }
+
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/learner/coursedetail',(req,res)=>{
+  res.render('coursedetail')
+})
+
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);

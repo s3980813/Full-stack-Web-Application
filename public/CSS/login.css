@@ -86,6 +86,52 @@ a:focus {
     outline-offset: 2px;
 }
 
+/* Radio Button Group Styling */
+.radio-group {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    width: 48%;  /* Makes sure both buttons take up equal space horizontally */
+    text-align: center;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 10px;
+    accent-color: #28a745; /* Change this to modify the color of the radio button */
+}
+
+.radio-group label:hover {
+    background-color: #f4f4f4;
+    border-color: #28a745;
+}
+
+.radio-group input[type="radio"]:checked + label {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+.radio-group label:first-of-type {
+    margin-right: 5px;
+}
+
+.radio-group label:last-of-type {
+    margin-left: 5px;
+}
+
 
 /* Footer Styling */
 footer {
