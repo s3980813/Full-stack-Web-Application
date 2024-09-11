@@ -23,13 +23,9 @@ const courseSchema = new Schema({
         required: true,
         minlength: 10
     },
-    dateStart: {
-        type: Date,
-        required: true
-    },
     instructor: {
-        type: Schema.Types.ObjectId, // Refers to the User model (Instructor)
-        ref: 'User',
+        type: Schema.Types.ObjectId, // Refers to the Teacher model
+        ref: 'Teacher',
         required: true
     },
     dateCreated: {
@@ -38,12 +34,4 @@ const courseSchema = new Schema({
     }
 }, { timestamps: true });
 
-// courseModel.virtual('imageCoverData').get(function () {
-//     if (this.coverImage != null && this.coverImageType != null) {
-//         return `data:${this.coverImageType};charset=utf-8;base64,${this.coverImage.toString('base64')}`
-//     }
-//     return "https://www.wowpatterns.com/assets/files/resource_images/diagonal-lines-vector-pattern.jpg"
-// })
-
-// Export the Course model
 module.exports = mongoose.model('Course', courseSchema);

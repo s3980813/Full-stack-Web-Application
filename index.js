@@ -16,16 +16,10 @@ const courseRoutes = require('./src/routes/courseRoutes');
 const learnerRoutes = require('./src/routes/learnerRoutes');
 const teacherRoutes = require('./src/routes/teacherRoutes');
 
-// Importing middleware
-const { requireAuth, checkUser } = require('./src/middlewares/authMiddleware');
-const { getUserById, getCourseById, getTeacherById, getLearnerById } = require('./src/middlewares/nameMiddleware');
-
-
 
 // Importing models
 const Learner = require('./src/models/learnerModel');
 const Teacher = require('./src/models/teacherModel');
-const Admin = require('./src/models/adminModel');
 const Course = require('./src/models/courseModel');
 const { errorMonitor } = require('events');
 
@@ -45,8 +39,8 @@ app.set("views", "./views");
 app.use(express.static('public'));
 
 
-// Checking user for all routes
-app.get('*', checkUser);
+// // Checking user for all routes
+// app.get('*', checkUser);
 
 // Setting up session
 app.use(
@@ -63,8 +57,9 @@ app.use(
 
 // Setting up routes
 // app.use(authRoutes);
-app.use(courseRoutes);
-app.use(learnerRoutes);
+// app.use(courseRoutes);
+// app.use(learnerRoutes);
+// app.use('/teacher',teacherRoutes);
 
 
 // Database Connection
@@ -74,22 +69,6 @@ mongoose.connect(mongoURI)
   .then(() => console.log('Connected to MongoDB Atlas'))
   .catch((error) => console.log(error.message));
 
-// Middleware for image upload
-const userImgStorage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/images/');
-  },
-  filename: function (req, file, cb) {
-    const token = req.cookies.jwt;
-    const decodedToken = jwt.verify(token, 'your-secret-key');
-    const userId = decodedToken.id;
-    const date = new Date();
-    const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`;
-    const newFilename = `${formattedDate}-${file.originalname}`;
-    cb(null, newFilename);
-  }
-});
-const userImgUpload = multer({ storage: userImgStorage });
 
 app.get('/', (req, res) => {
   res.render("home");
@@ -97,6 +76,38 @@ app.get('/', (req, res) => {
 
 app.get('/contact', (req, res) => {
   res.render('contact');
+});
+
+app.get('/aboutUs', (req, res) => {
+  res.render('aboutUs');
+});
+
+app.get('/addCourse', (req, res) => {
+  res.render('addCourse');
+});
+
+app.get('/coursedetail', (req, res) => {
+  res.render('coursedetail');
+});
+
+app.get('/FAQs', (req, res) => {
+  res.render('FAQs');
+});
+
+app.get('/inprofile', (req, res) => {
+  res.render('inprofile');
+});
+
+app.get('/profile', (req, res) => {
+  res.render('profile');
+});
+
+app.get('/thankyou', (req, res) => {
+  res.render('thankyou');
+});
+
+app.get('/signup', (req, res) => {
+  res.render('signup');
 });
 
 app.get('/login', (req, res) => {
@@ -117,12 +128,9 @@ app.post('/login',(req,res)=>{
     res.json("wrong")
   })
 })
-app.get('/signup', (req, res) => {
-  res.render('signup');
-});
 
 
-app.post('/signup', (req, res) => {
+app.post('/signup', async (req, res) => {
   var password = req.body.password
   var email = req.body.email
   var phone = req.body.phone
@@ -158,7 +166,36 @@ app.post('/signup', (req, res) => {
         res.json("gg")
       })
   }
+  const existingLearner = await Learner.findOne({ email });
+        const existingTeacher = await Teacher.findOne({ email });
+        
+        if (existingLearner || existingTeacher) {
+            return res.status(400).json({ error: 'Email already exists' });
+        }
+  res.redirect('/login');
 });
+
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
+});
+
+// / Middleware for image upload
+// const userImgStorage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, 'public/images/');
+//   },
+//   filename: function (req, file, cb) {
+//     const token = req.cookies.jwt;
+//     const decodedToken = jwt.verify(token, 'your-secret-key');
+//     const userId = decodedToken.id;
+//     const date = new Date();
+//     const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`;
+//     const newFilename = `${formattedDate}-${file.originalname}`;
+//     cb(null, newFilename);
+//   }
+// });
+// const userImgUpload = multer({ storage: userImgStorage });
+
 
 // app.get('/register', (req, res) => {
 //   res.render('register');
@@ -212,10 +249,29 @@ app.post('/signup', (req, res) => {
 //   }
 // });
 
-app.get('/aboutUs', (req, res) => {
-  res.render('aboutUs');
-});
 
-app.listen(port, () => {
-  console.log(`Server started on port ${port}`);
-});
+// app.get('/teacher/:id', async (req, res) => {
+//   try {
+//       const teacher = await Teacher.findById(req.params.id);
+
+//       if (!teacher) {
+//           return res.status(404).send('Teacher not found');
+//       }
+
+//       console.log(teacher);  // Log the teacher object
+
+//       const newCourses = await Course.find({ instructor: teacher._id }).sort({ dateCreated: -1 }).limit(5);
+//       const allCourses = await Course.find({ instructor: teacher._id });
+
+//       res.render('inprofile', { teacher, newCourses, allCourses });
+//   } catch (error) {
+//       console.error(error);
+//       res.status(500).send('Server Error');
+//   }
+// });
+
+
+
+
+
+

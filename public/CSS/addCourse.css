@@ -177,6 +177,71 @@ nav {
     width: 20%;
 }
 
+/*Pricing*/
+.pricing-table {
+    display: none;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 600px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    z-index: 100;
+}
+
+.pricing-table h2 {
+    text-align: center;
+    color: #1b5ac3;
+    margin-bottom: 20px;
+}
+
+.pricing-table table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.pricing-table table th, .pricing-table table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+.pricing-table table th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: bold;
+}
+
+.pricing-table table td {
+    color: #555;
+}
+
+.close-btn {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #1b5ac3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.close-btn:hover {
+    background-color: #174a9f;
+}
+
+/* Show the pricing table */
+.show-table {
+    display: block;
+}
+
 /* main content section  */
 .PageTitle {
     margin: 10px 0;

@@ -3,10 +3,64 @@
     <div class="nav">
         <a class="navButton" href="/views/home.ejs">Home</a>
         <a class="navButton" href="/views/aboutUs.ejs">About Us</a>
-        <a class="navButton" href="#">Pricing</a>
+        <a class="navButton" id="pricing-btn" href="#">Pricing</a>
         <a class="navButton" href="#search">Search</a>
         <a class="navButton" href="/views/FAQs.ejs">FAQ</a>
         <a class="navButton" href="/views/contact.ejs">Contact</a>
         <a class="navButton" href="/views/profile.ejs">My Account</a>
     </div>
 </nav>
+
+<!-- Pricing Table (initially hidden) -->
+<div class="pricing-table" id="pricing-table">
+    <h2>Subscription Fees</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Plan</th>
+                <th>Fee Type</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Basic Learner</td>
+                <td>Monthly Subscription</td>
+                <td>$10/month</td>
+            </tr>
+            <tr>
+                <td>Premium Learner</td>
+                <td>Premium Membership</td>
+                <td>$30/month</td>
+            </tr>
+            <tr>
+                <td>Basic Instructor</td>
+                <td>Monthly Subscription</td>
+                <td>$15/month</td>
+            </tr>
+            <tr>
+                <td>Instructor</td>
+                <td>Commission</td>
+                <td>10% per course</td>
+            </tr>
+        </tbody>
+    </table>
+    <button id="close-pricing-btn" class="close-btn">Close</button>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const pricingBtn = document.getElementById('pricing-btn');
+    const pricingTable = document.getElementById('pricing-table');
+    const closeBtn = document.getElementById('close-pricing-btn');
+
+    pricingBtn.addEventListener('click', function () {
+        pricingTable.classList.add('show-table');
+    });
+
+    closeBtn.addEventListener('click', function () {
+        pricingTable.classList.remove('show-table');
+    });
+});
+
+</script>

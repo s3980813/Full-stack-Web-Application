@@ -5,23 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <%= instructor.name %> Profile
+        <%= teacher.firstName %> Profile
     </title>
     <link rel="stylesheet" href="/css/inprofile.css">
 </head>
 
 <body>
     <!-- Unique Header for Instructor -->
-    <header class="instructor-header">
+    <header class="teacher-header">
         <div class="profile-image">
-            <img src="<%= instructor.profileImage %>" alt="<%= instructor.name %> Profile Picture">
+            <img src="<%= teacher.profileImage %>" alt="<%= teacher.firstName %> Profile Picture">
         </div>
-        <div class="instructor-info">
+        <div class="teacher-info">
             <h1>
-                <%= instructor.name %>
+                <%= teacher.firstName %>
             </h1>
             <p>
-                <%= instructor.title %>
+                <%= teacher.title %>
             </p>
         </div>
     </header>
@@ -32,7 +32,7 @@
         <section class="about-section">
             <h2>About</h2>
             <p>
-                <%= instructor.about %>
+                <%= teacher.specialization %>
             </p>
         </section>
 
@@ -43,7 +43,7 @@
                 <% newCourses.forEach(course=> { %>
                     <div class="course-card">
                         <a href="<%= course.link %>">
-                            <img src="<%= course.image %>" alt="<%= course.name %>">
+                            <img src="<%= course.picture %>" alt="<%= course.name %>">
                             <h3>
                                 <%= course.name %>
                             </h3>
@@ -63,7 +63,7 @@
                 <% allCourses.forEach(course=> { %>
                     <div class="course-card">
                         <a href="<%= course.link %>">
-                            <img src="<%= course.image %>" alt="<%= course.name %>">
+                            <img src="<%= course.picture %>" alt="<%= course.name %>">
                             <h3>
                                 <%= course.name %>
                             </h3>

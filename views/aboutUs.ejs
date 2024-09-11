@@ -12,84 +12,85 @@
     <!--Display navigation bar-->
     <%- include("partials/navbar.ejs") %>
 
-        <!-- Search Modal -->
-        <div class="modal_search" id="search">
-            <a href="#" class="close_search"></a>
-            <div class="search_body">
-                <input class="search_button" type="text" placeholder="Search" name="search">
-            </div>
+    <!-- Search Modal -->
+    <div class="modal_search" id="search">
+        <a href="#" class="close_search"></a>
+        <div class="search_body">
+            <input class="search_button" type="text" placeholder="Search" name="search">
+        </div>
+    </div>
+
+    <main>
+        <div class="intro">
+            <h1>About Us</h1>
+            <p>Our group consists of four members, and we are from RMIT University. This project was created to help beginners approach programming more easily.</p>
+            <p>We welcome everyone to join us as both instructors and learners.</p>
+            <h2>Meet the Co-founders</h2>
         </div>
 
-        <main>
-            <div class="intro">
-                <h1>About us</h1>
-                <p>Our group have four member and we are from RMIT University. This project are created to help newbie
-                    approach to programming more easy.</p>
-                <p>We are welcome everyone join with us in both role instructor and learner</p>
-                <h1>Here are the project Co-founder</h1>
+        <!-- Member Profiles Section -->
+        <section class="members">
+            <div class="member" id="member1">
+                <a href="#modal1">
+                    <img src="/images/member1.jpg" alt="Member #1 image">
+                    <h3>Member #1</h3>
+                </a>
             </div>
-            <section>
-                <a class="image" href="#1">
-                    <img src="A_small_cup_of_coffee.JPG" alt="Member #1 image">
-                    <h1>Member #1</h1>
+            <div class="member" id="member2">
+                <a href="#modal2">
+                    <img src="/images/member2.jpg" alt="Member #2 image">
+                    <h3>Member #2</h3>
                 </a>
-                <a class="image" href="#2">
-                    <img src="A_small_cup_of_coffee.JPG" alt="Member #2 image">
-                    <h1>Member #2</h1>
+            </div>
+            <div class="member" id="hung">
+                <a href="#modalHung">
+                    <img src="/images/hung.jpg" alt="Hung's image">
+                    <h3>Quan Hung</h3>
                 </a>
-                <a class="image" href="Hung">
-                    <img src="A_small_cup_of_coffee.JPG" alt="Hung's image">
-                    <h1>Quan Hung</h1>
+            </div>
+            <div class="member" id="member3">
+                <a href="#modal3">
+                    <img src="/images/member3.jpg" alt="Luu Gia Dinh's image">
+                    <h3>Luu Gia Dinh</h3>
                 </a>
-                <a class="image" href="#4">
-                    <img src="A_small_cup_of_coffee.JPG" alt="Member #3 image">
-                    <h1>Luu Gia Dinh</h1>
-                </a>
-            </section>
-        </main>
+            </div>
+        </section>
 
-        <!-- Modal -->
-        <div class="modal overlay" id="#1">
-            <a href="#" class="overlay-close"></a>
-            <div class="modal-body">
-                <p>Name: </p>
-                <p>Age: </p>
-                <p>Career: IT</p>
-                <p></p>
+        <!-- Modal Windows -->
+        <div class="modal" id="modal1">
+            <div class="modal-content">
+                <a href="#" class="modal-close">&times;</a>
+                <h3>Member #1</h3>
+                <p>Details about Member #1.</p>
             </div>
         </div>
-        <div class="modal overlay" id="#2">
-            <a href="#" class="overlay-close"></a>
-            <div class="modal-body">
-                <p>Name: </p>
-                <p>Age: </p>
-                <p>Career: IT</p>
-                <p></p>
+        <div class="modal" id="modal2">
+            <div class="modal-content">
+                <a href="#" class="modal-close">&times;</a>
+                <h3>Member #2</h3>
+                <p>Details about Member #2.</p>
             </div>
         </div>
-        <div class="modal overlay" id="Hung">
-            <a href="#" class="overlay-close"></a>
-            <div class="modal-body">
-                <p>Name: Quan Hung</p>
+        <div class="modal" id="modalHung">
+            <div class="modal-content">
+                <a href="#" class="modal-close">&times;</a>
+                <h3>Quan Hung</h3>
                 <p>Age: 22</p>
                 <p>Career: IT</p>
-                <p>I want to create a website to help the beginner improve their coding skill
-                    as well as approach with programming earlier
-                    which can help them define their future road more detail2</p>
+                <p>I want to create a website to help beginners improve their coding skills and help them define their future path in programming.</p>
             </div>
         </div>
-        <div class="modal overlay" id="#3">
-            <a href="#" class="overlay-close"></a>
-            <div class="modal-body">
-                <p>Name: </p>
-                <p>Age: </p>
-                <p>Career: IT</p>
-                <p></p>
+        <div class="modal" id="modal3">
+            <div class="modal-content">
+                <a href="#" class="modal-close">&times;</a>
+                <h3>Luu Gia Dinh</h3>
+                <p>Details about Luu Gia Dinh.</p>
             </div>
         </div>
+    </main>
 
-        <!-- Display footer -->
-        <%- include("partials/footer.ejs") %>
+    <!-- Display footer -->
+    <%- include("partials/footer.ejs") %>
 </body>
 
 </html>
