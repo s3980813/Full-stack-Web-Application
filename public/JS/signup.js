@@ -1,4 +1,3 @@
-const container = document.getElementById('container');
 const sign_up = document.querySelector('#sign_up');
 
 sign_up.addEventListener('submit', async (e) => {
@@ -11,7 +10,7 @@ sign_up.addEventListener('submit', async (e) => {
     const confirmPassword = sign_up.retypePassword.value;
     const firstName = sign_up.firstName.value;
     const lastName = sign_up.lastName.value;
-    const address = sign_up.address.value;
+    const street = sign_up.street.value;
     const city = sign_up.city.value;
     const zipcode = sign_up.zipcode.value;
     const country = sign_up.country.value;
@@ -35,7 +34,7 @@ sign_up.addEventListener('submit', async (e) => {
         password,
         firstName,
         lastName,
-        address,
+        street,
         city,
         zipcode,
         country,
@@ -43,7 +42,7 @@ sign_up.addEventListener('submit', async (e) => {
     };
 
     // Add instructor-specific fields if accountType is 'instructor'
-    if (accountType === 'instructor') {
+    if (accountType === 'teacher') {
         userData = {
             ...userData,
             schoolName,
@@ -59,26 +58,11 @@ sign_up.addEventListener('submit', async (e) => {
             headers: { 'Content-Type': 'application/json' }
         });
 
-        const data = await res.json();
-
-        if (data.error) {
-            let errorMessage = '';
-            if (data.error.includes('E11000 duplicate key error')) {
-                errorMessage += 'This email is already registered';
-            }
-            if (data.error.includes('Minimum password length is 6 characters')) {
-                errorMessage += 'Password must be at least 6 characters';
-            }
-            alert(errorMessage);
-        } else if (data.user) {
-            location.assign('/');
+        if (res.redirected) {
+            window.location.href = res.url;  // Redirect to login on success
         }
-
     } catch (err) {
         console.log(err);
         alert('An error occurred during registration');
     }
 });
-
-
-

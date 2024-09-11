@@ -11,44 +11,29 @@
 <body>
     <!-- NavBar -->
     <%- include("partials/navbar.ejs") %>
-        <!-- End NavBar -->
+    <!-- End NavBar -->
 
-        <!-- My Account Content -->
-        <div class="account-container" id="accountContainer">
-            <% if (isLoggedIn) { %>
-                <!-- If user is logged in -->
-                <div class="account-info">
-                    <img src="/images/<%= learner.profileImage %>" alt="Profile Picture" class="profile-image">
-                    <h2>
-                        <%= learner.firstName %>
-                            <%= learner.lastName %>
-                    </h2>
-                    <p><strong>Email:</strong>
-                        <%= learner.email %>
-                    </p>
-                    <p><strong>Phone:</strong>
-                        <%= learner.phone %>
-                    </p>
-                </div>
-                <% } else { %>
-                    <!-- If user is not logged in -->
-                    <div class="login-box">
-                        <h2>Login to Your Account</h2>
-                        <form action="/login" method="POST">
-                            <input type="text" name="emailOrPhone" placeholder="Email or Phone Number" required>
-                            <input type="password" name="password" placeholder="Password" required>
-                            <button type="submit">Login</button>
-                        </form>
-                        <a href="/forgot-password">Forgot Password?</a>
-                        <a href="/register">Register</a>
-                    </div>
-                    <% } %>
-        </div>
+    <!-- My Account Content -->
+    <div class="account-container" id="accountContainer">
+        <% if (learner) { %>
+            <!-- If user is logged in -->
+            <div class="account-info">
+                <h2><%= learner.firstName %> <%= learner.lastName %></h2>
+                <p><strong>Email:</strong> <%= learner.email %></p>
+                <p><strong>Phone:</strong> <%= learner.phone %></p>
+                <p><strong>Address:</strong> <%= learner.address %></p>
+            </div>
+        <% } else { %>
+            <!-- If user is not logged in -->
+            <div class="login-box">
+                <h2>You are not logged in</h2>
+                <a href="/login">Login</a>
+            </div>
+        <% } %>
+    </div>
 
-        <!-- Footer -->
-        <%- include("partials/footer.ejs") %>
-
-    <script src="/scripts/profile.js"></script>
+    <!-- Footer -->
+    <%- include("partials/footer.ejs") %>
 </body>
 
 </html>

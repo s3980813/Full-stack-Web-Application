@@ -5,30 +5,25 @@ sign_in.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = sign_in.email.value;
     const password = sign_in.password.value;
+    const accountType = document.querySelector('input[name="accountType"]:checked').value;
 
     try {
         const res = await fetch('/login', {
             method: "POST",
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ email, password, accountType }),
             headers: { 'Content-Type': 'application/json' }
         });
 
-        const data = await res.json();
-        if (!data) {
-            throw new Error('No response data');
-        }
-        if (data.error) {
-            let errorMessage = '';
-            if (data.error.email || data.error.password) {
-                errorMessage += 'Invalid email or password';
+        if (res.redirected) {
+            window.location.href = res.url;  // Redirect to home or instructor page on success
+        } else {
+            const data = await res.json();
+            if (data.error) {
+                alert(data.error);  // Alert if there’s an error message returned by the server
             }
-            alert(errorMessage);
-        }
-        if (data.user) {
-            location.assign('/');
         }
     } catch (err) {
         console.log(err);
-        alert(err);
+        alert('An error occurred during login');
     }
 });

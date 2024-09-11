@@ -1,13 +1,13 @@
 <nav class="navBar">
     <div class="logo"><a href="/views/home.ejs"><img src="/images/A_small_cup_of_coffee.JPG" alt="coffee cup"></a></div>
     <div class="nav">
-        <a class="navButton" href="/views/home.ejs">Home</a>
-        <a class="navButton" href="/views/aboutUs.ejs">About Us</a>
+        <a class="navButton" href="/">Home</a>
+        <a class="navButton" href="/aboutUs">About Us</a>
         <a class="navButton" id="pricing-btn" href="#">Pricing</a>
         <a class="navButton" href="#search">Search</a>
-        <a class="navButton" href="/views/FAQs.ejs">FAQ</a>
-        <a class="navButton" href="/views/contact.ejs">Contact</a>
-        <a class="navButton" href="/views/profile.ejs">My Account</a>
+        <a class="navButton" href="/FAQs">FAQ</a>
+        <a class="navButton" href="/contact">Contact</a>
+        <a class="navButton" href="/profile">My Account</a>
     </div>
 </nav>
 
@@ -50,17 +50,17 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-    const pricingBtn = document.getElementById('pricing-btn');
-    const pricingTable = document.getElementById('pricing-table');
-    const closeBtn = document.getElementById('close-pricing-btn');
+        const pricingBtn = document.getElementById('pricing-btn');
+        const pricingTable = document.getElementById('pricing-table');
+        const closeBtn = document.getElementById('close-pricing-btn');
 
-    pricingBtn.addEventListener('click', function () {
-        pricingTable.classList.add('show-table');
-    });
+        pricingBtn.addEventListener('click', function () {
+            pricingTable.classList.add('show-table');
+        });
 
-    closeBtn.addEventListener('click', function () {
-        pricingTable.classList.remove('show-table');
+        closeBtn.addEventListener('click', function () {
+            pricingTable.classList.remove('show-table');
+        });
     });
-});
 
 </script>

@@ -129,85 +129,92 @@ app.get('/login', (req, res) => {
 //   })
 // })
 
+app.get('/profile', (req, res) => {
+  if (!req.session.user) {
+    return res.redirect('/login'); // Redirect to login if not logged in
+  }
+
+  // Assuming the user in session is either a learner or a teacher
+  const learner = req.session.user;  // Retrieve the logged-in user from the session
+
+  // Pass the user to the profile template
+  res.render('/', { learner });
+});
 
 app.post('/signup', async (req, res) => {
-  var password = req.body.password
-  var email = req.body.email
-  var phone = req.body.phone
-  var city = req.body.city
-  var street = req.body.street
-  var address = street + " " + city
-  var picture = req.body.profilePicture
-  var type = req.body.accountType
-  var country = req.body.country
-  var firstName = req.body.firstName
-  var lastName = req.body.lastName
-  var schoolName = req.body.schoolName
-  var jobTitle = req.body.jobTitle
-  var specialization = req.body.specialization
-  console.log(email, password, type, phone, picture, address, country, firstName, lastName, schoolName, jobTitle, specialization)
-  if (type === 'learner') {
-    Learner.create({ email: email, password: password, address: address, firstName: firstName, lastName: lastName, phone: phone })
-      .then(data => {
-        res.json("success")
-      })
-      .catch(err => {
-        console.log(err)
-        // res.json("gg")
-        alert("email existed")
-      })
-  }
-  if (type === 'teacher') {
-    Teacher.create({ email: email, password: password, address: address, firstName: firstName, lastName: lastName, phone: phone, schoolName: schoolName, jobTitle: jobTitle, specialization: specialization })
-      .then(data => {
-        res.json("success")
-      })
-      .catch(err => {
-        console.log(err)
-        alert("email existed")
-      })
-  }
-  const existingLearner = await Learner.findOne({ email });
-  const existingTeacher = await Teacher.findOne({ email });
-
-  if (existingLearner || existingTeacher) {
-    return res.status(400).json({ error: 'Email already exists' });
-  }
-  res.redirect('/login');
-});
-
-app.post('/login', async (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  var type = req.body.accountType
+  const { email, password, phone, city, street, firstName, lastName, accountType, country, schoolName, jobTitle, specialization } = req.body;
+  const address = street + " " + city;
 
   try {
-    // First, try to log in the user as a learner
-    const learner = await Learner.login(email, password);
-    if (type = 'learner') {
-      console.log('Learner logged in');
-      return res.render('home');  // Redirect to learner's homepage (home.ejs)
+    // Check if the email already exists in either Learner or Teacher collection
+    const existingLearner = await Learner.findOne({ email });
+    const existingTeacher = await Teacher.findOne({ email });
+
+    if (existingLearner || existingTeacher) {
+      // Email already exists, re-render signup page with error
+      return res.status(400).render('signup', { error: 'Email already exists' });
     }
 
-    // If not a learner, try logging in the user as a teacher
-    const teacher = await Teacher.login(email, password);
-    if (type = 'teacher') {
-      console.log('Teacher logged in');
-      return res.render('inhome');  // Redirect to teacher's homepage (inhome.ejs)
+    // Proceed with creating learner or teacher
+    if (accountType === 'learner') {
+      await Learner.create({ email, password, address, firstName, lastName, phone });
+    } else if (accountType === 'teacher') {
+      await Teacher.create({ email, password, address, firstName, lastName, phone, schoolName, jobTitle, specialization });
     }
 
+    res.status(200).redirect('/login');  // Redirect to login page after successful signup
   } catch (err) {
-    console.error(err.message);
-
-    if (err.message === 'Incorrect email' || err.message === 'Incorrect password') {
-      return res.status(400).json({ error: 'Invalid email or password' });
-    }
-
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.log(err);
+    return res.status(500).render('signup', { error: 'Server error, please try again later' });
   }
 });
 
-app.get('/learner/coursedetail',(req,res)=>{
+
+app.post('/login', async (req, res) => {
+  const { email, password, accountType } = req.body;
+
+  try {
+    let user;
+
+    if (accountType === 'learner') {
+      user = await Learner.findOne({ email });
+      if (!user) {
+        return res.status(400).render('login', { error: 'Invalid email or password for learner' });
+      }
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!isPasswordValid) {
+        return res.status(400).render('login', { error: 'Invalid email or password for learner' });
+      }
+      req.session.user = user; // Store learner in session
+      return res.redirect('/');  // Redirect to profile page
+    }
+
+    if (accountType === 'teacher') {
+      user = await Teacher.findOne({ email });
+      if (!user) {
+        return res.status(400).render('login', { error: 'Invalid email or password for instructor' });
+      }
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!isPasswordValid) {
+        return res.status(400).render('login', { error: 'Invalid email or password for instructor' });
+      }
+      req.session.user = user; // Store teacher in session
+      return res.redirect('/inhome');  // Redirect to profile page
+    }
+
+    // If account type doesn't match, return error
+    return res.status(400).render('login', { error: 'Please select the correct account type' });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).render('login', { error: 'Internal Server Error' });
+  }
+});
+
+
+
+
+app.get('/learner/coursedetail', (req, res) => {
   res.render('coursedetail')
 })
 
@@ -215,6 +222,8 @@ app.get('/learner/coursedetail',(req,res)=>{
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
+
+
 
 // / Middleware for image upload
 // const userImgStorage = multer.diskStorage({
