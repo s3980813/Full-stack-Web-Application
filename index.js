@@ -102,9 +102,26 @@ app.get('/contact', (req, res) => {
 app.get('/login', (req, res) => {
   res.render('login');
 });
+app.post('/login',(req,res)=>{
+  // var type = req.body.type
+  var email = req.body.email
+  var password = req.body.password
+  console.log(email,password)
+  Learner.findOne({
+    email:email,
+    password:password
+  }).then(()=>{
+    res.render('home')
+  }).catch(err=>{
+    console.log(err)
+    res.json("wrong")
+  })
+})
 app.get('/signup', (req, res) => {
   res.render('signup');
 });
+
+
 app.post('/signup', (req, res) => {
   var password = req.body.password
   var email = req.body.email
