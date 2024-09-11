@@ -5,35 +5,35 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/login.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Page</title>
+    <title>Login Page</title>
 </head>
 
 <body>
     <!-- NavBar Partial -->
     <% include('partials/navbar') %>
 
-    <div class="container" id="container">
-        <!-- Login form -->
-        <div class="form-container log-in">
-            <form id="sign_in" action="/login" method="POST">
-                <h1>Log In</h1>
-                <input type="email" name="email" id="email" placeholder="Email" required>
-                <div class="email error"></div>
-                <input type="password" name="password" id="password" placeholder="Password" required>
-                <div class="password error"></div>
-                <button type="submit">Log In</button>
-                <div class="links">
-                    <a href="#">Forget Your Password?</a>
-                    <a href="/signup">Create an Account</a>
-                </div>
-            </form>
+        <div class="container" id="container">
+            <!-- Login form -->
+            <div class="form-container log-in">
+                <form id="sign_in" action="/login" method="POST">
+                    <h1>Log In</h1>
+                    <input type="email" name="email" id="email" placeholder="Email" required>
+                    <div class="email error"></div>
+                    <input type="password" name="password" id="password" placeholder="Password" required>
+                    <div class="password error"></div>
+                    <button type="submit">Log In</button>
+                    <div class="links">
+                        <a href="#">Forget Your Password?</a>
+                        <a href="/signup">Create an Account</a>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
 
-    <!-- Footer Partial -->
-    <% include('partials/footer') %>
+        <!-- Footer Partial -->
+        <% include('partials/footer') %>
 
-    <script src="public/JS/login.js"></script>
+            <script src="public/JS/login.js"></script>
 </body>
 
 </html>

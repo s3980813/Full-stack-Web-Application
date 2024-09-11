@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/orderPlacement.css" type="text/css">
+    <title> Order Placement</title>
 </head>
 
 
 <body>
     <!--Display navigation bar-->
-    <%- include("partials/navbar.ejs", {title: "Order Placement" }) %>
+    <%- include("partials/navbar.ejs") %>
 
         <!-- Search Modal -->
         <div class="modal_search" id="search">
@@ -89,7 +90,7 @@
                     <img src="<%= user.picture %>" alt="<%= user.name %> Profile picture">
                     <div class="InstructorName">
                         <h2 id="InstructorName">
-                            <%= Instructor.name %>
+                            <%= Teacher.firstName + Teacher.lastName %>
                         </h2>
                         <p id="Role">Instructor
                     </div>
