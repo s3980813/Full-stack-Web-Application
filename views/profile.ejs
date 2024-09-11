@@ -7,35 +7,23 @@
     <link rel="stylesheet" href="/css/profile.css">
 </head>
 <body>
-    <!-- NavBar -->
-    <nav class="navBar">
-        <div class="logo">
-            <a href="#"><img src="/images/A_small_cup_of_coffee.JPG" alt="coffee cup"></a>
-        </div>
-        <div class="nav">
-            <a class="navButton" href="/">Home</a>
-            <a class="navButton" href="/about">About Us</a>
-            <a class="navButton" href="/pricing">Pricing</a>
-            <a class="navButton" href="/faq">FAQ</a>
-            <a class="navButton" href="/contact">Contact</a>
-            <a class="navButton" href="/profile">My Account</a>
-        </div>
-    </nav>
+    <!-- NavBar
+    <%- include %> -->
     <!-- End NavBar -->
 
-    <!-- My Account Content -->
+    <!-- My Account Content
     <div class="account-container" id="accountContainer">
         <% if (isLoggedIn) { %>
             <!-- If user is logged in -->
-            <div class="account-info">
+            <!-- <div class="account-info">
                 <img src="/images/<%= learner.profileImage %>" alt="Profile Picture" class="profile-image">
                 <h2><%= learner.firstName %> <%= learner.lastName %></h2>
                 <p><strong>Email:</strong> <%= learner.email %></p>
                 <p><strong>Phone:</strong> <%= learner.phone %></p>
             </div>
-        <% } else { %>
+        <% } else { %> --> -->
             <!-- If user is not logged in -->
-            <div class="login-box">
+            <!-- <div class="login-box">
                 <h2>Login to Your Account</h2>
                 <form action="/login" method="POST">
                     <input type="text" name="emailOrPhone" placeholder="Email or Phone Number" required>
@@ -46,18 +34,18 @@
                 <a href="/register">Register</a>
             </div>
         <% } %>
-    </div>
+    </div> -->
 
     <!-- Footer -->
-    <footer>
+    <!-- <footer>
         <div class="footer-nav">
             <a href="#">Copyright</a>
             <a href="#">Terms of Service</a>
             <a href="#">Privacy Policy</a>
         </div>
-    </footer>
+    </footer> -->
 
-    <script src="/scripts/profile.js"></script>
+    <script src="/public/js/profile.js"></script>
 </body>
 </html>
 
