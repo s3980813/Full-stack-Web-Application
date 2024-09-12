@@ -65,4 +65,16 @@
         const pricingBtn = document.getElementById('pricing-btn');
         const pricingTable = document.getElementById('pricing-table');
         const closeBtn = document.getElementById('close-pricing-btn');
+
+        // Show the pricing table when the "Pricing" button is clicked
+        pricingBtn.addEventListener('click', function (e) {
+            e.preventDefault();  // Prevent default behavior
+            pricingTable.classList.add('show-table');  // Assuming you have CSS to show/hide this
+        });
+
+        // Hide the pricing table when the "Close" button is clicked
+        closeBtn.addEventListener('click', function () {
+            pricingTable.classList.remove('show-table');
+        });
     });
+</script>
