@@ -115,7 +115,9 @@ app.get('/thankyou', (req, res) => {
 });
 
 app.get('/signup', (req, res) => {
-  res.render('signup');
+  const user = req.session.user;
+  const accountType = req.session.accountType;
+  res.render('signup', { user, accountType });
 });
 
 app.get('/login', (req, res) => {
