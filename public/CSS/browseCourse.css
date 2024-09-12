@@ -233,90 +233,82 @@ body {
   display: block;
 }
 
-/* Header */
-header {
-  background-color: #1a73e8;
-  color: white;
+/* Browse Courses Section */
+.browse-courses {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  margin: 30px auto;
+  width: 90%;
+  max-width: 1200px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.browse-courses h2 {
   text-align: center;
-  padding: 40px 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  color: #1b5ac3;
 }
 
-header h1 {
-  font-size: 3em;
-  margin: 0;
+.browse-options {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
 }
 
-/* Course Container */
-.container {
+.browse-link {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1b5ac3;
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 2px solid #1b5ac3;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.browse-link:hover {
+  background-color: #1b5ac3;
+  color: #fff;
+}
+
+.course-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 20px auto;
+  justify-content: space-between;
 }
 
-.course {
-  background-color: white;
+.course-item {
+  width: 30%;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin: 20px;
-  width: 300px;
-  text-align: center;
   overflow: hidden;
-  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.course:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+.course-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.course h2 {
-  background-color: #ff6f61;
-  color: white;
-  padding: 15px 0;
-  margin: 0;
-  font-size: 1.5em;
-}
-
-.course ul,
-.course p {
-  padding: 20px;
-  margin: 0;
-  font-size: 1em;
-  color: #555555;
-  text-align: left;
-}
-
-.course ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-.course ul li {
-  margin: 10px 0;
-}
-
-.course img {
+.course-item img {
   width: 100%;
   height: auto;
 }
 
-.course button {
-  background-color: #ff6f61;
-  color: white;
-  padding: 15px;
-  border: none;
-  width: 100%;
-  cursor: pointer;
-  font-size: 1em;
-  transition: background-color 0.3s;
+.course-item h3 {
+  margin: 10px 0;
+  font-size: 18px;
+  color: #333;
 }
 
-.course button:hover {
-  background-color: #e8584c;
+.course-item p {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #555;
 }
 
 footer {

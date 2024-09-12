@@ -28,6 +28,12 @@ const courseSchema = new Schema({
         ref: 'Teacher',
         required: true
     },
+    category: {
+        type: String, // Add the category field
+        required: true, // Make it required
+        enum: ['Programming', 'Design', 'Marketing', 'Business', 'Other'], // Example categories
+        default: 'Other'
+    },
     dateCreated: {
         type: Date,
         default: Date.now

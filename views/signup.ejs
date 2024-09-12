@@ -10,7 +10,7 @@
 
 <body>
     <!-- NavBar Partial -->
-    <%- include('partials/navbar') %>
+    <%- include("partials/navbar.ejs", { user: user, accountType: accountType }) %>
     
 
     <div class="container" id="container">
