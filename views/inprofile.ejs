@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <%= teacher.firstName %> Profile
+        <%= teachers.firstName %> Profile
     </title>
     <link rel="stylesheet" href="/css/inprofile.css">
 </head>
@@ -14,14 +14,14 @@
     <!-- Unique Header for Instructor -->
     <header class="teacher-header">
         <div class="profile-image">
-            <img src="<%= teacher.profileImage %>" alt="<%= teacher.firstName %> Profile Picture">
+            <img src="<%= teachers.profileImage %>" alt="<%= teachers.firstName %> Profile Picture">
         </div>
         <div class="teacher-info">
             <h1>
-                <%= teacher.firstName %>
+                <%= teachers.firstName %>
             </h1>
             <p>
-                <%= teacher.title %>
+                <%= teachers.title %>
             </p>
         </div>
     </header>
@@ -32,7 +32,7 @@
         <section class="about-section">
             <h2>About</h2>
             <p>
-                <%= teacher.specialization %>
+                <%= teachers.specialization %>
             </p>
         </section>
 

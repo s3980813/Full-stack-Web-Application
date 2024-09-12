@@ -7,18 +7,62 @@
         <a class="navButton" href="#search">Search</a>
         <a class="navButton" href="/FAQs">FAQ</a>
         <a class="navButton" href="/contact">Contact</a>
-        <% if (user) { %>
-            <!-- Show Profile Link Based on accountType -->
-            <% if (accountType === 'learner') { %>
-                <a class="navButton" href="/profile">My Profile</a>
-            <% } else if (accountType === 'teacher') { %>
-                <a class="navButton" href="/inprofile">Instructor Profile</a>
-            <% } %>
+        <!-- Show Profile Link Based on accountType -->
+        <% if (accountType==='learner' ) { %>
+            <a class="navButton" href="/profile">My Profile</a>
             <!-- Show Logout Button -->
             <a class="navButton" href="/logout">Logout</a>
-        <% } else { %>
-            <!-- If not logged in, show login link -->
-            <a class="navButton" href="/login">Login</a>
-        <% } %>
+            <% } else if (accountType==='teacher' ) { %>
+                <a class="navButton" href="/inprofile">Instructor Profile</a>
+                <!-- Show Logout Button -->
+                <a class="navButton" href="/logout">Logout</a>
+                <% } else { %>
+                    <!-- If not logged in, show login link -->
+                    <a class="navButton" href="/login">Login</a>
+                    <% } %>
     </div>
 </nav>
+
+<!-- Pricing Table (initially hidden) -->
+<div class="pricing-table" id="pricing-table">
+    <h2>Subscription Fees</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Plan</th>
+                <th>Fee Type</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Basic Learner</td>
+                <td>Monthly Subscription</td>
+                <td>$10/month</td>
+            </tr>
+            <tr>
+                <td>Premium Learner</td>
+                <td>Premium Membership</td>
+                <td>$30/month</td>
+            </tr>
+            <tr>
+                <td>Basic Instructor</td>
+                <td>Monthly Subscription</td>
+                <td>$15/month</td>
+            </tr>
+            <tr>
+                <td>Instructor</td>
+                <td>Commission</td>
+                <td>10% per course</td>
+            </tr>
+        </tbody>
+    </table>
+    <button id="close-pricing-btn" class="close-btn">Close</button>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const pricingBtn = document.getElementById('pricing-btn');
+        const pricingTable = document.getElementById('pricing-table');
+        const closeBtn = document.getElementById('close-pricing-btn');
+    });

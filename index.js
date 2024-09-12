@@ -73,7 +73,6 @@ mongoose.connect(mongoURI)
 app.get('/', (req, res) => {
   const user = req.session.user;
   const accountType = req.session.accountType;
-    
   res.render('home', { user, accountType });  // Pass user and accountType to the home page
 });
 
@@ -103,14 +102,26 @@ app.get('/FAQs', (req, res) => {
   res.render('FAQs', { user, accountType });
 });
 
-app.get('/inprofile', (req, res) => {
-  res.render('inprofile');
+app.get('/inprofile', async (req, res) => {
+  accountType = req.session.accountType
+  try {
+    if (accountType === 'teacher') {
+      const teachers = await Teacher.find({});
+      res.render('inprofile', { teachers: teachers });
+    }
+  } catch (err) {
+    res.status(400).render('inprofile', { error: "cannot display data" });
+  }
 });
 
 app.get('/profile', async (req, res) => {
+  userID = req.session.userID
+  accountType = req.session.accountType
   try {
-    const learners = await Learner.find({});
-    res.render('profile', { learners: learners });
+    if (accountType === 'learner') {
+      const learners = await Learner.findOne({ _id: userID });
+      res.render('profile', { learners: learners });
+    }
   } catch (err) {
     res.status(400).render('profile', { error: "cannot display data" });
   }
@@ -139,21 +150,6 @@ app.get('/login', (req, res) => {
   const accountType = req.session.accountType;
   res.render('login', { user, accountType });
 });
-// app.post('/login',(req,res)=>{
-//   // var type = req.body.type
-//   var email = req.body.email
-//   var password = req.body.password
-//   console.log(email,password)
-//   Learner.findOne({
-//     email:email,
-//     password:password
-//   }).then(()=>{
-//     res.render('home')
-//   }).catch(err=>{
-//     console.log(err)
-//     res.json("wrong")
-//   })
-// })
 
 app.get('/profile', (req, res) => {
   const user = req.session.user;
@@ -162,7 +158,7 @@ app.get('/profile', (req, res) => {
   if (!user) {
     return res.redirect('/login');  // Redirect to login if not logged in
   }
-  
+
   res.render('profile', { learner: user, user, accountType });  // Pass user and accountType
 });
 
@@ -213,6 +209,7 @@ app.post('/login', async (req, res) => {
       }
       req.session.user = user; // Store learner data in session
       req.session.accountType = 'learner'; // Store account type in session
+      console.log(req.session.accountType)
       return res.redirect('/');  // Redirect to homepage after login
     }
 
@@ -309,7 +306,7 @@ app.post('/forgot-password', async (req, res) => {
 // Reset password route (for demonstration purposes, this will just display the link)
 app.get('/reset-password/:token', (req, res) => {
   const { token } = req.params;
-  
+
   try {
     const decoded = jwt.verify(token, 'your-secret-key');
     const email = decoded.email;
@@ -334,8 +331,6 @@ app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
 
-
-
 // / Middleware for image upload
 // const userImgStorage = multer.diskStorage({
 //   destination: function (req, file, cb) {
@@ -352,60 +347,6 @@ app.listen(port, () => {
 //   }
 // });
 // const userImgUpload = multer({ storage: userImgStorage });
-
-
-// app.get('/register', (req, res) => {
-//   res.render('register');
-// });
-
-// app.post('/register', (req, res) => {
-//   var password = req.body.password
-//   var email = req.body.email
-//   // var phone = req.body.phone
-//   // var address = req.body.address
-//   // var picture = req.body.profilePicture
-//   var type = req.body.accountType
-//   // var firstName = req.body.firstName
-//   // var lastName = req.body.lastName
-//   console.log(email, password, type)
-//   if (type === 'learner') {
-//     Learner.findOne({
-//       email: email
-//     })
-//       .then(data => {
-//         if (data) {
-//           res.send("tài khoản đã tồn tại")
-//         } else {
-//           return Learner.create({password: password, email: email})
-//         }
-//       })//thay vì viết .then trong user.create thì xài return thì nguyên function data.then res.json thành công
-//       .then(data => {
-//         res.json("tạo tài khoản thành công")
-//       })
-//       .catch(err => {
-//         res.json("thất bại")
-//       })
-//   }
-//   if (type === 'instructor') {
-//     Teacher.findOne({
-//       email: email
-//     })
-//       .then(data => {
-//         if (data) {
-//           res.send("tài khoản đã tồn tại")
-//         } else {
-//           return Teacher.create({ password: password, email: email })
-//         }
-//       })//thay vì viết .then trong user.create thì xài return thì nguyên function data.then res.json thành công
-//       .then(data => {
-//         res.json("tạo tài khoản thành công")
-//       })
-//       .catch(err => {
-//         res.json("thất bại")
-//       })
-//   }
-// });
-
 
 // app.get('/teacher/:id', async (req, res) => {
 //   try {
