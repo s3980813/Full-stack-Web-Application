@@ -71,7 +71,10 @@ mongoose.connect(mongoURI)
 
 
 app.get('/', (req, res) => {
-  res.render("home");
+  const user = req.session.user;
+  const accountType = req.session.accountType;
+    
+  res.render('home', { user, accountType });  // Pass user and accountType to the home page
 });
 
 app.get('/contact', (req, res) => {
@@ -116,7 +119,9 @@ app.get('/signup', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('login');
+  const user = req.session.user;
+  const accountType = req.session.accountType;
+  res.render('login', { user, accountType });
 });
 // app.post('/login',(req,res)=>{
 //   // var type = req.body.type
@@ -135,15 +140,14 @@ app.get('/login', (req, res) => {
 // })
 
 app.get('/profile', (req, res) => {
-  if (!req.session.user) {
-    return res.redirect('/login'); // Redirect to login if not logged in
+  const user = req.session.user;
+  const accountType = req.session.accountType;
+
+  if (!user) {
+    return res.redirect('/login');  // Redirect to login if not logged in
   }
-
-  // Assuming the user in session is either a learner or a teacher
-  const learner = req.session.user;  // Retrieve the logged-in user from the session
-
-  // Pass the user to the profile template
-  res.render('/', { learner });
+  
+  res.render('profile', { learner: user, user, accountType });  // Pass user and accountType
 });
 
 app.post('/signup', async (req, res) => {
@@ -181,6 +185,7 @@ app.post('/login', async (req, res) => {
   try {
     let user;
 
+    // Check if the account type is learner
     if (accountType === 'learner') {
       user = await Learner.findOne({ email });
       if (!user) {
@@ -190,10 +195,12 @@ app.post('/login', async (req, res) => {
       if (!isPasswordValid) {
         return res.status(400).render('login', { error: 'Invalid email or password for learner' });
       }
-      req.session.user = user; // Store learner in session
-      return res.redirect('/');  // Redirect to profile page
+      req.session.user = user; // Store learner data in session
+      req.session.accountType = 'learner'; // Store account type in session
+      return res.redirect('/');  // Redirect to homepage after login
     }
 
+    // Check if the account type is teacher
     if (accountType === 'teacher') {
       user = await Teacher.findOne({ email });
       if (!user) {
@@ -203,8 +210,9 @@ app.post('/login', async (req, res) => {
       if (!isPasswordValid) {
         return res.status(400).render('login', { error: 'Invalid email or password for instructor' });
       }
-      req.session.user = user; // Store teacher in session
-      return res.redirect('/inhome');  // Redirect to profile page
+      req.session.user = user; // Store teacher data in session
+      req.session.accountType = 'teacher'; // Store account type in session
+      return res.redirect('/');  // Redirect to homepage after login
     }
 
     // If account type doesn't match, return error

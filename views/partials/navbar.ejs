@@ -7,9 +7,20 @@
         <a class="navButton" href="#search">Search</a>
         <a class="navButton" href="/FAQs">FAQ</a>
         <a class="navButton" href="/contact">Contact</a>
-        <a class="navButton" href="/profile">My Account</a>
+        <% if (user) { %>
+            <!-- Show Profile Link Based on accountType -->
+            <% if (accountType === 'learner') { %>
+                <a class="navButton" href="/profile">My Profile</a>
+            <% } else if (accountType === 'teacher') { %>
+                <a class="navButton" href="/inprofile">Instructor Profile</a>
+            <% } %>
+        <% } else { %>
+            <!-- If not logged in, show login link -->
+            <a class="navButton" href="/login">Login</a>
+        <% } %>
     </div>
 </nav>
+
 
 <!-- Pricing Table (initially hidden) -->
 <div class="pricing-table" id="pricing-table">
