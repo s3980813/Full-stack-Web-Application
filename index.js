@@ -101,8 +101,13 @@ app.get('/inprofile', (req, res) => {
   res.render('inprofile');
 });
 
-app.get('/profile', (req, res) => {
-  res.render('profile');
+app.get('/profile', async (req, res) => {
+  try {
+    const learners = await Learner.find({});
+    res.render('profile', { learners: learners });
+  } catch (err) {
+    res.status(400).render('profile', { error: "cannot display data" });
+  }
 });
 
 app.get('/thankyou', (req, res) => {
