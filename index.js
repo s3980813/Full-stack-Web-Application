@@ -122,6 +122,12 @@ app.get('/thankyou', (req, res) => {
   res.render('thankyou', { user, accountType });
 });
 
+app.get('/browseCourse', (req, res) => {
+  const user = req.session.user;
+  const accountType = req.session.accountType;
+  res.render('browseCourse', { user, accountType });
+});
+
 app.get('/signup', (req, res) => {
   const user = req.session.user;
   const accountType = req.session.accountType;
@@ -245,6 +251,35 @@ app.get('/logout', (req, res) => {
     res.clearCookie('connect.sid'); // Clear the session cookie
     res.redirect('/'); // Redirect to homepage
   });
+});
+
+// Route to browse courses by name
+app.get('/browse/name', async (req, res) => {
+  try {
+    const courses = await Course.find().sort({ name: 1 }); // Sort courses alphabetically by name
+    res.render('browseCourse', { courses, browseBy: 'name', user: req.session.user, accountType: req.session.accountType });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error fetching courses');
+  }
+});
+
+// Route to browse courses by category
+app.get('/browse/category', async (req, res) => {
+  try {
+    const courses = await Course.find().populate('instructor'); // Fetch courses with instructor details
+    // Group courses by category
+    const categories = {};
+    courses.forEach(course => {
+      const category = course.category || 'Uncategorized'; // Handle missing category
+      if (!categories[category]) categories[category] = [];
+      categories[category].push(course);
+    });
+    res.render('browseCourse', { categories, browseBy: 'category', user: req.session.user, accountType: req.session.accountType });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error fetching courses');
+  }
 });
 
 

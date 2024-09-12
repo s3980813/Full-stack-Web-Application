@@ -2,186 +2,60 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/home.css">
     <title>Browse Courses</title>
-    <!-- Link to external CSS file for styling -->
-    <link rel="stylesheet" href="/css/browseCourse.css" />
 </head>
 
 <body>
-    <!--Display navigation bar-->
-    <%- include("partials/navbar.ejs") %>
-        <!-- End of NavBar -->
+    <!-- Include Navbar -->
+    <%- include("partials/navbar.ejs", { user: user, accountType: accountType }) %>
 
-        <!-- Search Modal -->
-        <!-- This section creates a modal for the search functionality -->
-        <div class="modal_search" id="search">
-            <!-- Close button for the search modal -->
-            <a href="#" class="close_search"></a>
-            <div class="search_body">
-                <!-- Input field for search queries -->
-                <input class="search_button" type="text" placeholder="Search" name="search" />
-            </div>
-        </div>
-        <!-- End of Search Modal -->
-
-        <!-- Header -->
-        <!-- This section displays the main heading of the page -->
-        <header>
-            <h1>Browse Courses</h1>
-        </header>
-
-        <!-- Course Container -->
-        <!-- This section holds all the course offerings -->
-        <div class="container">
-            <!-- Each course is displayed as a card -->
-            <div class="course">
-                <h2>AI Puzzle</h2>
-                <ul>
-                    <li>Train a model to solve CAPTCHA with Google.</li>
-                    <li>
-                        This series focuses on AI applications, training AI using Python.
-                        You can use Google Colab to speed up training.
-                    </li>
-                    <li>Object detection - Find objects in images with TensorFlow.</li>
-                </ul>
-                <!-- Image associated with the AI Puzzle course -->
-                <img src="https://cdn.glitch.global/a8735179-2600-4365-b449-07d7da34204c/AI-puzzle-Lottie-JSON-animation.gif?v=1724823890046"
-                    alt="AI Puzzle Course Image" />
-                <!-- Button that could link to more details about the course -->
-                <button>Click here to learn more</button>
+    <main>
+        <section class="browse-courses">
+            <h2>Browse Courses</h2>
+            <div class="browse-options">
+                <a class="browse-link" href="/browse/name">Browse Courses by Name</a>
+                <a class="browse-link" href="/browse/category">Browse Courses by Category</a>
             </div>
 
-            <div class="course">
-                <h2>Web Development</h2>
-                <p>
-                    This course is designed for beginners who want to enter the world of
-                    web development. You will learn how to structure web pages using HTML,
-                    style them with CSS, and add interactive elements with JavaScript.
-                </p>
-                <!-- Image associated with the Web Development course -->
-                <img src="https://cdn.glitch.me/a8735179-2600-4365-b449-07d7da34204c/Java.gif?v=1724836630307"
-                    alt="Web Development Course Image" />
-                <!-- Button that could link to more details about the course -->
-                <button>Click here to learn more</button>
-            </div>
+            <!-- Display Courses -->
+            <% if (browseBy === 'name') { %>
+                <h3>Courses Alphabetically</h3>
+                <div class="course-list">
+                    <% courses.forEach(course => { %>
+                        <div class="course-item">
+                            <a href="/coursedetail/<%= course._id %>">
+                                <img src="/images/<%= course.picture %>" alt="<%= course.name %>">
+                                <h3><%= course.name %></h3>
+                            </a>
+                            <p>Price: $<%= course.price %></p>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } else if (browseBy === 'category') { %>
+                <h3>Courses by Category</h3>
+                <% Object.keys(categories).forEach(category => { %>
+                    <h4><%= category %></h4>
+                    <div class="course-list">
+                        <% categories[category].forEach(course => { %>
+                            <div class="course-item">
+                                <a href="/coursedetail/<%= course._id %>">
+                                    <img src="/images/<%= course.picture %>" alt="<%= course.name %>">
+                                    <h3><%= course.name %></h3>
+                                </a>
+                                <p>Price: $<%= course.price %></p>
+                            </div>
+                        <% }); %>
+                    </div>
+                <% }); %>
+            <% } %>
+        </section>
+    </main>
 
-            <div class="course">
-                <h2>App Development</h2>
-                <ul>
-                    <li>
-                        Learn to create powerful and user-friendly mobile applications from
-                        scratch.
-                    </li>
-                    <li>
-                        This course is perfect for aspiring developers who want to dive into
-                        mobile app development. You will learn the fundamentals of app
-                        design, coding, and deployment for both iOS and Android platforms.
-                    </li>
-                </ul>
-                <!-- Image associated with the App Development course -->
-                <img src="https://cdn.glitch.global/a8735179-2600-4365-b449-07d7da34204c/2019-10-01-13-58-44-5d935b94dd6b5-app-development.gif?v=1724822662135"
-                    alt="App Development Course Image" />
-                <!-- Button that could link to more details about the course -->
-                <button>Click here to learn more</button>
-            </div>
-
-            <div class="course">
-                <h2>Artificial Intelligence and Machine Learning</h2>
-                <ul>
-                    <li>
-                        Explore the world of AI and Machine Learning with hands-on projects
-                        and expert guidance.
-                    </li>
-                    <li>
-                        This course is designed for those who want to dive deep into AI and
-                        Machine Learning. You will learn the fundamental concepts, tools,
-                        and techniques used in the industry, including neural networks,
-                        natural language processing, and computer vision.
-                    </li>
-                </ul>
-
-                <img src="https://cdn.glitch.global/a8735179-2600-4365-b449-07d7da34204c/imgpsh_fullsize_anim.gif?v=1724822883626"
-                    alt="Artificial Intelligence and Machine Learning Course Image" />
-                <!-- Button that could link to more details about the course -->
-                <button>Click here to learn more</button>
-            </div>
-            <div class="course">
-                <h2>Basic JavaScript</h2>
-                <ul>
-                    <li>
-                        This course will teach you concepts like variables, functions,
-                        loops, conditions, events, functions in JavaScript, and many other
-                        basic and advanced concepts.
-                    </li>
-                    <li>
-                        In addition, the author will guide you through the basic concepts
-                        and provide practice exercises to help you master the knowledge.
-                    </li>
-                </ul>
-                <!-- Image associated with the AI and Machine Learning course -->
-                <img src="https://cdn.glitch.global/a8735179-2600-4365-b449-07d7da34204c/Java.gif?v=1724836151020"
-                    alt="Basic JavaScript Course Image" />
-                <!-- Button that could link to more details about the course -->
-                <button>Click here to learn more</button>
-            </div>
-        </div>
-
-        <!-- Display footer -->
-        <%- include("partials/footer.ejs") %>
-            <!-- End of Footer -->
-
-            <!-- Link to external JavaScript file for interactivity -->
-            <script src="/public/JS/BrowseCourse.js">
-                document.addEventListener('DOMContentLoaded', function () {
-                    // Simulated user status (could be 'learner', 'instructor', or 'guest')
-                    const userStatus = 'learner';  // Change this to 'instructor' or 'guest' to see different views
-
-                    const actionButtons = document.getElementById('actionButtons');
-
-                    if (userStatus === 'learner') {
-                        actionButtons.innerHTML = `
-            <button class="trial-button" onclick="startTrial()">Trial For 2-Day</button>
-            <button class="enroll-button" onclick="enrollCourse()">Enroll</button>
-        `;
-                    } else if (userStatus === 'instructor') {
-                        actionButtons.innerHTML = `
-            <button class="edit-button" onclick="editCourse()">Edit Course</button>
-            <button class="delete-button" onclick="deleteCourse()">Delete Course</button>
-        `;
-                    } else if (userStatus === 'guest') {
-                        // No action buttons for guests, only course title and description are shown
-                        document.getElementById('courseInstructor').style.display = 'none';
-                        document.getElementById('coursePrice').style.display = 'none';
-                    }
-                });
-
-                // Functions for learners
-                function startTrial() {
-                    alert('You have started a 2-day trial for this course.');
-                    // Add logic to handle trial subscription
-                }
-
-                function enrollCourse() {
-                    window.location.href = 'order-placement.html';  // Redirect to order placement page
-                }
-
-                // Functions for instructors
-                function editCourse() {
-                    alert('You are now editing this course.');
-                    // Add logic to redirect to the edit course page
-                }
-
-                function deleteCourse() {
-                    const confirmation = confirm('Are you sure you want to delete this course?');
-                    if (confirmation) {
-                        alert('Course deleted successfully.');
-                        // Add logic to delete the course
-                    }
-                }
-
-            </script>
+    <!-- Include Footer -->
+    <%- include("partials/footer.ejs") %>
 </body>
 
 </html>
