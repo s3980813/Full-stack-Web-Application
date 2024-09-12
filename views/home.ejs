@@ -10,7 +10,7 @@
 
 <body>
     <!-- Header: Logo and Navigation Bar -->
-    <%- include("partials/navbar.ejs", {title: "Order Placement" }) %>
+    <%- include("partials/navbar.ejs", { user: user, accountType: accountType }) %>
 
     <!-- Search Modal -->
     <div class="modal_search" id="search">
