@@ -78,11 +78,15 @@ app.get('/', (req, res) => {
 });
 
 app.get('/contact', (req, res) => {
-  res.render('contact');
+  const user = req.session.user;
+  const accountType = req.session.accountType;
+  res.render('contact', { user, accountType });
 });
 
 app.get('/aboutUs', (req, res) => {
-  res.render('aboutUs');
+  const user = req.session.user;
+  const accountType = req.session.accountType;
+  res.render('aboutUs', { user, accountType });
 });
 
 app.get('/addCourse', (req, res) => {
@@ -94,7 +98,9 @@ app.get('/coursedetail', (req, res) => {
 });
 
 app.get('/FAQs', (req, res) => {
-  res.render('FAQs');
+  const user = req.session.user;
+  const accountType = req.session.accountType;
+  res.render('FAQs', { user, accountType });
 });
 
 app.get('/inprofile', (req, res) => {
@@ -111,7 +117,9 @@ app.get('/profile', async (req, res) => {
 });
 
 app.get('/thankyou', (req, res) => {
-  res.render('thankyou');
+  const user = req.session.user;
+  const accountType = req.session.accountType;
+  res.render('thankyou', { user, accountType });
 });
 
 app.get('/signup', (req, res) => {
@@ -224,6 +232,19 @@ app.post('/login', async (req, res) => {
     console.error(err);
     return res.status(500).render('login', { error: 'Internal Server Error' });
   }
+});
+
+// Logout route
+app.get('/logout', (req, res) => {
+  // Destroy the session and redirect to homepage
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+      return res.redirect('/');
+    }
+    res.clearCookie('connect.sid'); // Clear the session cookie
+    res.redirect('/'); // Redirect to homepage
+  });
 });
 
 
