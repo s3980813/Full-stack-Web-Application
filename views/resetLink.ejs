@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Password Reset Link</title>
+</head>
+
+<body>
+    <!-- Container for the reset link page -->
+    <div class="container" id="reset-link-container">
+        <div class="form-container">
+            <h1>Password Reset</h1>
+            <p>A password reset link has been generated:</p>
+            <a href="<%= resetLink %>" class="reset-link">
+                <%= resetLink %>
+            </a>
+            <button id="back-to-login" class="back-button">Back to Login</button>
+        </div>
+    </div>
+
+    <script>
+        // Redirect to login page when the "Back to Login" button is clicked
+        document.getElementById('back-to-login').onclick = function () {
+            window.location.href = '/login';
+        }
+    </script>
+</body>
+
+</html>

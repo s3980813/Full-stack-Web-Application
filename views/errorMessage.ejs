@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Error</title>
+</head>
+<body>
+    <!-- Container for the error message -->
+    <div class="container" id="error-message-container">
+        <div class="form-container">
+            <h1>Error</h1>
+            <p><%= errorMessage %></p>
+            <button id="back-to-login" class="back-button">Back to Login</button>
+        </div>
+    </div>
+
+    <script>
+        // Redirect to login page when the "Back to Login" button is clicked
+        document.getElementById('back-to-login').onclick = function () {
+            window.location.href = '/login';
+        }
+    </script>
+</body>
+</html>

@@ -282,6 +282,46 @@ app.get('/browse/category', async (req, res) => {
   }
 });
 
+// Forgot password route
+app.post('/forgot-password', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    let user = await Learner.findOne({ email }) || await Teacher.findOne({ email });
+
+    if (!user) {
+      // Render the styled error message page
+      return res.render('errorMessage', { errorMessage: "No account associated with that email address." });
+    }
+
+    // Generate a reset token
+    const resetToken = jwt.sign({ email }, 'your-secret-key', { expiresIn: '1h' });
+    const resetLink = `http://localhost:${port}/reset-password/${resetToken}`;
+
+    // Render a styled page with the reset link
+    res.render('resetLink', { resetLink });
+  } catch (error) {
+    console.error(error);
+    res.status(500).render('errorMessage', { errorMessage: "Error generating reset link." });
+  }
+});
+
+// Reset password route (for demonstration purposes, this will just display the link)
+app.get('/reset-password/:token', (req, res) => {
+  const { token } = req.params;
+  
+  try {
+    const decoded = jwt.verify(token, 'your-secret-key');
+    const email = decoded.email;
+
+    // For demonstration, just display the decoded email
+    res.send(`Password reset for email: ${email}. You can now change your password.`);
+  } catch (err) {
+    console.error(err);
+    res.status(400).send("Invalid or expired reset token.");
+  }
+});
+
 
 
 
