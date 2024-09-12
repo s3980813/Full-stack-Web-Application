@@ -115,10 +115,11 @@ app.get('/inprofile', async (req, res) => {
 });
 
 app.get('/profile', async (req, res) => {
+  userID = req.session.userID
   accountType = req.session.accountType
   try {
     if (accountType === 'learner') {
-      const learners = await Learner.find({});
+      const learners = await Learner.findOne({ _id: userID });
       res.render('profile', { learners: learners });
     }
   } catch (err) {
@@ -149,21 +150,6 @@ app.get('/login', (req, res) => {
   const accountType = req.session.accountType;
   res.render('login', { user, accountType });
 });
-// app.post('/login',(req,res)=>{
-//   // var type = req.body.type
-//   var email = req.body.email
-//   var password = req.body.password
-//   console.log(email,password)
-//   Learner.findOne({
-//     email:email,
-//     password:password
-//   }).then(()=>{
-//     res.render('home')
-//   }).catch(err=>{
-//     console.log(err)
-//     res.json("wrong")
-//   })
-// })
 
 app.get('/profile', (req, res) => {
   const user = req.session.user;
@@ -293,9 +279,6 @@ app.get('/browse/category', async (req, res) => {
   }
 });
 
-
-
-
 app.get('/learner/coursedetail', (req, res) => {
   res.render('coursedetail')
 })
@@ -304,8 +287,6 @@ app.get('/learner/coursedetail', (req, res) => {
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
-
-
 
 // / Middleware for image upload
 // const userImgStorage = multer.diskStorage({
@@ -323,60 +304,6 @@ app.listen(port, () => {
 //   }
 // });
 // const userImgUpload = multer({ storage: userImgStorage });
-
-
-// app.get('/register', (req, res) => {
-//   res.render('register');
-// });
-
-// app.post('/register', (req, res) => {
-//   var password = req.body.password
-//   var email = req.body.email
-//   // var phone = req.body.phone
-//   // var address = req.body.address
-//   // var picture = req.body.profilePicture
-//   var type = req.body.accountType
-//   // var firstName = req.body.firstName
-//   // var lastName = req.body.lastName
-//   console.log(email, password, type)
-//   if (type === 'learner') {
-//     Learner.findOne({
-//       email: email
-//     })
-//       .then(data => {
-//         if (data) {
-//           res.send("tài khoản đã tồn tại")
-//         } else {
-//           return Learner.create({password: password, email: email})
-//         }
-//       })//thay vì viết .then trong user.create thì xài return thì nguyên function data.then res.json thành công
-//       .then(data => {
-//         res.json("tạo tài khoản thành công")
-//       })
-//       .catch(err => {
-//         res.json("thất bại")
-//       })
-//   }
-//   if (type === 'instructor') {
-//     Teacher.findOne({
-//       email: email
-//     })
-//       .then(data => {
-//         if (data) {
-//           res.send("tài khoản đã tồn tại")
-//         } else {
-//           return Teacher.create({ password: password, email: email })
-//         }
-//       })//thay vì viết .then trong user.create thì xài return thì nguyên function data.then res.json thành công
-//       .then(data => {
-//         res.json("tạo tài khoản thành công")
-//       })
-//       .catch(err => {
-//         res.json("thất bại")
-//       })
-//   }
-// });
-
 
 // app.get('/teacher/:id', async (req, res) => {
 //   try {
