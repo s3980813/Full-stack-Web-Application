@@ -5,7 +5,6 @@
 // const multer = require('multer');
 // const jwt = require('jsonwebtoken');
 // const Teacher = require('../models/teacherModel');  // Import the Teacher model
-// // import { Course } from '../models/courseModel.js'
 
 // // Initialize the Express router
 // const router = express.Router();

@@ -11,29 +11,38 @@
 <body>
     <!-- NavBar -->
     <%- include("partials/navbar.ejs") %>
-    <!-- End NavBar -->
+        <!-- End NavBar -->
 
-    <!-- My Account Content -->
-    <div class="account-container" id="accountContainer">
-        <% if (learner) { %>
-            <!-- If user is logged in -->
-            <div class="account-info">
-                <h2><%= learner.firstName %> <%= learner.lastName %></h2>
-                <p><strong>Email:</strong> <%= learner.email %></p>
-                <p><strong>Phone:</strong> <%= learner.phone %></p>
-                <p><strong>Address:</strong> <%= learner.address %></p>
-            </div>
-        <% } else { %>
-            <!-- If user is not logged in -->
-            <div class="login-box">
-                <h2>You are not logged in</h2>
-                <a href="/login">Login</a>
-            </div>
-        <% } %>
-    </div>
+        <!-- My Account Content -->
+        <div class="account-container" id="accountContainer">
+            <% if (learners) { %>
+                <!-- If user is logged in -->
+                <div class="account-info">
+                    <h2>
+                        <%= learners.firstName %>
+                            <%= learners.lastName %>
+                    </h2>
+                    <p><strong>Email:</strong>
+                        <%= learners.email %>
+                    </p>
+                    <p><strong>Phone:</strong>
+                        <%= learners.phone %>
+                    </p>
+                    <p><strong>Address:</strong>
+                        <%= learners.address %>
+                    </p>
+                </div>
+                <% } else { %>
+                    <!-- If user is not logged in -->
+                    <div class="login-box">
+                        <h2>You are not logged in</h2>
+                        <a href="/login">Login</a>
+                    </div>
+                    <% } %>
+        </div>
 
-    <!-- Footer -->
-    <%- include("partials/footer.ejs") %>
+        <!-- Footer -->
+        <%- include("partials/footer.ejs") %>
 </body>
 
 </html>
