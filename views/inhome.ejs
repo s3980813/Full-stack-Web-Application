@@ -10,177 +10,177 @@
 
 <body>
     <!-- Header: Logo and Navigation Bar -->
-    <%- include("partials/navbar.ejs", {title: "Order Placement" }) %>
+    <%- include("partials/navbar.ejs") %>
 
-    <!-- Search Modal -->
-    <div class="modal_search" id="search">
-        <a href="#" class="close_search"></a>
-        <div class="search_body">
-            <input class="search_button" type="text" placeholder="Search" name="search">
-        </div>
-    </div>
-    
-    <!-- Quote Section -->
-    <section class="quote-section">
-        <div class="quote-content">
-            <div class="quote-text">
-                <h2>“The beautiful thing about learning is that no one can take it away from you.”</h2>
-                <p>- B.B. King</p>
+        <!-- Search Modal -->
+        <div class="modal_search" id="search">
+            <a href="#" class="close_search"></a>
+            <div class="search_body">
+                <input class="search_button" type="text" placeholder="Search" name="search">
             </div>
         </div>
-    </section>
 
-    <!-- Main Content Area -->
-    <main>
-        <!-- New Instructors -->
-        <section class="Lecture new-instructors">
-            <h2>New Instructors</h2>
-            <div class="container">
-                <div class="lecInfo">
-                    <div class="info">
-                        <a href="/instructors/hung">
-                            <img src="/images/teacher.jpg" alt="Tran Manh Hung">
-                            <h3>Tran Manh Hung</h3>
-                        </a>
-                    </div>
-                </div>
-                <!-- Add more instructors here -->
-                <div class="lecInfo">
-                    <div class="info">
-                        <a href="/instructors/hung">
-                            <img src="/images/teacher.jpg" alt="Tran Manh Hung">
-                            <h3>Tran Manh Hung</h3>
-                        </a>
-                    </div>
-                </div>
-                <div class="lecInfo">
-                    <div class="info">
-                        <a href="/instructors/hung">
-                            <img src="/images/teacher.jpg" alt="Tran Manh Hung">
-                            <h3>Tran Manh Hung</h3>
-                        </a>
-                    </div>
+        <!-- Quote Section -->
+        <section class="quote-section">
+            <div class="quote-content">
+                <div class="quote-text">
+                    <h2>“The beautiful thing about learning is that no one can take it away from you.”</h2>
+                    <p>- B.B. King</p>
                 </div>
             </div>
         </section>
 
-        <!-- New Courses -->
-        <section class="Lecture new-courses">
-            <h2>New Courses</h2>
-            <div class="container">
-                <div class="lecInfo">
-                    <div class="info">
-                        <a href="/courses/java">
-                            <img src="/images/course.jpg" alt="Java Course">
-                            <h3>Java Programming</h3>
-                        </a>
-                        <p>Instructor: <a href="/instructors/hung">Tran Manh Hung</a></p>
-                        <p>Price: $50</p>
+        <!-- Main Content Area -->
+        <main>
+            <!-- New Instructors -->
+            <section class="Lecture new-instructors">
+                <h2>New Instructors</h2>
+                <div class="container">
+                    <div class="lecInfo">
+                        <div class="info">
+                            <a href="/instructors/hung">
+                                <img src="/images/teacher.jpg" alt="Tran Manh Hung">
+                                <h3>Tran Manh Hung</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Add more instructors here -->
+                    <div class="lecInfo">
+                        <div class="info">
+                            <a href="/instructors/hung">
+                                <img src="/images/teacher.jpg" alt="Tran Manh Hung">
+                                <h3>Tran Manh Hung</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="lecInfo">
+                        <div class="info">
+                            <a href="/instructors/hung">
+                                <img src="/images/teacher.jpg" alt="Tran Manh Hung">
+                                <h3>Tran Manh Hung</h3>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="lecInfo">
-                    <div class="info">
-                        <a href="/courses/java">
-                            <img src="/images/course.jpg" alt="Java Course">
-                            <h3>Java Programming</h3>
-                        </a>
-                        <p>Instructor: <a href="/instructors/hung">Tran Manh Hung</a></p>
-                        <p>Price: $50</p>
-                    </div>
-                </div>
-                <div class="lecInfo">
-                    <div class="info">
-                        <a href="/courses/java">
-                            <img src="/images/course.jpg" alt="Java Course">
-                            <h3>Java Programming</h3>
-                        </a>
-                        <p>Instructor: <a href="/instructors/hung">Tran Manh Hung</a></p>
-                        <p>Price: $50</p>
-                    </div>
-                </div>
-                <!-- Add more courses here -->
-            </div>
-        </section>
+            </section>
 
-        <!-- Featured Instructor -->
-        <section class="Lecture featured-instructors">
-            <h2>Featured Instructor</h2>
-            <div class="container">
-                <div class="lecInfo">
-                    <div class="info">
-                        <a href="/instructors/khang">
-                            <img src="/images/teacher.jpg" alt="Nguyen Manh Khang">
-                            <h3>Nguyen Manh Khang</h3>
-                        </a>
+            <!-- New Courses -->
+            <section class="Lecture new-courses">
+                <h2>New Courses</h2>
+                <div class="container">
+                    <div class="lecInfo">
+                        <div class="info">
+                            <a href="/courses/java">
+                                <img src="/images/course.jpg" alt="Java Course">
+                                <h3>Java Programming</h3>
+                            </a>
+                            <p>Instructor: <a href="/instructors/hung">Tran Manh Hung</a></p>
+                            <p>Price: $50</p>
+                        </div>
                     </div>
-                </div>
-                <div class="lecInfo">
-                    <div class="info">
-                        <a href="/instructors/khang">
-                            <img src="/images/teacher.jpg" alt="Nguyen Manh Khang">
-                            <h3>Nguyen Manh Khang</h3>
-                        </a>
+                    <div class="lecInfo">
+                        <div class="info">
+                            <a href="/courses/java">
+                                <img src="/images/course.jpg" alt="Java Course">
+                                <h3>Java Programming</h3>
+                            </a>
+                            <p>Instructor: <a href="/instructors/hung">Tran Manh Hung</a></p>
+                            <p>Price: $50</p>
+                        </div>
                     </div>
-                </div>
-                <div class="lecInfo">
-                    <div class="info">
-                        <a href="/instructors/khang">
-                            <img src="/images/teacher.jpg" alt="Nguyen Manh Khang">
-                            <h3>Nguyen Manh Khang</h3>
-                        </a>
+                    <div class="lecInfo">
+                        <div class="info">
+                            <a href="/courses/java">
+                                <img src="/images/course.jpg" alt="Java Course">
+                                <h3>Java Programming</h3>
+                            </a>
+                            <p>Instructor: <a href="/instructors/hung">Tran Manh Hung</a></p>
+                            <p>Price: $50</p>
+                        </div>
                     </div>
+                    <!-- Add more courses here -->
                 </div>
-                <!-- Add more featured instructors here -->
-            </div>
-        </section>
+            </section>
 
-        <!-- Featured Courses -->
-        <section class="Lecture featured-courses">
-            <h2>Featured Courses</h2>
-            <div class="container">
-                <div class="lecInfo">
-                    <div class="info">
-                        <a href="/courses/cybersecurity">
-                            <img src="/images/course.jpg" alt="Cybersecurity Course">
-                            <h3>Cybersecurity</h3>
-                        </a>
-                        <p>Instructor: <a href="/instructors/khang">Nguyen Manh Khang</a></p>
-                        <p>Price: $60</p>
+            <!-- Featured Instructor -->
+            <section class="Lecture featured-instructors">
+                <h2>Featured Instructor</h2>
+                <div class="container">
+                    <div class="lecInfo">
+                        <div class="info">
+                            <a href="/instructors/khang">
+                                <img src="/images/teacher.jpg" alt="Nguyen Manh Khang">
+                                <h3>Nguyen Manh Khang</h3>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="lecInfo">
-                    <div class="info">
-                        <a href="/courses/cybersecurity">
-                            <img src="/images/course.jpg" alt="Cybersecurity Course">
-                            <h3>Cybersecurity</h3>
-                        </a>
-                        <p>Instructor: <a href="/instructors/khang">Nguyen Manh Khang</a></p>
-                        <p>Price: $60</p>
+                    <div class="lecInfo">
+                        <div class="info">
+                            <a href="/instructors/khang">
+                                <img src="/images/teacher.jpg" alt="Nguyen Manh Khang">
+                                <h3>Nguyen Manh Khang</h3>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="lecInfo">
-                    <div class="info">
-                        <a href="/courses/cybersecurity">
-                            <img src="/images/course.jpg" alt="Cybersecurity Course">
-                            <h3>Cybersecurity</h3>
-                        </a>
-                        <p>Instructor: <a href="/instructors/khang">Nguyen Manh Khang</a></p>
-                        <p>Price: $60</p>
+                    <div class="lecInfo">
+                        <div class="info">
+                            <a href="/instructors/khang">
+                                <img src="/images/teacher.jpg" alt="Nguyen Manh Khang">
+                                <h3>Nguyen Manh Khang</h3>
+                            </a>
+                        </div>
                     </div>
+                    <!-- Add more featured instructors here -->
                 </div>
-                <!-- Add more featured courses here -->
-            </div>
-        </section>
-    </main>
+            </section>
 
-    <!-- Footer: Navigation Bar -->
-    <footer>
-        <div class="footer-nav">
-            <a href="#">Copyright</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Privacy Policy</a>
-        </div>
-    </footer>
+            <!-- Featured Courses -->
+            <section class="Lecture featured-courses">
+                <h2>Featured Courses</h2>
+                <div class="container">
+                    <div class="lecInfo">
+                        <div class="info">
+                            <a href="/courses/cybersecurity">
+                                <img src="/images/course.jpg" alt="Cybersecurity Course">
+                                <h3>Cybersecurity</h3>
+                            </a>
+                            <p>Instructor: <a href="/instructors/khang">Nguyen Manh Khang</a></p>
+                            <p>Price: $60</p>
+                        </div>
+                    </div>
+                    <div class="lecInfo">
+                        <div class="info">
+                            <a href="/courses/cybersecurity">
+                                <img src="/images/course.jpg" alt="Cybersecurity Course">
+                                <h3>Cybersecurity</h3>
+                            </a>
+                            <p>Instructor: <a href="/instructors/khang">Nguyen Manh Khang</a></p>
+                            <p>Price: $60</p>
+                        </div>
+                    </div>
+                    <div class="lecInfo">
+                        <div class="info">
+                            <a href="/courses/cybersecurity">
+                                <img src="/images/course.jpg" alt="Cybersecurity Course">
+                                <h3>Cybersecurity</h3>
+                            </a>
+                            <p>Instructor: <a href="/instructors/khang">Nguyen Manh Khang</a></p>
+                            <p>Price: $60</p>
+                        </div>
+                    </div>
+                    <!-- Add more featured courses here -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer: Navigation Bar -->
+        <footer>
+            <div class="footer-nav">
+                <a href="#">Copyright</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+        </footer>
 </body>
 
 </html>
