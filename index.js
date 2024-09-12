@@ -73,7 +73,6 @@ mongoose.connect(mongoURI)
 app.get('/', (req, res) => {
   const user = req.session.user;
   const accountType = req.session.accountType;
-    
   res.render('home', { user, accountType });  // Pass user and accountType to the home page
 });
 
@@ -97,14 +96,25 @@ app.get('/FAQs', (req, res) => {
   res.render('FAQs');
 });
 
-app.get('/inprofile', (req, res) => {
-  res.render('inprofile');
+app.get('/inprofile', async (req, res) => {
+  accountType = req.session.accountType
+  try {
+    if (accountType === 'teacher') {
+      const teachers = await Teacher.find({});
+      res.render('inprofile', { teachers: teachers });
+    }
+  } catch (err) {
+    res.status(400).render('inprofile', { error: "cannot display data" });
+  }
 });
 
 app.get('/profile', async (req, res) => {
+  accountType = req.session.accountType
   try {
-    const learners = await Learner.find({});
-    res.render('profile', { learners: learners });
+    if (accountType === 'learner') {
+      const learners = await Learner.find({});
+      res.render('profile', { learners: learners });
+    }
   } catch (err) {
     res.status(400).render('profile', { error: "cannot display data" });
   }
@@ -146,7 +156,7 @@ app.get('/profile', (req, res) => {
   if (!user) {
     return res.redirect('/login');  // Redirect to login if not logged in
   }
-  
+
   res.render('profile', { learner: user, user, accountType });  // Pass user and accountType
 });
 
@@ -197,6 +207,7 @@ app.post('/login', async (req, res) => {
       }
       req.session.user = user; // Store learner data in session
       req.session.accountType = 'learner'; // Store account type in session
+      console.log(req.session.accountType)
       return res.redirect('/');  // Redirect to homepage after login
     }
 
