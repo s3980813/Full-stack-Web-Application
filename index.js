@@ -55,6 +55,19 @@ app.use(
   })
 );
 
+// Set up storage and file naming for multer
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/Images/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname));  // Save file with timestamp
+  }
+});
+
+// File upload middleware
+const upload = multer({ storage: storage });
+
 // Setting up routes
 // app.use(authRoutes);
 // app.use(courseRoutes);
@@ -88,9 +101,49 @@ app.get('/aboutUs', (req, res) => {
   res.render('aboutUs', { user, accountType });
 });
 
-app.get('/addCourse', (req, res) => {
-  res.render('addCourse');
+//render add course page
+app.get('/addCourse', upload.single('picture'), async (req, res) => {
+  accountType = req.session.accountType
+  userID = req.session.userID
+  try {
+    if (accountType === 'teacher') {
+      const teachers = await Teacher.findOne({ _id: req.session.userID });
+      res.render('addCourse', { teachers: teachers });
+    }
+  } catch (err) {
+    res.status(400).render('addCourse', { error: "cannot display data" });
+  }
 });
+
+
+//Allow teacher role to post data from the add course form to the database
+app.post('/addCourse', async (req, res) => {
+  const { name, price, description, instructor, category } = req.body;
+
+  // Access uploaded file
+  const picture = req.file ? `/Images/${req.file.filename}` : null;
+
+  if (!picture) {
+    return res.status(400).send("Course image (picture) is required.");
+  }
+
+  const newCourse = new Course({
+    name,
+    picture,
+    price,
+    description,
+    instructor: req.session.userID,
+    category
+  });
+  try {
+    await newCourse.save();
+    res.send("Course added successfully!");
+    res.redirect('/coursedetail');
+  } catch (err) {
+    console.error(err);
+    res.send("Failed to add the course.");
+  }
+})
 
 app.get('/coursedetail', (req, res) => {
   res.render('coursedetail');
@@ -103,14 +156,29 @@ app.get('/FAQs', (req, res) => {
 });
 
 app.get('/inprofile', async (req, res) => {
-  accountType = req.session.accountType
+  const accountType = req.session.accountType;
+  const userID = req.session.userID;
+
   try {
     if (accountType === 'teacher') {
-      const teachers = await Teacher.find({});
-      res.render('inprofile', { teachers: teachers });
+      // Fetch the teacher's details
+      const teachers = await Teacher.findOne({ _id: userID });
+
+      if (!teachers) {
+        return res.status(404).render('inprofile', { error: 'Teacher not found', teachers: null, courses: [] });
+      }
+
+      // Fetch all courses by this teacher
+      const courses = await Course.find({ instructor: userID });
+
+      // Render the profile page with teacher and course details
+      res.render('inprofile', { teachers, courses });
+    } else {
+      res.status(403).send('Access denied. Only teachers can view this page.');
     }
   } catch (err) {
-    res.status(400).render('inprofile', { error: "cannot display data" });
+    console.error(err);
+    res.status(500).render('inprofile', { error: 'Error retrieving data', teachers: null, courses: [] });
   }
 });
 
@@ -119,7 +187,7 @@ app.get('/profile', async (req, res) => {
   accountType = req.session.accountType
   try {
     if (accountType === 'learner') {
-      const learners = await Learner.findOne({ _id: userID });
+      const learners = await Learner.findOne({ _id: req.session.userID });
       res.render('profile', { learners: learners });
     }
   } catch (err) {
@@ -207,6 +275,7 @@ app.post('/login', async (req, res) => {
       if (!isPasswordValid) {
         return res.status(400).render('login', { error: 'Invalid email or password for learner' });
       }
+      req.session.userID = user._id;
       req.session.user = user; // Store learner data in session
       req.session.accountType = 'learner'; // Store account type in session
       console.log(req.session.accountType)

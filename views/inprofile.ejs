@@ -4,26 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
+    <!-- <title>
         <%= teachers.firstName %> Profile
-    </title>
+    </title> -->
     <link rel="stylesheet" href="/css/inprofile.css">
 </head>
 
 <body>
     <!-- Unique Header for Instructor -->
     <header class="teacher-header">
-        <div class="profile-image">
-            <img src="<%= teachers.profileImage %>" alt="<%= teachers.firstName %> Profile Picture">
-        </div>
-        <div class="teacher-info">
-            <h1>
-                <%= teachers.firstName %>
-            </h1>
-            <p>
-                <%= teachers.title %>
-            </p>
-        </div>
+        <% if (teachers) { %>
+            <div class="profile-image">
+                <img src="<%= teachers.picture %>" alt="<%= teachers.firstName %> Profile Picture">
+            </div>
+            <div class="teacher-info">
+                <h1>
+                    <%= teachers.firstName %>
+                        <%= teachers.lastName %>
+                </h1>
+                <p>
+                    <%= teachers.jobTitle %>
+                </p>
+            </div>
+            <% } else { %>
+                <p>No teacher information available.</p>
+                <% } %>
     </header>
 
     <!-- Main Section -->

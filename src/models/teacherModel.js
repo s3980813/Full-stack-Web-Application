@@ -32,7 +32,7 @@ const teacherSchema = new mongoose.Schema({
         type: String,
         default: 'default-avatar.jpg'
     },
-    address: {type: String, required: true},
+    address: { type: String, required: true },
     schoolName: {
         type: String,
         required: true
@@ -58,7 +58,7 @@ teacherSchema.pre('save', async function (next) {
     next();
 });
 
-teacherSchema.statics.login = async function(email, password) {
+teacherSchema.statics.login = async function (email, password) {
     const user = await this.findOne({ email });
     if (user) {
         const validPass = await bcrypt.compare(password, user.password);
