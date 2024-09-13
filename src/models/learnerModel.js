@@ -28,10 +28,10 @@ const learnerSchema = new mongoose.Schema({
         required: true,
         minlength: 6
     },
-    // picture: {
-    //     type: String,
-    //     default: 'profile-1.png'
-    // },
+    picture: {
+        type: String,
+        default: 'profile-1.png'
+    },
     address: {type: String, required: true},
 }, { timestamps: true });
 

@@ -182,17 +182,39 @@ app.get('/inprofile', async (req, res) => {
   }
 });
 
+// app.get('/profile', async (req, res) => {
+//   userID = req.session.userID
+//   accountType = req.session.accountType
+//   try {
+//     if (accountType === 'learner') {
+//       const learners = await Learner.findOne({ _id: req.session.userID });
+//       res.render('profile', { learners: learners });
+//     }
+//   } catch (err) {
+//     res.status(400).render('profile', { error: "cannot display data" });
+//   }
+// });
+
 app.get('/profile', async (req, res) => {
-  userID = req.session.userID
-  accountType = req.session.accountType
-  try {
-    if (accountType === 'learner') {
-      const learners = await Learner.findOne({ _id: req.session.userID });
-      res.render('profile', { learners: learners });
-    }
-  } catch (err) {
-    res.status(400).render('profile', { error: "cannot display data" });
+  const learners = req.session.learners;  // Get learner data from session
+  const accountType = req.session.accountType;
+
+  if (!learners) {
+    return res.redirect('/login');  // Redirect to login if not logged in
   }
+
+  res.render('profile', { learners, accountType });  // Pass learners and accountType
+});
+
+app.get('/inprofile', async (req, res) => {
+  const teachers = req.session.teachers;  // Get learner data from session
+  const accountType = req.session.accountType;
+
+  if (!teachers) {
+    return res.redirect('/login');  // Redirect to login if not logged in
+  }
+
+  res.render('inprofile', { teachers, accountType });  // Pass learners and accountType
 });
 
 app.get('/thankyou', (req, res) => {
@@ -230,34 +252,60 @@ app.get('/profile', (req, res) => {
   res.render('profile', { learner: user, user, accountType });  // Pass user and accountType
 });
 
-app.post('/signup', async (req, res) => {
-  const { email, password, phone, city, street, firstName, lastName, accountType, country, schoolName, jobTitle, specialization } = req.body;
-  const address = street + " " + city;
+// app.post('/signup', async (req, res) => {
+//   const { email, password, phone, city, street, firstName, lastName, accountType, country, schoolName, jobTitle, specialization } = req.body;
+//   const address = street + " " + city;
+
+//   try {
+//     // Check if the email already exists in either Learner or Teacher collection
+//     const existingLearner = await Learner.findOne({ email });
+//     const existingTeacher = await Teacher.findOne({ email });
+
+//     if (existingLearner || existingTeacher) {
+//       // Email already exists, re-render signup page with error
+//       return res.status(400).render('signup', { error: 'Email already exists' });
+//     }
+
+//     // Proceed with creating learner or teacher
+//     if (accountType === 'learner') {
+//       await Learner.create({ email, password, address, firstName, lastName, phone });
+//     } else if (accountType === 'teacher') {
+//       await Teacher.create({ email, password, address, firstName, lastName, phone, schoolName, jobTitle, specialization });
+//     }
+
+//     res.status(200).redirect('/login');  // Redirect to login page after successful signup
+//   } catch (err) {
+//     console.log(err);
+//     return res.status(500).render('signup', { error: 'Server error, please try again later' });
+//   }
+// });
+
+// Signup route with picture upload
+app.post('/signup', upload.single('picture'), async (req, res) => {
+  const { email, password, phone, city, street, firstName, lastName, accountType } = req.body;
+  const address = `${street}, ${city}`;
+  const picture = req.file ? `/images/${req.file.filename}` : 'profile-1.png';
 
   try {
-    // Check if the email already exists in either Learner or Teacher collection
     const existingLearner = await Learner.findOne({ email });
     const existingTeacher = await Teacher.findOne({ email });
 
     if (existingLearner || existingTeacher) {
-      // Email already exists, re-render signup page with error
       return res.status(400).render('signup', { error: 'Email already exists' });
     }
 
-    // Proceed with creating learner or teacher
     if (accountType === 'learner') {
-      await Learner.create({ email, password, address, firstName, lastName, phone });
+      await Learner.create({ email, password, address, firstName, lastName, phone, picture });
     } else if (accountType === 'teacher') {
-      await Teacher.create({ email, password, address, firstName, lastName, phone, schoolName, jobTitle, specialization });
+      // Handle teacher registration here
     }
 
-    res.status(200).redirect('/login');  // Redirect to login page after successful signup
+    res.status(200).redirect('/login');
   } catch (err) {
     console.log(err);
     return res.status(500).render('signup', { error: 'Server error, please try again later' });
   }
 });
-
 
 app.post('/login', async (req, res) => {
   const { email, password, accountType } = req.body;
@@ -276,7 +324,7 @@ app.post('/login', async (req, res) => {
         return res.status(400).render('login', { error: 'Invalid email or password for learner' });
       }
       req.session.userID = user._id;
-      req.session.user = user; // Store learner data in session
+      req.session.learners = user; // Store learner data in session
       req.session.accountType = 'learner'; // Store account type in session
       console.log(req.session.accountType)
       return res.redirect('/');  // Redirect to homepage after login
@@ -292,8 +340,10 @@ app.post('/login', async (req, res) => {
       if (!isPasswordValid) {
         return res.status(400).render('login', { error: 'Invalid email or password for instructor' });
       }
-      req.session.user = user; // Store teacher data in session
+      req.session.userID = user._id;
+      req.session.teachers = user; // Store teacher data in session
       req.session.accountType = 'teacher'; // Store account type in session
+      console.log(req.session.accountType)
       return res.redirect('/');  // Redirect to homepage after login
     }
 
