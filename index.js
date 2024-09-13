@@ -58,7 +58,7 @@ app.use(
 // Set up storage and file naming for multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '/Images');
+    cb(null, 'public/images');
   },
   filename: function (req, file, cb) {
     const date = new Date();
@@ -287,7 +287,7 @@ app.get('/profile', (req, res) => {
 app.post('/signup', upload.single('picture'), async (req, res) => {
   const { email, password, phone, city, street, firstName, lastName, accountType, schoolName, jobTitle, specialization } = req.body;
   const address = `${street}, ${city}`;
-  const picture = req.file ? `/images/${req.file.filename}` : 'profile-1.png';
+  const picture = req.file ? `/images/${req.file.filename}` : 'hieu.jpg';
   console.log('Picture path:', picture);
 
   try {
