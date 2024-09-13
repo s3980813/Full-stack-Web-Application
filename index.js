@@ -341,7 +341,11 @@ app.post('/login', async (req, res) => {
         return res.status(400).render('login', { error: 'Invalid email or password for instructor' });
       }
       req.session.userID = user._id;
+<<<<<<< Updated upstream
       req.session.teachers = user; // Store teacher data in session
+=======
+      req.session.user = user; // Store teacher data in session
+>>>>>>> Stashed changes
       req.session.accountType = 'teacher'; // Store account type in session
       console.log(req.session.accountType)
       return res.redirect('/');  // Redirect to homepage after login
