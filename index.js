@@ -61,12 +61,9 @@ const storage = multer.diskStorage({
     cb(null, 'public/images/');
   },
   filename: function (req, file, cb) {
-    const token = req.cookies.jwt;
-    const decodedToken = jwt.verify(token, 'your-secret-key');
-    const userId = decodedToken.id;
     const date = new Date();
     const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`;
-    const newFilename = `${formattedDate}-${userId}-${file.originalname}`;
+    const newFilename = `${formattedDate}-${file.originalname}`;
     cb(null, newFilename);  // Save file with timestamp
   }
 });
@@ -288,9 +285,10 @@ app.get('/profile', (req, res) => {
 
 // Signup route with picture upload
 app.post('/signup', upload.single('picture'), async (req, res) => {
-  const { email, password, phone, city, street, firstName, lastName, accountType } = req.body;
+  const { email, password, phone, city, street, firstName, lastName, accountType, schoolName, jobTitle, specialization } = req.body;
   const address = `${street}, ${city}`;
   const picture = req.file ? `/images/${req.file.filename}` : 'profile-1.png';
+  console.log('Picture path:', picture);
 
   try {
     const existingLearner = await Learner.findOne({ email });
@@ -303,7 +301,7 @@ app.post('/signup', upload.single('picture'), async (req, res) => {
     if (accountType === 'learner') {
       await Learner.create({ email, password, address, firstName, lastName, phone, picture });
     } else if (accountType === 'teacher') {
-      // Handle teacher registration here
+        await Teacher.create({ email, password, address, firstName, lastName, phone, picture, schoolName, jobTitle, specialization });
     }
 
     res.status(200).redirect('/login');

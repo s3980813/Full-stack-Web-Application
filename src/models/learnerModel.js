@@ -54,7 +54,7 @@ learnerSchema.statics.login = async function(email, password) {
     throw Error('Incorrect email');
 };
 
-const Learner = mongoose.model('Learner', learnerSchema, 'learner');
+const Learner = mongoose.model('Learner', learnerSchema, 'learners');
 module.exports = Learner;
 
 
