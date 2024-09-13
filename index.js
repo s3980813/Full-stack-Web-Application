@@ -58,7 +58,7 @@ app.use(
 // Set up storage and file naming for multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/Images/');
+    cb(null, '/Images');
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));  // Save file with timestamp
