@@ -12,6 +12,12 @@
     <!-- Header: Logo and Navigation Bar -->
     <%- include("partials/navbar.ejs", { user: user, accountType: accountType }) %>
 
+    <% if (message) { %>
+        <div class="alert alert-success">
+          <%= message %>
+        </div>
+      <% } %>
+
         <!-- Search Modal -->
         <div class="modal_search" id="search">
             <a href="#" class="close_search"></a>

@@ -38,9 +38,21 @@ function editCourse() {
 }
 
 function deleteCourse() {
-    const confirmation = confirm('Are you sure you want to delete this course?');
-    if (confirmation) {
-        alert('Course deleted successfully.');
-        // Add logic to delete the course
+    if (confirm('Are you sure you want to delete this course?')) {
+      // Send a POST request to delete the course
+      fetch(`/deleteCourse/<%= course._id %>`, {
+        method: 'POST',
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('Course deleted successfully.');
+          window.location.href = '/';  // Redirect to homepage
+        } else {
+          alert('Error deleting course.');
+        }
+      })
+      .catch(error => {
+        console.error('Error deleting course:', error);
+      });
     }
-}
+  }

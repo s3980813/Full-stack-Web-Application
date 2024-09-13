@@ -89,7 +89,12 @@ mongoose.connect(mongoURI)
 app.get('/', (req, res) => {
   const user = req.session.user;
   const accountType = req.session.accountType;
-  res.render('home', { user, accountType });  // Pass user and accountType to the home page
+  const message = req.session.message || null; // Check for any message in the session
+
+  // Clear the message from the session after displaying it
+  req.session.message = null;
+
+  res.render('home', { user, accountType, message });
 });
 
 app.get('/contact', (req, res) => {
@@ -104,18 +109,18 @@ app.get('/aboutUs', (req, res) => {
   res.render('aboutUs', { user, accountType });
 });
 
-//render add course page
+// render add course page
 app.get('/addCourse', async (req, res) => {
   const accountType = req.session.accountType;
   const userID = req.session.userID;
-  
+
   try {
     if (accountType === 'teacher') {
       const teachers = await Teacher.findOne({ _id: userID });
       if (!teachers) {
         return res.status(404).render('addCourse', { error: 'Teacher not found', accountType });
       }
-      res.render('addCourse', { teachers, accountType });  // Pass accountType here
+      res.render('addCourse', { teachers, accountType });
     } else {
       res.redirect('/'); // Redirect if not a teacher
     }
@@ -125,34 +130,96 @@ app.get('/addCourse', async (req, res) => {
   }
 });
 
-
-//Allow teacher role to post data from the add course form to the database
+// Handle course form submission (POST)
 app.post('/addCourse', upload.single('picture'), async (req, res) => {
   const { name, price, description, category } = req.body;
-  
-  // Access uploaded file
+  const instructor = req.session.userID;
+  const accountType = req.session.accountType; // Retrieve accountType from session
   const picture = req.file ? `/images/${req.file.filename}` : 'course.jpg';
 
-  const newCourse = new Course({
-    name,
-    picture,
-    price,
-    description,
-    instructor: req.session.userID,
-    category
-  });
-
   try {
-    await newCourse.save();
-    res.redirect('/coursedetail');  // Redirect to course details after success
+    if (accountType === 'teacher') { // Ensure accountType is checked
+      const newCourse = await Course.create({
+        name,
+        price,
+        description,
+        instructor,
+        category,
+        picture
+      });
+
+      // Redirect to the course details page
+      res.redirect(`/coursedetail/${newCourse._id}`);
+    } else {
+      res.status(403).send('Only teachers can add courses.');
+    }
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Failed to add the course.");
+    console.error('Error adding course:', err);
+    res.status(500).send('Failed to add the course.');
   }
 });
 
-app.get('/coursedetail', (req, res) => {
-  res.render('coursedetail');
+
+
+// Allow teacher role to post data from the add course form to the database
+app.post('/login', async (req, res) => {
+  const { email, password, accountType } = req.body;
+
+  try {
+    let user;
+
+    if (accountType === 'learner') {
+      user = await Learner.findOne({ email });
+      if (!user) return res.status(400).render('login', { error: 'Invalid email or password for learner' });
+
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!isPasswordValid) return res.status(400).render('login', { error: 'Invalid email or password for learner' });
+
+      req.session.userID = user._id;
+      req.session.learners = user;
+      req.session.accountType = 'learner'; // Set session accountType
+
+      return res.redirect('/');
+    }
+
+    if (accountType === 'teacher') {
+      user = await Teacher.findOne({ email });
+      if (!user) return res.status(400).render('login', { error: 'Invalid email or password for teacher' });
+
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!isPasswordValid) return res.status(400).render('login', { error: 'Invalid email or password for teacher' });
+
+      req.session.userID = user._id;
+      req.session.user = user;
+      req.session.accountType = 'teacher'; // Set session accountType
+
+      return res.redirect('/');
+    }
+
+    res.status(400).render('login', { error: 'Please select a valid account type' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).render('login', { error: 'Internal Server Error' });
+  }
+});
+
+
+app.get('/coursedetail/:courseId', async (req, res) => {
+  const accountType = req.session.accountType; // Get accountType from session
+  const courseId = req.params.courseId;
+
+  try {
+    const course = await Course.findById(courseId).populate('instructor');
+    if (!course) {
+      return res.status(404).send('Course not found');
+    }
+
+    // Pass course and accountType to the template
+    res.render('coursedetail', { course, accountType });
+  } catch (err) {
+    console.error('Error fetching course details:', err);
+    res.status(500).send('Server Error');
+  }
 });
 
 app.get('/FAQs', (req, res) => {
@@ -303,7 +370,7 @@ app.post('/signup', upload.single('picture'), async (req, res) => {
     if (accountType === 'learner') {
       await Learner.create({ email, password, address, firstName, lastName, phone, picture });
     } else if (accountType === 'teacher') {
-        await Teacher.create({ email, password, address, firstName, lastName, phone, picture, schoolName, jobTitle, specialization });
+      await Teacher.create({ email, password, address, firstName, lastName, phone, picture, schoolName, jobTitle, specialization });
     }
 
     res.status(200).redirect('/login');
@@ -444,8 +511,188 @@ app.get('/reset-password/:token', (req, res) => {
   }
 });
 
+// Route to render the edit course form
+app.get('/editCourse/:courseId', async (req, res) => {
+  const courseId = req.params.courseId;
+  const accountType = req.session.accountType;
 
+  try {
+    const course = await Course.findById(courseId).populate('instructor');
+    if (!course) {
+      return res.status(404).send('Course not found');
+    }
 
+    // Only instructors who created the course can edit it
+    if (req.session.userID.toString() !== course.instructor._id.toString()) {
+      return res.status(403).send('Access denied. You can only edit your own courses.');
+    }
+
+    res.render('editCourse', { course, accountType });
+  } catch (err) {
+    console.error('Error fetching course for editing:', err);
+    res.status(500).send('Server Error');
+  }
+});
+
+// Route to handle the edit course form submission
+app.post('/editCourse/:courseId', upload.single('picture'), async (req, res) => {
+  const courseId = req.params.courseId;
+  const { name, price, description, category } = req.body;
+
+  try {
+    let course = await Course.findById(courseId);
+
+    if (!course) {
+      return res.status(404).send('Course not found');
+    }
+
+    // Only instructors who created the course can edit it
+    if (req.session.userID.toString() !== course.instructor.toString()) {
+      return res.status(403).send('Access denied. You can only edit your own courses.');
+    }
+
+    // Update course details
+    course.name = name;
+    course.price = price;
+    course.description = description;
+    course.category = category;
+
+    // Update picture if a new one is uploaded
+    if (req.file) {
+      course.picture = `/images/${req.file.filename}`;
+    }
+
+    await course.save();
+    res.redirect(`/coursedetail/${course._id}`);
+  } catch (err) {
+    console.error('Error updating course:', err);
+    res.status(500).send('Server Error');
+  }
+});
+
+// Route to handle course deletion
+app.post('/deleteCourse/:courseId', async (req, res) => {
+  const courseId = req.params.courseId;
+
+  try {
+    // Find and delete the course
+    const course = await Course.findByIdAndDelete(courseId);
+
+    if (!course) {
+      return res.status(404).send('Course not found');
+    }
+
+    // Redirect to the homepage with a success message
+    req.session.message = 'Course deleted successfully';
+    res.redirect('/');
+  } catch (err) {
+    console.error('Error deleting course:', err);
+    res.status(500).send('Server Error');
+  }
+});
+
+// const handleErrorsforaddcourse = (err) => {
+//   console.log(err.message, err.code);
+//   let errors = { Name: '' };
+
+//   if (err.code == 11000) {
+//       errors.courseName = 'This course name has been registered';
+//       return errors;
+//   }
+
+//   // check for type of error
+//   if (err.message.includes('course validation failed')) {
+//       Object.values(err.errors).forEach(({ properties }) => {
+//           errors[properties.path] = properties.message;
+//       });
+//   }
+//   if (err.message.includes('team validation failed')) {
+//     Object.values(err.errors).forEach(({ properties }) => {
+//         errors[properties.path] = properties.message;
+//     });
+//   }
+
+//   return errors;
+// };
+
+// module.exports.allCourseGet = async (req, res) => {
+//   const course = await Course.find().populate('teacher');
+//   const teacher = await Teacher.find();
+//   res.render('browseCourse', {course, teacher});
+// }
+
+// module.exports.courseDetailGet = async (req, res) => {
+//   try {
+//       const teacher = await Teacher.find();
+//       const course = await Course.findById(req.params.id).populate('teacher');
+//       res.render('coursedetail', { course: course, teacher: teacher});
+//   } catch (err) {
+//       console.error(err);
+//       res.redirect('/');
+//   }
+// }
+// module.exports.addCourseGet = async (req, res) => {
+//   try {
+//       const teacher = await Teacher.find();
+//       res.render('addCourse', { teacher});
+//   } catch (error) {
+//       console.error(error);
+//       res.status(500).send('Internal Server Error');
+//   }
+// }
+
+// module.exports.addCoursePost = async (req, res) => {
+//   try {
+//       const { courseName, price, description, instructor, category} = req.body;
+//       let courseData = { courseName, price, description, instructor, category };
+
+//       if (req.file) {
+//           courseData.picture = "/images/" + req.file.filename;
+//       }
+
+//       const course = await Course.create(courseData);
+//   }
+//   catch (err) {
+//       let error = handleErrorsforaddcourse(err);
+//       res.status(400).json({ error });
+//   }
+// }
+
+// module.exports.teacherGet = async (req, res) => {
+//   try {
+//       res.render('inprofile');
+//   } catch (error) {
+//       console.error(error);
+//       res.status(500).send('Internal Server Error');
+//   }
+// }
+// module.exports.teacherPost = async (req, res) => {
+
+//   try {
+//       const { email, address, firstName, lastName, phone, picture, schoolName, jobTitle, specialization } = req.body;
+//       let teacherData = { email, address, firstName, lastName, phone, picture, schoolName, jobTitle, specialization };
+
+//       if (req.file) {
+//           teacherData.teacherImage = "/public/images/" + req.file.filename;
+//       }
+//       const teacher = await Teacher.create(teacherData);
+//       res.status(200).json(team);
+//   }
+//   catch (err) {
+//       const errors = handleErrors(err);
+//       res.status(400).json({ errors });
+//   }
+// }
+
+// const getTeacherById = async (teacherId) => {
+//   try {
+//     const player = await Player.findById(playerId);
+//     return player;
+//   } catch (error) {
+//     console.error('Error fetching player:', error);
+//     throw error;
+//   }
+// };
 
 app.get('/learner/coursedetail', (req, res) => {
   res.render('coursedetail')

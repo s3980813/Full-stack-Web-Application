@@ -8,18 +8,18 @@
         <a class="navButton" href="/FAQs">FAQ</a>
         <a class="navButton" href="/contact">Contact</a>
         <!-- Show Profile Link Based on accountType -->
-        <% if (accountType==='learner' ) { %>
-            <a class="navButton" href="/profile">My Profile</a>
-            <!-- Show Logout Button -->
-            <a class="navButton" href="/logout">Logout</a>
-            <% } else if (accountType==='teacher' ) { %>
-                <a class="navButton" href="/inprofile">Instructor Profile</a>
-                <!-- Show Logout Button -->
+        <% if (typeof accountType !== 'undefined') { %>
+            <% if (accountType === 'learner') { %>
+                <a class="navButton" href="/profile">My Profile</a>
                 <a class="navButton" href="/logout">Logout</a>
-                <% } else { %>
-                    <!-- If not logged in, show login link -->
-                    <a class="navButton" href="/login">Login</a>
-                    <% } %>
+            <% } else if (accountType === 'teacher') { %>
+                <a class="navButton" href="/inprofile">Instructor Profile</a>
+                <a class="navButton" href="/logout">Logout</a>
+            <% } %>
+        <% } else { %>
+            <!-- If not logged in, show login link -->
+            <a class="navButton" href="/login">Login</a>
+        <% } %>
     </div>
 </nav>
 
