@@ -58,10 +58,16 @@ app.use(
 // Set up storage and file naming for multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/Images/');
+    cb(null, 'public/images/');
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));  // Save file with timestamp
+    const token = req.cookies.jwt;
+    const decodedToken = jwt.verify(token, 'your-secret-key');
+    const userId = decodedToken.id;
+    const date = new Date();
+    const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`;
+    const newFilename = `${formattedDate}-${userId}-${file.originalname}`;
+    cb(null, newFilename);  // Save file with timestamp
   }
 });
 
