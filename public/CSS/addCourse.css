@@ -4,136 +4,55 @@
     box-sizing: border-box;
 }
 
+/* Navigation Bar Styling */
 .navBar {
     background: linear-gradient(29deg, #1b5ac3, #df5aa5);
     background-size: 400% 400%;
-    -webkit-animation: AnimationName 30s ease infinite;
-    -moz-animation: AnimationName 30s ease infinite;
-    -o-animation: AnimationName 30s ease infinite;
     animation: AnimationName 30s ease infinite;
-    padding: 0 20px;
-    /* Added padding to the navbar for better spacing */
+    padding: 10px 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow for a modern look */
-}
-
-@-webkit-keyframes AnimationName {
-    0% {
-        background-position: 0% 24%
-    }
-
-    50% {
-        background-position: 100% 77%
-    }
-
-    100% {
-        background-position: 0% 24%
-    }
-}
-
-@-moz-keyframes AnimationName {
-    0% {
-        background-position: 0% 24%
-    }
-
-    50% {
-        background-position: 100% 77%
-    }
-
-    100% {
-        background-position: 0% 24%
-    }
-}
-
-@-o-keyframes AnimationName {
-    0% {
-        background-position: 0% 24%
-    }
-
-    50% {
-        background-position: 100% 77%
-    }
-
-    100% {
-        background-position: 0% 24%
-    }
-}
-
-@keyframes AnimationName {
-    0% {
-        background-position: 0% 24%
-    }
-
-    50% {
-        background-position: 100% 77%
-    }
-
-    100% {
-        background-position: 0% 24%
-    }
 }
 
 .logo a img {
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    /* Makes the logo circular */
     border: 2px solid white;
-    /* Adds a white border around the logo for better contrast */
 }
 
 .navBar {
     display: flex;
     justify-content: space-between;
-    /* Adjusted for better spacing */
     align-items: center;
     height: 74px;
 }
 
 .nav {
     display: flex;
-    height: 100%;
     align-items: center;
 }
 
-
 .navButton {
-    padding: 20px 25px;
-    /* Slightly adjusted padding for better spacing */
+    padding: 15px 20px;
     display: block;
-    height: 100%;
     text-decoration: none;
-    font-weight: 600;
-    /* Added boldness for better readability */
+    font-weight: bold;
     font-family: 'Arial', sans-serif;
     color: white;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    /* Smooth transition for hover effects */
     border-radius: 5px;
-    /* Rounded corners for a softer look */
 }
 
 .navButton:hover {
     background-color: rgba(255, 255, 255, 0.2);
-    /* Changed to a lighter overlay for better contrast */
     transform: translateY(-3px);
-    /* Adds a subtle lift effect on hover */
-}
-
-.navButton:hover {
-    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .navButton:active {
     transform: translateY(0);
-    /* Resets the lift effect when active */
 }
 
 /* Search Modal */
-nav {
-    position: relative;
-}
-
 #search {
     align-items: center;
     justify-content: center;
@@ -144,17 +63,12 @@ nav {
     bottom: 0;
     z-index: 10;
     display: none;
-}
-
-#search {
     background-color: rgba(0, 0, 0, 0.5);
-    ;
 }
 
 #search:target {
     display: flex;
 }
-
 
 .search_button {
     display: block;
@@ -171,7 +85,6 @@ nav {
     width: 100%;
     cursor: default;
 }
-
 
 .search_body {
     width: 20%;
@@ -242,110 +155,102 @@ nav {
     display: block;
 }
 
-/* main content section  */
+/* Page Title Styling */
 .PageTitle {
-    margin: 10px 0;
+    text-align: center;
+    margin: 20px 0;
 }
 
 .PageTitle h1 {
-    position: relative;
-    left: 30px;
-    margin-bottom: 10px;
-    color: white;
+    color: #333;
+    font-size: 2.5em;
 }
 
 .PageTitle hr {
-    color: white;
-    border: 1px solid white;
+    margin: 10px auto;
+    width: 200px;
+    border: 2px solid #1b5ac3;
 }
 
-#InstructorName {
-    font-size: 25px;
-}
-
-#Role {
-    font-style: italic;
-    font-size: 15px;
-}
-
+/* Main Content Styling */
 .mainContent {
     display: flex;
-    justify-content: center;
-    padding: 0;
-    margin-top: 10px;
+    justify-content: space-around;
+    margin: 20px;
 }
 
 .ProfileSection {
-    padding: 0;
-    margin: 10px 25px;
-    margin-right: 100px;
+    text-align: center;
 }
 
 .ProfileSection img {
-    width: 70px;
-    height: 70px;
-    border-radius: 100%;
-    padding: 10px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    margin-bottom: 10px;
 }
 
+.ProfileSection h2 {
+    font-size: 1.8em;
+    color: #333;
+}
+
+.ProfileSection p {
+    font-style: italic;
+    color: #777;
+}
+
+/* Form Styling */
 .addCourseForm {
+    width: 50%;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.addCourseForm label {
+    display: block;
+    margin-bottom: 10px;
     font-weight: bold;
+    color: #333;
 }
 
-form label {
-    font-size: large;
+.addCourseForm input, .addCourseForm select, .addCourseForm textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    font-family: 'Arial', sans-serif;
 }
 
-#courseName {
-    margin: 10px 0;
+.addCourseForm input[type="file"] {
+    padding: 5px;
 }
 
-#Price {
-    margin: 10px 0;
-}
-
-#coursePicture {
-    margin: 10px 0;
-}
-
-#Description {
-    margin: 10px 0;
-}
-
-form button {
+.addCourseForm button {
     width: 150px;
-    height: 25px;
-    border-radius: 50px;
-    background-color: lightslategray;
+    padding: 10px;
+    background-color: #1b5ac3;
     color: white;
-}
-
-form button:hover {
-    text-decoration: underline;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
     cursor: pointer;
 }
 
-.dollarSign {
-    border: 1px inset white;
-}
-
-.dollarSign input {
-    border: 0;
+.addCourseForm button:hover {
+    background-color: #174a9f;
 }
 
 /* Footer Styling */
 footer {
-    position: absolute;
-    bottom: 0;
-    color: #fff;
     text-align: center;
     padding: 1rem;
-    margin-top: 2rem;
-    width: 100%;
     background: linear-gradient(29deg, #1b5ac3, #df5aa5);
-    background-size: 400% 400%;
-    -webkit-animation: AnimationName 30s ease infinite;
-    animation: AnimationName 30s ease infinite;
+    color: white;
 }
 
 .footer-nav a {
@@ -358,41 +263,38 @@ footer {
     text-decoration: underline;
 }
 
-/* Desktop (1200px or higher) */
-@media (min-width: 1200px) {
-    body {
-        background-color: #fff;
-        font-size: 1.2em;
-    }
-
-    .AddCourse {
-        width: 1200px;
-        margin: 0 auto;
-    }
-}
-
-/* Tablet (768px to 1199px) */
-@media (min-width: 768px) and (max-width: 1199px) {
-    body {
-        background-color: #e0e0e0;
-    }
-
-    .AddCourse {
-        width: 95%;
-        margin: 0 auto;
-    }
-}
-
-/* Smartphone (767px or lower) */
-@media (max-width: 767px) {
-    body {
-        background-color: #d0d0d0;
-    }
-
-    .AddCourse {
-        width: 100%;
-        margin: 0 auto;
-        flex-wrap: wrap;
+/* Responsive Design */
+@media (max-width: 768px) {
+    .mainContent {
         flex-direction: column;
+        align-items: center;
+    }
+
+    .ProfileSection, .addCourseForm {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .addCourseForm {
+        padding: 10px;
+    }
+
+    .addCourseForm button {
+        width: 100%;
+    }
+}
+
+/* Animations */
+@keyframes AnimationName {
+    0% {
+        background-position: 0% 24%
+    }
+
+    50% {
+        background-position: 100% 77%
+    }
+
+    100% {
+        background-position: 0% 24%
     }
 }
