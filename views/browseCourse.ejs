@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/browseCourse.css">
     <title>Browse Courses</title>
 </head>
 
@@ -27,8 +27,9 @@
                     <% courses.forEach(course => { %>
                         <div class="course-item">
                             <a href="/coursedetail/<%= course._id %>">
-                                <img src="/images/<%= course.picture %>" alt="<%= course.name %>">
+                                <img src="<%= course.picture %>" alt="<%= course.name %>">
                                 <h3><%= course.name %></h3>
+                                <p>Instructor: <%= course.instructor.firstName %> <%= course.instructor.lastName %></p> <!-- Instructor's name -->
                             </a>
                             <p>Price: $<%= course.price %></p>
                         </div>
@@ -41,9 +42,10 @@
                     <div class="course-list">
                         <% categories[category].forEach(course => { %>
                             <div class="course-item">
-                                <a href="/coursedetail/<%= learner._id %>">
-                                    <img src="/images/<%= course.picture %>" alt="<%= course.name %>">
+                                <a href="/coursedetail/<%= course._id %>">
+                                    <img src="<%= course.picture %>" alt="<%= course.name %>">
                                     <h3><%= course.name %></h3>
+                                    <p>Instructor: <%= course.instructor.firstName %> <%= course.instructor.lastName %></p>
                                 </a>
                                 <p>Price: $<%= course.price %></p>
                             </div>

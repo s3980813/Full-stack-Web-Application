@@ -255,18 +255,6 @@ app.get('/inprofile', async (req, res) => {
   }
 });
 
-// app.get('/profile', async (req, res) => {
-//   userID = req.session.userID
-//   accountType = req.session.accountType
-//   try {
-//     if (accountType === 'learner') {
-//       const learners = await Learner.findOne({ _id: req.session.userID });
-//       res.render('profile', { learners: learners });
-//     }
-//   } catch (err) {
-//     res.status(400).render('profile', { error: "cannot display data" });
-//   }
-// });
 
 app.get('/profile', async (req, res) => {
   const learners = req.session.learners;  // Get learner data from session
@@ -279,16 +267,52 @@ app.get('/profile', async (req, res) => {
   res.render('profile', { learners, accountType });  // Pass learners and accountType
 });
 
-app.get('/inprofile', async (req, res) => {
-  const teachers = req.session.teachers;  // Get learner data from session
-  const accountType = req.session.accountType;
+app.get('/inprofile', (req, res) => {
+  const teacher = {
+    firstName: 'John',
+    lastName: 'Doe',
+    picture: 'default-avatar.jpg',
+    jobTitle: 'Instructor',
+    specialization: ['Programming', 'Web Development']
+  };
 
-  if (!teachers) {
-    return res.redirect('/login');  // Redirect to login if not logged in
-  }
-
-  res.render('inprofile', { teachers, accountType });  // Pass learners and accountType
+  // Ensure the 'teacher' object is passed correctly
+  res.render('inprofile', { teacher });
 });
+
+// app.get('/inprofile', async (req, res) => {
+//   const accountType = req.session.accountType;
+//   const userID = req.session.userID;
+
+//   try {
+//     if (accountType === 'teacher') {
+//       // Fetch the teacher's details
+//       const teacher = await Teacher.findOne({ _id: userID });
+
+//       // Add a log to check if teacher data is retrieved
+//       console.log('Teacher Data:', teacher);
+
+//       if (!teacher) {
+//         return res.status(404).render('inprofile', { error: 'Teacher not found', teacher: null, newCourses: [], allCourses: [] });
+//       }
+
+//       // Fetch all courses by this teacher
+//       const allCourses = await Course.find({ instructor: userID }).sort({ dateCreated: -1 });
+
+//       // Divide into newCourses (latest 5) and allCourses
+//       const newCourses = allCourses.slice(0, 5);  // Get up to 5 newest courses
+
+//       // Render the profile page with teacher and course details
+//       res.render('inprofile', { teacher, newCourses, allCourses });
+//     } else {
+//       res.status(403).send('Access denied. Only teachers can view this page.');
+//     }
+//   } catch (err) {
+//     console.error('Error:', err);
+//     res.status(500).render('inprofile', { error: 'Error retrieving data', teacher: null, newCourses: [], allCourses: [] });
+//   }
+// });
+
 
 app.get('/thankyou', (req, res) => {
   const user = req.session.user;
@@ -299,7 +323,9 @@ app.get('/thankyou', (req, res) => {
 app.get('/browseCourse', (req, res) => {
   const user = req.session.user;
   const accountType = req.session.accountType;
-  res.render('browseCourse', { user, accountType });
+
+  // Set a default 'browseBy' value for the browseCourse page
+  res.render('browseCourse', { user, accountType, browseBy: 'name', courses: [] });
 });
 
 app.get('/signup', (req, res) => {
@@ -325,33 +351,6 @@ app.get('/profile', (req, res) => {
   res.render('profile', { learner: user, user, accountType });  // Pass user and accountType
 });
 
-// app.post('/signup', async (req, res) => {
-//   const { email, password, phone, city, street, firstName, lastName, accountType, country, schoolName, jobTitle, specialization } = req.body;
-//   const address = street + " " + city;
-
-//   try {
-//     // Check if the email already exists in either Learner or Teacher collection
-//     const existingLearner = await Learner.findOne({ email });
-//     const existingTeacher = await Teacher.findOne({ email });
-
-//     if (existingLearner || existingTeacher) {
-//       // Email already exists, re-render signup page with error
-//       return res.status(400).render('signup', { error: 'Email already exists' });
-//     }
-
-//     // Proceed with creating learner or teacher
-//     if (accountType === 'learner') {
-//       await Learner.create({ email, password, address, firstName, lastName, phone });
-//     } else if (accountType === 'teacher') {
-//       await Teacher.create({ email, password, address, firstName, lastName, phone, schoolName, jobTitle, specialization });
-//     }
-
-//     res.status(200).redirect('/login');  // Redirect to login page after successful signup
-//   } catch (err) {
-//     console.log(err);
-//     return res.status(500).render('signup', { error: 'Server error, please try again later' });
-//   }
-// });
 
 // Signup route with picture upload
 app.post('/signup', upload.single('picture'), async (req, res) => {
@@ -591,108 +590,6 @@ app.post('/deleteCourse/:courseId', async (req, res) => {
   }
 });
 
-// const handleErrorsforaddcourse = (err) => {
-//   console.log(err.message, err.code);
-//   let errors = { Name: '' };
-
-//   if (err.code == 11000) {
-//       errors.courseName = 'This course name has been registered';
-//       return errors;
-//   }
-
-//   // check for type of error
-//   if (err.message.includes('course validation failed')) {
-//       Object.values(err.errors).forEach(({ properties }) => {
-//           errors[properties.path] = properties.message;
-//       });
-//   }
-//   if (err.message.includes('team validation failed')) {
-//     Object.values(err.errors).forEach(({ properties }) => {
-//         errors[properties.path] = properties.message;
-//     });
-//   }
-
-//   return errors;
-// };
-
-// module.exports.allCourseGet = async (req, res) => {
-//   const course = await Course.find().populate('teacher');
-//   const teacher = await Teacher.find();
-//   res.render('browseCourse', {course, teacher});
-// }
-
-// module.exports.courseDetailGet = async (req, res) => {
-//   try {
-//       const teacher = await Teacher.find();
-//       const course = await Course.findById(req.params.id).populate('teacher');
-//       res.render('coursedetail', { course: course, teacher: teacher});
-//   } catch (err) {
-//       console.error(err);
-//       res.redirect('/');
-//   }
-// }
-// module.exports.addCourseGet = async (req, res) => {
-//   try {
-//       const teacher = await Teacher.find();
-//       res.render('addCourse', { teacher});
-//   } catch (error) {
-//       console.error(error);
-//       res.status(500).send('Internal Server Error');
-//   }
-// }
-
-// module.exports.addCoursePost = async (req, res) => {
-//   try {
-//       const { courseName, price, description, instructor, category} = req.body;
-//       let courseData = { courseName, price, description, instructor, category };
-
-//       if (req.file) {
-//           courseData.picture = "/images/" + req.file.filename;
-//       }
-
-//       const course = await Course.create(courseData);
-//   }
-//   catch (err) {
-//       let error = handleErrorsforaddcourse(err);
-//       res.status(400).json({ error });
-//   }
-// }
-
-// module.exports.teacherGet = async (req, res) => {
-//   try {
-//       res.render('inprofile');
-//   } catch (error) {
-//       console.error(error);
-//       res.status(500).send('Internal Server Error');
-//   }
-// }
-// module.exports.teacherPost = async (req, res) => {
-
-//   try {
-//       const { email, address, firstName, lastName, phone, picture, schoolName, jobTitle, specialization } = req.body;
-//       let teacherData = { email, address, firstName, lastName, phone, picture, schoolName, jobTitle, specialization };
-
-//       if (req.file) {
-//           teacherData.teacherImage = "/public/images/" + req.file.filename;
-//       }
-//       const teacher = await Teacher.create(teacherData);
-//       res.status(200).json(team);
-//   }
-//   catch (err) {
-//       const errors = handleErrors(err);
-//       res.status(400).json({ errors });
-//   }
-// }
-
-// const getTeacherById = async (teacherId) => {
-//   try {
-//     const player = await Player.findById(playerId);
-//     return player;
-//   } catch (error) {
-//     console.error('Error fetching player:', error);
-//     throw error;
-//   }
-// };
 
 app.get('/learner/coursedetail', (req, res) => {
   res.render('coursedetail')
@@ -703,42 +600,6 @@ app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
 
-// / Middleware for image upload
-// const userImgStorage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, 'public/images/');
-//   },
-//   filename: function (req, file, cb) {
-//     const token = req.cookies.jwt;
-//     const decodedToken = jwt.verify(token, 'your-secret-key');
-//     const userId = decodedToken.id;
-//     const date = new Date();
-//     const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`;
-//     const newFilename = `${formattedDate}-${file.originalname}`;
-//     cb(null, newFilename);
-//   }
-// });
-// const userImgUpload = multer({ storage: userImgStorage });
-
-// app.get('/teacher/:id', async (req, res) => {
-//   try {
-//       const teacher = await Teacher.findById(req.params.id);
-
-//       if (!teacher) {
-//           return res.status(404).send('Teacher not found');
-//       }
-
-//       console.log(teacher);  // Log the teacher object
-
-//       const newCourses = await Course.find({ instructor: teacher._id }).sort({ dateCreated: -1 }).limit(5);
-//       const allCourses = await Course.find({ instructor: teacher._id });
-
-//       res.render('inprofile', { teacher, newCourses, allCourses });
-//   } catch (error) {
-//       console.error(error);
-//       res.status(500).send('Server Error');
-//   }
-// });
 
 
 

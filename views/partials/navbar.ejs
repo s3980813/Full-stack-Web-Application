@@ -3,11 +3,9 @@
     <div class="nav">
         <a class="navButton" href="/">Home</a>
         <a class="navButton" href="/aboutUs">About Us</a>
-        <a class="navButton" id="pricing-btn" href="#">Pricing</a>
-        <a class="navButton" href="#search">Search</a>
+        <a class="navButton" id="browse-btn" href="/browseCourse">Browse</a> <!-- Updated this line -->
         <a class="navButton" href="/FAQs">FAQ</a>
         <a class="navButton" href="/contact">Contact</a>
-        <!-- Show Profile Link Based on accountType -->
         <% if (typeof accountType !== 'undefined') { %>
             <% if (accountType === 'learner') { %>
                 <a class="navButton" href="/profile">My Profile</a>
@@ -17,7 +15,6 @@
                 <a class="navButton" href="/logout">Logout</a>
             <% } %>
         <% } else { %>
-            <!-- If not logged in, show login link -->
             <a class="navButton" href="/login">Login</a>
         <% } %>
     </div>

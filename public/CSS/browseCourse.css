@@ -1,12 +1,4 @@
 /* General Styles */
-body {
-  font-family: "Arial", sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f7f8fc;
-  color: #333333;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -138,36 +130,6 @@ body {
   /* Resets the lift effect when active */
 }
 
-/* Search Modal */
-.modal_search {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  justify-content: center;
-  align-items: center;
-}
-
-/* Styles for the search input field within the modal */
-.search_body {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.search_button {
-  width: 100%;
-  padding: 15px;
-  font-size: 1.2em;
-  border: 2px solid #1a73e8;
-  border-radius: 5px;
-}
-
-
 /*Pricing*/
 .pricing-table {
   display: none;
@@ -233,12 +195,19 @@ body {
   display: block;
 }
 
-/* Browse Courses Section */
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f8fc;
+  color: #333;
+}
+
 .browse-courses {
-  padding: 20px;
+  padding: 30px;
   background-color: #fff;
   border-radius: 12px;
-  margin: 30px auto;
+  margin: 40px auto;
   width: 90%;
   max-width: 1200px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -246,8 +215,9 @@ body {
 
 .browse-courses h2 {
   text-align: center;
-  margin-bottom: 20px;
+  font-size: 32px;
   color: #1b5ac3;
+  margin-bottom: 20px;
 }
 
 .browse-options {
@@ -261,10 +231,10 @@ body {
   font-weight: bold;
   color: #1b5ac3;
   text-decoration: none;
-  padding: 10px 20px;
+  padding: 12px 30px;
   border: 2px solid #1b5ac3;
   border-radius: 8px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .browse-link:hover {
@@ -272,21 +242,22 @@ body {
   color: #fff;
 }
 
+/* Course Listing Styles */
 .course-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  gap: 20px;
+  justify-content: space-around;
 }
 
 .course-item {
   width: 30%;
-  margin-bottom: 20px;
-  background-color: #f9f9f9;
+  background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .course-item:hover {
@@ -296,19 +267,48 @@ body {
 
 .course-item img {
   width: 100%;
-  height: auto;
+  height: 200px;
+  object-fit: cover;
 }
 
 .course-item h3 {
-  margin: 10px 0;
-  font-size: 18px;
+  font-size: 20px;
+  margin: 15px 0 5px 0;
   color: #333;
 }
 
 .course-item p {
-  margin-bottom: 10px;
-  font-size: 14px;
-  color: #555;
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #666;
+}
+
+.course-item p.price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1b5ac3;
+}
+
+/* Category Header */
+.browse-courses h4 {
+  font-size: 24px;
+  margin-top: 20px;
+  color: #1b5ac3;
+  border-bottom: 2px solid #1b5ac3;
+  padding-bottom: 5px;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .course-item {
+    width: 45%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .course-item {
+    width: 100%;
+  }
 }
 
 footer {
@@ -325,45 +325,11 @@ footer {
   gap: 20px;
 }
 
+.footer-nav a {
+  color: white;
+  text-decoration: none;
+}
+
 .footer-nav a:hover {
   text-decoration: underline;
-}
-
-/* Desktop (1200px or higher) */
-@media (min-width: 1200px) {
-  body {
-    background-color: #fff;
-    font-size: 1.2em;
-  }
-
-  .BrowseCourse {
-    width: 1200px;
-    margin: 0 auto;
-  }
-}
-
-/* Tablet (768px to 1199px) */
-@media (min-width: 768px) and (max-width: 1199px) {
-  body {
-    background-color: #e0e0e0;
-  }
-
-  .BrowseCourse {
-    width: 95%;
-    margin: 0 auto;
-  }
-}
-
-/* Smartphone (767px or lower) */
-@media (max-width: 767px) {
-  body {
-    background-color: #d0d0d0;
-  }
-
-  .BrowseCourse {
-    width: 100%;
-    margin: 0 auto;
-    flex-wrap: wrap;
-    flex-direction: column;
-  }
 }

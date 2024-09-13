@@ -1,34 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <title>
-        <%= teachers.firstName %> Profile
-    </title> -->
+    <title><%= teacher.firstName %> Profile</title>
     <link rel="stylesheet" href="/css/inprofile.css">
 </head>
-
 <body>
     <!-- Unique Header for Instructor -->
     <header class="teacher-header">
-        <% if (teachers) { %>
-            <div class="profile-image">
-                <img src="<%= teachers.picture %>" alt="<%= teachers.firstName %> Profile Picture">
-            </div>
-            <div class="teacher-info">
-                <h1>
-                    <%= teachers.firstName %>
-                        <%= teachers.lastName %>
-                </h1>
-                <p>
-                    <%= teachers.jobTitle %>
-                </p>
-            </div>
-            <% } else { %>
-                <p>No teacher information available.</p>
-                <% } %>
+        <div class="profile-image">
+            <img src="<%= teacher.picture %>" alt="<%= teacher.firstName %> Profile Picture">
+        </div>
+        <div class="teacher-info">
+            <h1><%= teacher.firstName %> <%= teacher.lastName %></h1>
+            <p><%= teacher.jobTitle %></p>
+        </div>
     </header>
 
     <!-- Main Section -->
@@ -36,28 +23,26 @@
         <!-- About Section -->
         <section class="about-section">
             <h2>About</h2>
-            <p>
-                <%= teachers.specialization %>
-            </p>
+            <p>Specialization: <%= teacher.specialization.join(', ') %></p>
         </section>
 
         <!-- New Courses Section -->
         <section class="new-courses-section">
             <h2>New Courses</h2>
             <div class="courses-grid" id="newCourses">
-                <% course.forEach(course=> { %>
-                    <div class="course-card">
-                        <a href="<%= course.link %>">
-                            <img src="<%= course.picture %>" alt="<%= course.name %>">
-                            <h3>
-                                <%= course.name %>
-                            </h3>
-                        </a>
-                        <p>
-                            <%= course.price %>
-                        </p>
-                    </div>
+                <% if (newCourses.length > 0) { %>
+                    <% newCourses.forEach(course => { %>
+                        <div class="course-card">
+                            <a href="/coursedetail/<%= course._id %>">
+                                <img src="<%= course.picture %>" alt="<%= course.name %>">
+                                <h3><%= course.name %></h3>
+                            </a>
+                            <p>Price: $<%= course.price %></p>
+                        </div>
                     <% }); %>
+                <% } else { %>
+                    <p>No new courses available.</p>
+                <% } %>
             </div>
         </section>
 
@@ -65,19 +50,19 @@
         <section class="all-courses-section">
             <h2>All Courses</h2>
             <div class="courses-grid" id="allCourses">
-                <% allCourses.forEach(course=> { %>
-                    <div class="course-card">
-                        <a href="<%= course.link %>">
-                            <img src="<%= course.picture %>" alt="<%= course.name %>">
-                            <h3>
-                                <%= course.name %>
-                            </h3>
-                        </a>
-                        <p>
-                            <%= course.price %>
-                        </p>
-                    </div>
+                <% if (allCourses.length > 0) { %>
+                    <% allCourses.forEach(course => { %>
+                        <div class="course-card">
+                            <a href="/coursedetail/<%= course._id %>">
+                                <img src="<%= course.picture %>" alt="<%= course.name %>">
+                                <h3><%= course.name %></h3>
+                            </a>
+                            <p>Price: $<%= course.price %></p>
+                        </div>
                     <% }); %>
+                <% } else { %>
+                    <p>No courses available.</p>
+                <% } %>
             </div>
         </section>
 
@@ -87,62 +72,13 @@
         </section>
     </main>
 
-    <!-- Unique Footer for Instructor -->
-    <-% include("partials/footer.ejs") %>
+    <!-- Footer Partial -->
+    <%- include("partials/footer.ejs") %>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                // Simulated data (in a real app, this data would come from a backend API)
-                const newCourses = [
-                    { name: 'React for Beginners', image: 'react-course.jpg', price: '$49.99', link: '#' },
-                    { name: 'Advanced JavaScript', image: 'js-course.jpg', price: '$59.99', link: '#' },
-                    { name: 'Node.js Essentials', image: 'node-course.jpg', price: '$39.99', link: '#' },
-                    { name: 'CSS Masterclass', image: 'css-course.jpg', price: '$29.99', link: '#' },
-                    { name: 'HTML5 & CSS3', image: 'html-course.jpg', price: '$19.99', link: '#' },
-                ];
-
-                const allCourses = [
-                    { name: 'React for Beginners', image: 'react-course.jpg', price: '$49.99', link: '#' },
-                    { name: 'Advanced JavaScript', image: 'js-course.jpg', price: '$59.99', link: '#' },
-                    { name: 'Node.js Essentials', image: 'node-course.jpg', price: '$39.99', link: '#' },
-                    { name: 'CSS Masterclass', image: 'css-course.jpg', price: '$29.99', link: '#' },
-                    { name: 'HTML5 & CSS3', image: 'html-course.jpg', price: '$19.99', link: '#' },
-                    { name: 'Full-Stack Development', image: 'fullstack-course.jpg', price: '$99.99', link: '#' },
-                    { name: 'Web Accessibility', image: 'accessibility-course.jpg', price: '$24.99', link: '#' },
-                ];
-
-                // Function to generate course cards
-                function generateCourseCards(courses, containerId) {
-                    const container = document.getElementById(containerId);
-                    container.innerHTML = '';
-
-                    courses.forEach(course => {
-                        const courseCard = document.createElement('div');
-                        courseCard.classList.add('course-card');
-
-                        courseCard.innerHTML = `
-                <a href="${course.link}">
-                    <img src="course.jpg" alt="${course.name}">
-                    <h3>${course.name}</h3>
-                </a>
-                <p>${course.price}</p>
-            `;
-
-                        container.appendChild(courseCard);
-                    });
-                }
-
-                // Load new courses and all courses
-                generateCourseCards(newCourses, 'newCourses');
-                generateCourseCards(allCourses, 'allCourses');
-            });
-
-            // Redirect to the Add Course page
-            function redirectToAddCourse() {
-                window.location.href = 'add-course.html';  // Change this to the actual URL of your Add Course page
-            }
-
-        </script>
+    <script>
+        function redirectToAddCourse() {
+            window.location.href = '/addCourse';
+        }
+    </script>
 </body>
-
 </html>
