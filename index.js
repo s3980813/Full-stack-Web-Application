@@ -58,7 +58,7 @@ app.use(
 // Set up storage and file naming for multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/images/');
+    cb(null, '/Images');
   },
   filename: function (req, file, cb) {
     const date = new Date();
@@ -345,7 +345,7 @@ app.post('/login', async (req, res) => {
         return res.status(400).render('login', { error: 'Invalid email or password for instructor' });
       }
       req.session.userID = user._id;
-      req.session.teachers = user; // Store teacher data in session
+      req.session.user = user; // Store teacher data in session
       req.session.accountType = 'teacher'; // Store account type in session
       console.log(req.session.accountType)
       return res.redirect('/');  // Redirect to homepage after login
