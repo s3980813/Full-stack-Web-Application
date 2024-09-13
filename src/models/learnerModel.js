@@ -30,7 +30,7 @@ const learnerSchema = new mongoose.Schema({
     },
     picture: {
         type: String,
-        default: 'hieu.jpg'
+        default: 'profile-1.png'
     },
     address: {type: String, required: true},
 }, { timestamps: true });

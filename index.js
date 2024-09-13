@@ -61,10 +61,10 @@ const storage = multer.diskStorage({
     cb(null, 'public/images');
   },
   filename: function (req, file, cb) {
-    const date = new Date();
-    const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`;
-    const newFilename = `${formattedDate}-${file.originalname}`;
-    cb(null, newFilename);  // Save file with timestamp
+    // const date = new Date();
+    // const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`;
+    // const newFilename = `${formattedDate}-${file.originalname}`;
+    cb(null, file.originalname);  // Save file with timestamp
   }
 });
 
@@ -105,30 +105,33 @@ app.get('/aboutUs', (req, res) => {
 });
 
 //render add course page
-app.get('/addCourse', upload.single('picture'), async (req, res) => {
-  accountType = req.session.accountType
-  userID = req.session.userID
+app.get('/addCourse', async (req, res) => {
+  const accountType = req.session.accountType;
+  const userID = req.session.userID;
+  
   try {
     if (accountType === 'teacher') {
-      const teachers = await Teacher.findOne({ _id: req.session.userID });
-      res.render('addCourse', { teachers: teachers });
+      const teachers = await Teacher.findOne({ _id: userID });
+      if (!teachers) {
+        return res.status(404).render('addCourse', { error: 'Teacher not found', accountType });
+      }
+      res.render('addCourse', { teachers, accountType });  // Pass accountType here
+    } else {
+      res.redirect('/'); // Redirect if not a teacher
     }
   } catch (err) {
-    res.status(400).render('addCourse', { error: "cannot display data" });
+    console.error(err);
+    res.status(500).render('addCourse', { error: 'Cannot load the page', accountType });
   }
 });
 
 
 //Allow teacher role to post data from the add course form to the database
-app.post('/addCourse', async (req, res) => {
-  const { name, price, description, instructor, category } = req.body;
-
+app.post('/addCourse', upload.single('picture'), async (req, res) => {
+  const { name, price, description, category } = req.body;
+  
   // Access uploaded file
-  const picture = req.file ? `/Images/${req.file.filename}` : null;
-
-  if (!picture) {
-    return res.status(400).send("Course image (picture) is required.");
-  }
+  const picture = req.file ? `/images/${req.file.filename}` : 'course.jpg';
 
   const newCourse = new Course({
     name,
@@ -138,15 +141,15 @@ app.post('/addCourse', async (req, res) => {
     instructor: req.session.userID,
     category
   });
+
   try {
     await newCourse.save();
-    res.send("Course added successfully!");
-    res.redirect('/coursedetail');
+    res.redirect('/coursedetail');  // Redirect to course details after success
   } catch (err) {
     console.error(err);
-    res.send("Failed to add the course.");
+    res.status(500).send("Failed to add the course.");
   }
-})
+});
 
 app.get('/coursedetail', (req, res) => {
   res.render('coursedetail');
@@ -287,8 +290,7 @@ app.get('/profile', (req, res) => {
 app.post('/signup', upload.single('picture'), async (req, res) => {
   const { email, password, phone, city, street, firstName, lastName, accountType, schoolName, jobTitle, specialization } = req.body;
   const address = `${street}, ${city}`;
-  const picture = req.file ? `/images/${req.file.filename}` : 'hieu.jpg';
-  console.log('Picture path:', picture);
+  const picture = req.file ? `/images/${req.file.filename}` : 'profile-1.png';  // Use default if no image is uploaded
 
   try {
     const existingLearner = await Learner.findOne({ email });
@@ -306,8 +308,8 @@ app.post('/signup', upload.single('picture'), async (req, res) => {
 
     res.status(200).redirect('/login');
   } catch (err) {
-    console.log(err);
-    return res.status(500).render('signup', { error: 'Server error, please try again later' });
+    console.error(err);
+    res.status(500).render('signup', { error: 'Server error, please try again later' });
   }
 });
 

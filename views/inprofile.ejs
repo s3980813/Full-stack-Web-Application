@@ -45,7 +45,7 @@
         <section class="new-courses-section">
             <h2>New Courses</h2>
             <div class="courses-grid" id="newCourses">
-                <% newCourses.forEach(course=> { %>
+                <% course.forEach(course=> { %>
                     <div class="course-card">
                         <a href="<%= course.link %>">
                             <img src="<%= course.picture %>" alt="<%= course.name %>">

@@ -11,7 +11,7 @@ const courseSchema = new Schema({
     picture: {
         type: String,
         required: true,
-        default: 'default-course.jpg' // Placeholder image if none is provided
+        default: 'course.jpg' // Placeholder image if none is provided
     },
     price: {
         type: Number,
@@ -40,4 +40,4 @@ const courseSchema = new Schema({
     }
 }, { timestamps: true });
 
-module.exports = mongoose.model('Course', courseSchema);
+module.exports = mongoose.model('Course', courseSchema, 'courses');
