@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,121 +11,128 @@
     <!-- Header: Logo and Navigation Bar -->
     <%- include("partials/navbar.ejs", { user: user, accountType: accountType }) %>
 
-        <% if (message) { %>
-            <div class="alert alert-success">
-                <%= message %>
+    <% if (message) { %>
+        <div class="alert alert-success">
+            <%= message %>
+        </div>
+    <% } %>
+
+    <!-- Quote Section -->
+    <section class="quote-section">
+        <div class="quote-content">
+            <div class="quote-text">
+                <h2>“The beautiful thing about learning is that no one can take it away from you.”</h2>
+                <p>- B.B. King</p>
             </div>
-            <% } %>
-                <!-- Quote Section -->
-                <section class="quote-section">
-                    <div class="quote-content">
-                        <div class="quote-text">
-                            <h2>“The beautiful thing about learning is that no one can take it away from you.”</h2>
-                            <p>- B.B. King</p>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main>
+        <!-- New Instructors -->
+        <section class="Lecture new-instructors">
+            <h2>New Instructors</h2>
+            <div class="container">
+                <% newInstructors.forEach(instructor => { %>
+                    <div class="lecInfo">
+                        <div class="info">
+                            <a href="/inprofile/<%= instructor._id %>">
+                                <img src="<%= instructor.picture %>" alt="<%= instructor.firstName %>">
+                                <h3>
+                                    <%= instructor.firstName %> <%= instructor.lastName %>
+                                </h3>
+                            </a>
                         </div>
                     </div>
-                </section>
-                <!-- Main Content Area -->
-                <main>
-                    <!-- New Instructors -->
-                    <section class="Lecture new-instructors">
-                        <h2>New Instructors</h2>
-                        <div class="container">
-                            <% newInstructors.forEach(instructor=> { %>
-                                <div class="lecInfo">
-                                    <div class="info">
-                                        <a href="/inprofile/<%= instructor._id %>">
-                                            <img src="<%= instructor.picture %>" alt="<%= instructor.firstName %>">
-                                            <h3>
-                                                <%= instructor.firstName %>
-                                                    <%= instructor.lastName %>
-                                            </h3>
-                                        </a>
-                                    </div>
-                                </div>
-                                <% }) %>
-                        </div>
-                    </section>
+                <% }) %>
+            </div>
+        </section>
 
-                    <!-- New Courses -->
-                    <section class="Lecture new-courses">
-                        <h2>New Courses</h2>
-                        <div class="container">
-                            <% newCourses.forEach(course=> { %>
-                                <div class="lecInfo">
-                                    <div class="info">
-                                        <a href="/coursedetail/<%= course._id %>">
-                                            <img src="<%= course.picture %>" alt="<%= course.name %>">
-                                            <h3>
-                                                <%= course.name %>
-                                            </h3>
-                                        </a>
-                                        <p>Instructor: <a href="/inprofile/<%= course.instructor._id %>">
-                                                <%= course.instructor.firstName %>
-                                                    <%= course.instructor.lastName %>
-                                            </a></p>
-                                        <p>Price: $<%= course.price %>
-                                        </p>
-                                    </div>
-                                </div>
-                                <% }) %>
+        <!-- New Courses -->
+        <section class="Lecture new-courses">
+            <h2>New Courses</h2>
+            <div class="container">
+                <% newCourses.forEach(course => { %>
+                    <div class="lecInfo">
+                        <div class="info">
+                            <a href="/coursedetail/<%= course._id %>">
+                                <img src="<%= course.picture %>" alt="<%= course.name %>">
+                                <h3>
+                                    <%= course.name %>
+                                </h3>
+                            </a>
+                            <p>Instructor: 
+                                <% if (course.instructor) { %>
+                                    <a href="/inprofile/<%= course.instructor._id %>">
+                                        <%= course.instructor.firstName %> <%= course.instructor.lastName %>
+                                    </a>
+                                <% } else { %>
+                                    <span>Unknown Instructor</span>
+                                <% } %>
+                            </p>
+                            <p>Price: $<%= course.price %></p>
                         </div>
-                    </section>
-
-                    <!-- Featured Instructor -->
-                    <section class="Lecture featured-instructors">
-                        <h2>Featured Instructors</h2>
-                        <div class="container">
-                            <% featuredInstructors.forEach(instructor=> { %>
-                                <div class="lecInfo">
-                                    <div class="info">
-                                        <a href="/inprofile/<%= instructor._id %>">
-                                            <img src="<%= instructor.picture %>" alt="<%= instructor.firstName %>">
-                                            <h3>
-                                                <%= instructor.firstName %>
-                                                    <%= instructor.lastName %>
-                                            </h3>
-                                        </a>
-                                    </div>
-                                </div>
-                                <% }) %>
-                        </div>
-                    </section>
-
-                    <!-- Featured Courses -->
-                    <section class="Lecture featured-courses">
-                        <h2>Featured Courses</h2>
-                        <div class="container">
-                            <% featuredCourses.forEach(course=> { %>
-                                <div class="lecInfo">
-                                    <div class="info">
-                                        <a href="/coursedetail/<%= course._id %>">
-                                            <img src="<%= course.picture %>" alt="<%= course.name %>">
-                                            <h3>
-                                                <%= course.name %>
-                                            </h3>
-                                        </a>
-                                        <p>Instructor: <a href="/inprofile/<%= course.instructor._id %>">
-                                                <%= course.instructor.firstName %>
-                                                    <%= course.instructor.lastName %>
-                                            </a></p>
-                                        <p>Price: $<%= course.price %>
-                                        </p>
-                                    </div>
-                                </div>
-                                <% }) %>
-                        </div>
-                    </section>
-                </main>
-
-                <!-- Footer: Navigation Bar -->
-                <footer>
-                    <div class="footer-nav">
-                        <a href="#">Copyright</a>
-                        <a href="#">Terms of Service</a>
-                        <a href="#">Privacy Policy</a>
                     </div>
-                </footer>
+                <% }) %>
+            </div>
+        </section>
+
+        <!-- Featured Instructors -->
+        <section class="Lecture featured-instructors">
+            <h2>Featured Instructors</h2>
+            <div class="container">
+                <% featuredInstructors.forEach(instructor => { %>
+                    <div class="lecInfo">
+                        <div class="info">
+                            <a href="/inprofile/<%= instructor._id %>">
+                                <img src="<%= instructor.picture %>" alt="<%= instructor.firstName %>">
+                                <h3>
+                                    <%= instructor.firstName %> <%= instructor.lastName %>
+                                </h3>
+                            </a>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </section>
+
+        <!-- Featured Courses -->
+        <section class="Lecture featured-courses">
+            <h2>Featured Courses</h2>
+            <div class="container">
+                <% featuredCourses.forEach(course => { %>
+                    <div class="lecInfo">
+                        <div class="info">
+                            <a href="/coursedetail/<%= course._id %>">
+                                <img src="<%= course.picture %>" alt="<%= course.name %>">
+                                <h3>
+                                    <%= course.name %>
+                                </h3>
+                            </a>
+                            <p>Instructor: 
+                                <% if (course.instructor) { %>
+                                    <a href="/inprofile/<%= course.instructor._id %>">
+                                        <%= course.instructor.firstName %> <%= course.instructor.lastName %>
+                                    </a>
+                                <% } else { %>
+                                    <span>Unknown Instructor</span>
+                                <% } %>
+                            </p>
+                            <p>Price: $<%= course.price %></p>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer: Navigation Bar -->
+    <footer>
+        <div class="footer-nav">
+            <a href="#">Copyright</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+    </footer>
 </body>
-
 </html>
