@@ -195,38 +195,50 @@ app.post('/login', async (req, res) => {
   try {
     let user;
 
+    // For learner account type
     if (accountType === 'learner') {
-      user = await Learner.findOne({ email });
-      if (!user) return res.status(400).render('login', { error: 'Invalid email or password for learner' });
-
+      user = await Learner.findOne({ email }).lean(); // Use lean to get a plain object
+      if (!user) {
+        console.log('Learner not found');
+        return res.status(400).render('login', { error: 'Invalid email or password for learner' });
+      }
       const isPasswordValid = await bcrypt.compare(password, user.password);
-      if (!isPasswordValid) return res.status(400).render('login', { error: 'Invalid email or password for learner' });
-
+      if (!isPasswordValid) {
+        console.log('Invalid password for learner');
+        return res.status(400).render('login', { error: 'Invalid email or password for learner' });
+      }
       req.session.userID = user._id;
-      req.session.learners = user;
-      req.session.accountType = 'learner'; // Set session accountType
-
+      req.session.user = user; // Ensure this is now a plain object
+      req.session.accountType = 'learner'; // Set account type
+      console.log('User set in session:', req.session.user);
       return res.redirect('/');
     }
 
+    // For teacher account type
     if (accountType === 'teacher') {
-      user = await Teacher.findOne({ email });
-      if (!user) return res.status(400).render('login', { error: 'Invalid email or password for teacher' });
-
+      user = await Teacher.findOne({ email }).lean(); // Use lean to get a plain object
+      if (!user) {
+        console.log('Teacher not found');
+        return res.status(400).render('login', { error: 'Invalid email or password for instructor' });
+      }
       const isPasswordValid = await bcrypt.compare(password, user.password);
-      if (!isPasswordValid) return res.status(400).render('login', { error: 'Invalid email or password for teacher' });
-
+      if (!isPasswordValid) {
+        console.log('Invalid password for instructor');
+        return res.status(400).render('login', { error: 'Invalid email or password for instructor' });
+      }
       req.session.userID = user._id;
-      req.session.user = user;
-      req.session.accountType = 'teacher'; // Set session accountType
-
+      req.session.user = user; // Ensure this is now a plain object
+      req.session.accountType = 'teacher'; // Set account type
+      console.log('User set in session:', req.session.user);
       return res.redirect('/');
     }
 
-    res.status(400).render('login', { error: 'Please select a valid account type' });
+    // If account type doesn't match, return error
+    return res.status(400).render('login', { error: 'Please select the correct account type' });
+
   } catch (err) {
     console.error(err);
-    res.status(500).render('login', { error: 'Internal Server Error' });
+    return res.status(500).render('login', { error: 'Internal Server Error' });
   }
 });
 
@@ -423,10 +435,9 @@ app.post('/login', async (req, res) => {
         return res.status(400).render('login', { error: 'Invalid email or password for learner' });
       }
       req.session.userID = user._id;
-      req.session.learners = user; // Store learner data in session
+      req.session.user = user; // Store learner data in session
       req.session.accountType = 'learner'; // Store account type in session
-      console.log(req.session.accountType)
-      return res.redirect('/');  // Redirect to homepage after login
+      return res.redirect('/');
     }
 
     // Check if the account type is teacher
@@ -442,8 +453,7 @@ app.post('/login', async (req, res) => {
       req.session.userID = user._id;
       req.session.user = user; // Store teacher data in session
       req.session.accountType = 'teacher'; // Store account type in session
-      console.log(req.session.accountType)
-      return res.redirect('/');  // Redirect to homepage after login
+      return res.redirect('/');
     }
 
     // If account type doesn't match, return error
@@ -616,6 +626,35 @@ app.post('/deleteCourse/:courseId', async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+app.get('/orderPlacement/:courseId', async (req, res) => {
+  console.log('Session User:', req.session.user); // Log session user
+  console.log('Session AccountType:', req.session.accountType); // Log account type
+
+  const user = req.session.user;
+  const accountType = req.session.accountType;
+
+  if (!user) {
+    return res.redirect('/login'); // Redirect to login if not logged in
+  }
+
+  const courseId = req.params.courseId;
+
+  try {
+    // Find the course by ID and populate the instructor's details
+    const course = await Course.findById(courseId).populate('instructor');
+
+    if (!course) {
+      return res.status(404).send('Course not found');
+    }
+
+    res.render('orderPlacement', { user, accountType, course });
+  } catch (error) {
+    console.error('Error fetching course details:', error);
+    res.status(500).send('Server Error');
+  }
+});
+
 
 
 app.get('/learner/coursedetail', (req, res) => {

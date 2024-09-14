@@ -87,26 +87,28 @@
             <!--This class will show the details such as course name, instructor name and role, course price, and total payment of the order-->
             <div class="OrderSummary">
                 <div class="InstructorInfo">
-                    <img src="<%= user.picture %>" alt="<%= user.name %> Profile picture">
+                    <img src="<%= course.instructor.picture %>"
+                        alt="<%= course.instructor.firstName %> Profile picture">
                     <div class="InstructorName">
                         <h2 id="InstructorName">
-                            <%= Teacher.firstName + Teacher.lastName %>
+                            <%= course.instructor.firstName %>
+                                <%= course.instructor.lastName %>
                         </h2>
-                        <p id="Role">Instructor
+                        <p id="Role">Instructor</p>
                     </div>
                 </div>
                 <hr>
                 <div class="CourseGroup">
                     <p id="courseName">
-                        <%= courseModel.name %>
+                        <%= course.name %>
                     </p>
-                    <p id="coursePrice">$<%= courseModel.price %>
+                    <p id="coursePrice">$<%= course.price %>
                     </p>
                 </div>
                 <hr>
                 <div class="Confirmation">
                     <p id="paymentConfirmation">Total payment</p>
-                    <p id="coursePrice">$<%= courseModel.price %>
+                    <p id="coursePrice">$<%= course.price %>
                     </p>
                 </div>
             </div>
@@ -134,8 +136,8 @@
                 }
 
                 function redirect() {
-                    window.location.assign("thankyou.ejs")
-                    alert("Thank you for your order")
+                    window.location.assign("/thankyou");
+                    alert("Thank you for your order");
                 }
             </script>
         </div>
