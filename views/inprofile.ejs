@@ -16,6 +16,9 @@
             <h1><%= teacher.firstName %> <%= teacher.lastName %></h1>
             <p><%= teacher.jobTitle %></p>
         </div>
+        <div class="header-nav">
+            <button class="home-button" onclick="redirectToHome()">Home</button>
+        </div>
     </header>
 
     <!-- Main Section -->
@@ -78,6 +81,10 @@
     <script>
         function redirectToAddCourse() {
             window.location.href = '/addCourse';
+        }
+
+        function redirectToHome() {
+            window.location.href = '/';
         }
     </script>
 </body>

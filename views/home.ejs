@@ -12,181 +12,121 @@
     <!-- Header: Logo and Navigation Bar -->
     <%- include("partials/navbar.ejs", { user: user, accountType: accountType }) %>
 
-    <% if (message) { %>
-        <div class="alert alert-success">
-          <%= message %>
-        </div>
-      <% } %>
-
-        <!-- Search Modal -->
-        <div class="modal_search" id="search">
-            <a href="#" class="close_search"></a>
-            <div class="search_body">
-                <input class="search_button" type="text" placeholder="Search" name="search">
+        <% if (message) { %>
+            <div class="alert alert-success">
+                <%= message %>
             </div>
-        </div>
+            <% } %>
+                <!-- Quote Section -->
+                <section class="quote-section">
+                    <div class="quote-content">
+                        <div class="quote-text">
+                            <h2>“The beautiful thing about learning is that no one can take it away from you.”</h2>
+                            <p>- B.B. King</p>
+                        </div>
+                    </div>
+                </section>
+                <!-- Main Content Area -->
+                <main>
+                    <!-- New Instructors -->
+                    <section class="Lecture new-instructors">
+                        <h2>New Instructors</h2>
+                        <div class="container">
+                            <% newInstructors.forEach(instructor=> { %>
+                                <div class="lecInfo">
+                                    <div class="info">
+                                        <a href="/inprofile/<%= instructor._id %>">
+                                            <img src="<%= instructor.picture %>" alt="<%= instructor.firstName %>">
+                                            <h3>
+                                                <%= instructor.firstName %>
+                                                    <%= instructor.lastName %>
+                                            </h3>
+                                        </a>
+                                    </div>
+                                </div>
+                                <% }) %>
+                        </div>
+                    </section>
 
-        <!-- Quote Section -->
-        <section class="quote-section">
-            <div class="quote-content">
-                <div class="quote-text">
-                    <h2>“The beautiful thing about learning is that no one can take it away from you.”</h2>
-                    <p>- B.B. King</p>
-                </div>
-            </div>
-        </section>
+                    <!-- New Courses -->
+                    <section class="Lecture new-courses">
+                        <h2>New Courses</h2>
+                        <div class="container">
+                            <% newCourses.forEach(course=> { %>
+                                <div class="lecInfo">
+                                    <div class="info">
+                                        <a href="/coursedetail/<%= course._id %>">
+                                            <img src="<%= course.picture %>" alt="<%= course.name %>">
+                                            <h3>
+                                                <%= course.name %>
+                                            </h3>
+                                        </a>
+                                        <p>Instructor: <a href="/inprofile/<%= course.instructor._id %>">
+                                                <%= course.instructor.firstName %>
+                                                    <%= course.instructor.lastName %>
+                                            </a></p>
+                                        <p>Price: $<%= course.price %>
+                                        </p>
+                                    </div>
+                                </div>
+                                <% }) %>
+                        </div>
+                    </section>
 
-        <!-- Main Content Area -->
-        <main>
-            <!-- New Instructors -->
-            <section class="Lecture new-instructors">
-                <h2>New Instructors</h2>
-                <div class="container">
-                    <div class="lecInfo">
-                        <div class="info">
-                            <a href="/instructors/hung">
-                                <img src="/images/teacher.jpg" alt="Tran Manh Hung">
-                                <h3>Tran Manh Hung</h3>
-                            </a>
+                    <!-- Featured Instructor -->
+                    <section class="Lecture featured-instructors">
+                        <h2>Featured Instructors</h2>
+                        <div class="container">
+                            <% featuredInstructors.forEach(instructor=> { %>
+                                <div class="lecInfo">
+                                    <div class="info">
+                                        <a href="/inprofile/<%= instructor._id %>">
+                                            <img src="<%= instructor.picture %>" alt="<%= instructor.firstName %>">
+                                            <h3>
+                                                <%= instructor.firstName %>
+                                                    <%= instructor.lastName %>
+                                            </h3>
+                                        </a>
+                                    </div>
+                                </div>
+                                <% }) %>
                         </div>
-                    </div>
-                    <!-- Add more instructors here -->
-                    <div class="lecInfo">
-                        <div class="info">
-                            <a href="/instructors/hung">
-                                <img src="/images/teacher.jpg" alt="Tran Manh Hung">
-                                <h3>Tran Manh Hung</h3>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="lecInfo">
-                        <div class="info">
-                            <a href="/instructors/hung">
-                                <img src="/images/teacher.jpg" alt="Tran Manh Hung">
-                                <h3>Tran Manh Hung</h3>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                    </section>
 
-            <!-- New Courses -->
-            <section class="Lecture new-courses">
-                <h2>New Courses</h2>
-                <div class="container">
-                    <div class="lecInfo">
-                        <div class="info">
-                            <a href="/courses/java">
-                                <img src="/images/course.jpg" alt="Java Course">
-                                <h3>Java Programming</h3>
-                            </a>
-                            <p>Instructor: <a href="/instructors/hung">Tran Manh Hung</a></p>
-                            <p>Price: $50</p>
+                    <!-- Featured Courses -->
+                    <section class="Lecture featured-courses">
+                        <h2>Featured Courses</h2>
+                        <div class="container">
+                            <% featuredCourses.forEach(course=> { %>
+                                <div class="lecInfo">
+                                    <div class="info">
+                                        <a href="/coursedetail/<%= course._id %>">
+                                            <img src="<%= course.picture %>" alt="<%= course.name %>">
+                                            <h3>
+                                                <%= course.name %>
+                                            </h3>
+                                        </a>
+                                        <p>Instructor: <a href="/inprofile/<%= course.instructor._id %>">
+                                                <%= course.instructor.firstName %>
+                                                    <%= course.instructor.lastName %>
+                                            </a></p>
+                                        <p>Price: $<%= course.price %>
+                                        </p>
+                                    </div>
+                                </div>
+                                <% }) %>
                         </div>
-                    </div>
-                    <div class="lecInfo">
-                        <div class="info">
-                            <a href="/courses/java">
-                                <img src="/images/course.jpg" alt="Java Course">
-                                <h3>Java Programming</h3>
-                            </a>
-                            <p>Instructor: <a href="/instructors/hung">Tran Manh Hung</a></p>
-                            <p>Price: $50</p>
-                        </div>
-                    </div>
-                    <div class="lecInfo">
-                        <div class="info">
-                            <a href="/courses/java">
-                                <img src="/images/course.jpg" alt="Java Course">
-                                <h3>Java Programming</h3>
-                            </a>
-                            <p>Instructor: <a href="/instructors/hung">Tran Manh Hung</a></p>
-                            <p>Price: $50</p>
-                        </div>
-                    </div>
-                    <!-- Add more courses here -->
-                </div>
-            </section>
+                    </section>
+                </main>
 
-            <!-- Featured Instructor -->
-            <section class="Lecture featured-instructors">
-                <h2>Featured Instructor</h2>
-                <div class="container">
-                    <div class="lecInfo">
-                        <div class="info">
-                            <a href="/instructors/khang">
-                                <img src="/images/teacher.jpg" alt="Nguyen Manh Khang">
-                                <h3>Nguyen Manh Khang</h3>
-                            </a>
-                        </div>
+                <!-- Footer: Navigation Bar -->
+                <footer>
+                    <div class="footer-nav">
+                        <a href="#">Copyright</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Privacy Policy</a>
                     </div>
-                    <div class="lecInfo">
-                        <div class="info">
-                            <a href="/instructors/khang">
-                                <img src="/images/teacher.jpg" alt="Nguyen Manh Khang">
-                                <h3>Nguyen Manh Khang</h3>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="lecInfo">
-                        <div class="info">
-                            <a href="/instructors/khang">
-                                <img src="/images/teacher.jpg" alt="Nguyen Manh Khang">
-                                <h3>Nguyen Manh Khang</h3>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Add more featured instructors here -->
-                </div>
-            </section>
-
-            <!-- Featured Courses -->
-            <section class="Lecture featured-courses">
-                <h2>Featured Courses</h2>
-                <div class="container">
-                    <div class="lecInfo">
-                        <div class="info">
-                            <a href="/courses/cybersecurity">
-                                <img src="/images/course.jpg" alt="Cybersecurity Course">
-                                <h3>Cybersecurity</h3>
-                            </a>
-                            <p>Instructor: <a href="/instructors/khang">Nguyen Manh Khang</a></p>
-                            <p>Price: $60</p>
-                        </div>
-                    </div>
-                    <div class="lecInfo">
-                        <div class="info">
-                            <a href="/courses/cybersecurity">
-                                <img src="/images/course.jpg" alt="Cybersecurity Course">
-                                <h3>Cybersecurity</h3>
-                            </a>
-                            <p>Instructor: <a href="/instructors/khang">Nguyen Manh Khang</a></p>
-                            <p>Price: $60</p>
-                        </div>
-                    </div>
-                    <div class="lecInfo">
-                        <div class="info">
-                            <a href="/courses/cybersecurity">
-                                <img src="/images/course.jpg" alt="Cybersecurity Course">
-                                <h3>Cybersecurity</h3>
-                            </a>
-                            <p>Instructor: <a href="/instructors/khang">Nguyen Manh Khang</a></p>
-                            <p>Price: $60</p>
-                        </div>
-                    </div>
-                    <!-- Add more featured courses here -->
-                </div>
-            </section>
-        </main>
-
-        <!-- Footer: Navigation Bar -->
-        <footer>
-            <div class="footer-nav">
-                <a href="#">Copyright</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Privacy Policy</a>
-            </div>
-        </footer>
+                </footer>
 </body>
 
 </html>

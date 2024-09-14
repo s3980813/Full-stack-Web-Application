@@ -86,16 +86,43 @@ mongoose.connect(mongoURI)
   .catch((error) => console.log(error.message));
 
 
-app.get('/', (req, res) => {
-  const user = req.session.user;
-  const accountType = req.session.accountType;
-  const message = req.session.message || null; // Check for any message in the session
+  app.get('/', async (req, res) => {
+    const user = req.session.user;
+    const accountType = req.session.accountType;
+    const message = req.session.message || null; // Check for any message in the session
 
-  // Clear the message from the session after displaying it
-  req.session.message = null;
+    try {
+        // Fetch new instructors (limit to 5 for demonstration purposes)
+        const newInstructors = await Teacher.find().sort({ dateCreated: -1 }).limit(5);
 
-  res.render('home', { user, accountType, message });
+        // Fetch new courses (limit to 5 for demonstration purposes)
+        const newCourses = await Course.find().sort({ dateCreated: -1 }).populate('instructor').limit(5);
+
+        // Fetch featured instructors (this could be a subset of instructors based on criteria)
+        const featuredInstructors = await Teacher.find().limit(3); // Modify query as needed
+
+        // Fetch featured courses (this could be a subset of courses based on criteria)
+        const featuredCourses = await Course.find().populate('instructor').limit(3); // Modify query as needed
+
+        // Clear the message from the session after displaying it
+        req.session.message = null;
+
+        // Render the home page with real data
+        res.render('home', {
+            user,
+            accountType,
+            message,
+            newInstructors,
+            newCourses,
+            featuredInstructors,
+            featuredCourses
+        });
+    } catch (error) {
+        console.error('Error fetching data for homepage:', error);
+        res.status(500).send('Server Error');
+    }
 });
+
 
 app.get('/contact', (req, res) => {
   const user = req.session.user;
@@ -228,32 +255,32 @@ app.get('/FAQs', (req, res) => {
   res.render('FAQs', { user, accountType });
 });
 
-app.get('/inprofile', async (req, res) => {
-  const accountType = req.session.accountType;
-  const userID = req.session.userID;
+// app.get('/inprofile', async (req, res) => {
+//   const accountType = req.session.accountType;
+//   const userID = req.session.userID;
 
-  try {
-    if (accountType === 'teacher') {
-      // Fetch the teacher's details
-      const teachers = await Teacher.findOne({ _id: userID });
+//   try {
+//     if (accountType === 'teacher') {
+//       // Fetch the teacher's details
+//       const teachers = await Teacher.findOne({ _id: userID });
 
-      if (!teachers) {
-        return res.status(404).render('inprofile', { error: 'Teacher not found', teachers: null, courses: [] });
-      }
+//       if (!teachers) {
+//         return res.status(404).render('inprofile', { error: 'Teacher not found', teachers: null, courses: [] });
+//       }
 
-      // Fetch all courses by this teacher
-      const courses = await Course.find({ instructor: userID });
+//       // Fetch all courses by this teacher
+//       const courses = await Course.find({ instructor: userID });
 
-      // Render the profile page with teacher and course details
-      res.render('inprofile', { teachers, courses });
-    } else {
-      res.status(403).send('Access denied. Only teachers can view this page.');
-    }
-  } catch (err) {
-    console.error(err);
-    res.status(500).render('inprofile', { error: 'Error retrieving data', teachers: null, courses: [] });
-  }
-});
+//       // Render the profile page with teacher and course details
+//       res.render('inprofile', { teachers, courses });
+//     } else {
+//       res.status(403).send('Access denied. Only teachers can view this page.');
+//     }
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).render('inprofile', { error: 'Error retrieving data', teachers: null, courses: [] });
+//   }
+// });
 
 
 app.get('/profile', async (req, res) => {
@@ -267,51 +294,51 @@ app.get('/profile', async (req, res) => {
   res.render('profile', { learners, accountType });  // Pass learners and accountType
 });
 
-app.get('/inprofile', (req, res) => {
-  const teacher = {
-    firstName: 'John',
-    lastName: 'Doe',
-    picture: 'default-avatar.jpg',
-    jobTitle: 'Instructor',
-    specialization: ['Programming', 'Web Development']
-  };
+// app.get('/inprofile', (req, res) => {
+//   const teacher = {
+//     firstName: 'John',
+//     lastName: 'Doe',
+//     picture: 'default-avatar.jpg',
+//     jobTitle: 'Instructor',
+//     specialization: ['Programming', 'Web Development']
+//   };
 
-  // Ensure the 'teacher' object is passed correctly
-  res.render('inprofile', { teacher });
-});
-
-// app.get('/inprofile', async (req, res) => {
-//   const accountType = req.session.accountType;
-//   const userID = req.session.userID;
-
-//   try {
-//     if (accountType === 'teacher') {
-//       // Fetch the teacher's details
-//       const teacher = await Teacher.findOne({ _id: userID });
-
-//       // Add a log to check if teacher data is retrieved
-//       console.log('Teacher Data:', teacher);
-
-//       if (!teacher) {
-//         return res.status(404).render('inprofile', { error: 'Teacher not found', teacher: null, newCourses: [], allCourses: [] });
-//       }
-
-//       // Fetch all courses by this teacher
-//       const allCourses = await Course.find({ instructor: userID }).sort({ dateCreated: -1 });
-
-//       // Divide into newCourses (latest 5) and allCourses
-//       const newCourses = allCourses.slice(0, 5);  // Get up to 5 newest courses
-
-//       // Render the profile page with teacher and course details
-//       res.render('inprofile', { teacher, newCourses, allCourses });
-//     } else {
-//       res.status(403).send('Access denied. Only teachers can view this page.');
-//     }
-//   } catch (err) {
-//     console.error('Error:', err);
-//     res.status(500).render('inprofile', { error: 'Error retrieving data', teacher: null, newCourses: [], allCourses: [] });
-//   }
+//   // Ensure the 'teacher' object is passed correctly
+//   res.render('inprofile', { teacher });
 // });
+
+app.get('/inprofile', async (req, res) => {
+  const accountType = req.session.accountType;
+  const userID = req.session.userID;
+
+  try {
+    if (accountType === 'teacher') {
+      // Fetch the teacher's details
+      const teacher = await Teacher.findOne({ _id: userID });
+
+      // Add a log to check if teacher data is retrieved
+      console.log('Teacher Data:', teacher);
+
+      if (!teacher) {
+        return res.status(404).render('inprofile', { error: 'Teacher not found', teacher: null, newCourses: [], allCourses: [] });
+      }
+
+      // Fetch all courses by this teacher
+      const allCourses = await Course.find({ instructor: userID }).sort({ dateCreated: -1 });
+
+      // Divide into newCourses (latest 5) and allCourses
+      const newCourses = allCourses.slice(0, 5);  // Get up to 5 newest courses
+
+      // Render the profile page with teacher and course details
+      res.render('inprofile', { teacher, newCourses, allCourses });
+    } else {
+      res.status(403).send('Access denied. Only teachers can view this page.');
+    }
+  } catch (err) {
+    console.error('Error:', err);
+    res.status(500).render('inprofile', { error: 'Error retrieving data', teacher: null, newCourses: [], allCourses: [] });
+  }
+});
 
 
 app.get('/thankyou', (req, res) => {

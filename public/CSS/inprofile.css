@@ -3,66 +3,51 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
 }
 
-/* Header and Footer */
-.instructor-header {
-    color: #fff;
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header Section */
+.teacher-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 20px;
-    background: linear-gradient(29deg, #1b5ac3, #df5aa5);
-    background-size: 400% 400%;
-    -webkit-animation: AnimationName 30s ease infinite;
-    animation: AnimationName 30s ease infinite;
+    background: linear-gradient(45deg, #1b5ac3, #df5aa5);
+    color: white;
+    border-bottom: 4px solid #df5aa5;
 }
 
-.instructor-header .profile-image,
-.instructor-footer .footer-profile-image {
+.teacher-header .profile-image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid #fff;
     margin-right: 20px;
 }
 
-.instructor-header img,
-.instructor-footer img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+.teacher-info h1 {
+    font-size: 2rem;
+    margin-bottom: 5px;
 }
 
-.instructor-info h1,
-.footer-info h2 {
-    margin: 0;
-}
-
-.instructor-info p {
-    margin-top: 5px;
+.teacher-info p {
+    font-size: 1.2rem;
     font-style: italic;
 }
 
-/* Main Section */
-main {
-    padding: 20px;
+.header-nav {
+    margin-left: auto;
 }
 
-/* About Section */
-.about-section {
-    margin-bottom: 40px;
-}
-
-.about-section h2 {
-    margin-bottom: 10px;
-}
-
-/* Add Course Button Section */
-.add-course-section {
-    margin-bottom: 40px;
-    text-align: right;
-}
-
-.add-course-button {
-    background-color: #1b5ac3;
-    color: white;
+.home-button {
+    background-color: #fff;
+    color: #1b5ac3;
     border: none;
     padding: 10px 20px;
     font-size: 16px;
@@ -71,8 +56,30 @@ main {
     transition: background-color 0.3s ease;
 }
 
-.add-course-button:hover {
-    background-color: #0e3d92;
+.home-button:hover {
+    background-color: #df5aa5;
+    color: #fff;
+}
+
+/* Main Section */
+main {
+    padding: 40px 20px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* About Section */
+.about-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.about-section h2 {
+    margin-bottom: 15px;
+    color: #1b5ac3;
 }
 
 /* Courses Section */
@@ -83,10 +90,15 @@ main {
 }
 
 .course-card {
-    background-color: #f4f4f4;
+    background-color: #fff;
     padding: 15px;
     border-radius: 8px;
-    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
 }
 
 .course-card img {
@@ -98,14 +110,37 @@ main {
 
 .course-card h3 {
     margin: 10px 0;
+    font-size: 1.4rem;
+    color: #333;
 }
 
 .course-card p {
     font-weight: bold;
-    color: #333;
+    color: #1b5ac3;
 }
 
-/* Footer Section */
+/* Add Course Button */
+.add-course-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.add-course-button {
+    background-color: #1b5ac3;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-course-button:hover {
+    background-color: #0e3d92;
+}
+
+/* Footer Styling */
 footer {
     bottom: 0;
     color: #fff;
@@ -129,56 +164,19 @@ footer {
     text-decoration: underline;
 }
 
+
 /* Responsive Design */
 @media (max-width: 600px) {
-
-    .instructor-header,
-    .instructor-footer {
+    .teacher-header {
         flex-direction: column;
         text-align: center;
     }
 
-    .footer-info {
-        text-align: center;
-        margin-top: 20px;
-    }
-}
-
-/* Desktop (1200px or higher) */
-@media (min-width: 1200px) {
-    body {
-        background-color: #fff;
-        font-size: 1.2em;
+    .teacher-header .profile-image {
+        margin-bottom: 15px;
     }
 
-    .InProfile {
-        width: 1200px;
-        margin: 0 auto;
-    }
-}
-
-/* Tablet (768px to 1199px) */
-@media (min-width: 768px) and (max-width: 1199px) {
-    body {
-        background-color: #e0e0e0;
-    }
-
-    .InProfile {
-        width: 95%;
-        margin: 0 auto;
-    }
-}
-
-/* Smartphone (767px or lower) */
-@media (max-width: 767px) {
-    body {
-        background-color: #d0d0d0;
-    }
-
-    .InProfile {
-        width: 100%;
-        margin: 0 auto;
-        flex-wrap: wrap;
-        flex-direction: column;
+    .courses-grid {
+        grid-template-columns: 1fr;
     }
 }
