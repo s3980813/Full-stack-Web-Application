@@ -138,24 +138,26 @@ app.get('/aboutUs', (req, res) => {
 
 // render add course page
 app.get('/addCourse', async (req, res) => {
+  const user = req.session.user;
   const accountType = req.session.accountType;
   const userID = req.session.userID;
 
   try {
-    if (accountType === 'teacher') {
-      const teachers = await Teacher.findOne({ _id: userID });
-      if (!teachers) {
-        return res.status(404).render('addCourse', { error: 'Teacher not found', accountType });
+      if (accountType === 'teacher') {
+          const teachers = await Teacher.findOne({ _id: userID });
+          if (!teachers) {
+              return res.status(404).render('addCourse', { error: 'Teacher not found', accountType, user });
+          }
+          res.render('addCourse', { teachers, accountType, user });
+      } else {
+          res.redirect('/'); // Redirect if not a teacher
       }
-      res.render('addCourse', { teachers, accountType });
-    } else {
-      res.redirect('/'); // Redirect if not a teacher
-    }
   } catch (err) {
-    console.error(err);
-    res.status(500).render('addCourse', { error: 'Cannot load the page', accountType });
+      console.error(err);
+      res.status(500).render('addCourse', { error: 'Cannot load the page', accountType, user });
   }
 });
+
 
 // Handle course form submission (POST)
 app.post('/addCourse', upload.single('picture'), async (req, res) => {
@@ -244,6 +246,7 @@ app.post('/login', async (req, res) => {
 
 
 app.get('/coursedetail/:courseId', async (req, res) => {
+  const user = req.session.user;
   const accountType = req.session.accountType; // Get accountType from session
   const courseId = req.params.courseId;
 
@@ -253,8 +256,8 @@ app.get('/coursedetail/:courseId', async (req, res) => {
       return res.status(404).send('Course not found');
     }
 
-    // Pass course and accountType to the template
-    res.render('coursedetail', { course, accountType });
+    // Pass course, accountType, and user to the template
+    res.render('coursedetail', { course, accountType, user });
   } catch (err) {
     console.error('Error fetching course details:', err);
     res.status(500).send('Server Error');
@@ -320,8 +323,6 @@ app.get('/profile', async (req, res) => {
 // });
 
 app.get('/inprofile/:teacherId', async (req, res) => {
-  const userID = req.session.userID;
-  const accountType = req.session.accountType;
   const teacherId = req.params.teacherId;
 
   try {
@@ -338,7 +339,7 @@ app.get('/inprofile/:teacherId', async (req, res) => {
       const newCourses = allCourses.slice(0, 5);  // Get up to 5 newest courses
 
       // Check if the current user is the owner of this profile
-      const isOwner = accountType === 'teacher' && userID.toString() === teacherId.toString();
+      const isOwner = req.session.accountType === 'teacher' && req.session.userID.toString() === teacherId.toString();
 
       // Render the profile page with teacher and course details
       res.render('inprofile', { teacher, newCourses, allCourses, isOwner });

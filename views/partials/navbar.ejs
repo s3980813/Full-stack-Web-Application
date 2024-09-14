@@ -3,15 +3,16 @@
     <div class="nav">
         <a class="navButton" href="/">Home</a>
         <a class="navButton" href="/aboutUs">About Us</a>
-        <a class="navButton" id="browse-btn" href="/browseCourse">Browse</a> <!-- Updated this line -->
+        <a class="navButton" id="browse-btn" href="/browseCourse">Browse</a>
         <a class="navButton" href="/FAQs">FAQ</a>
         <a class="navButton" href="/contact">Contact</a>
         <% if (typeof accountType !== 'undefined') { %>
             <% if (accountType === 'learner') { %>
                 <a class="navButton" href="/profile">My Profile</a>
                 <a class="navButton" href="/logout">Logout</a>
-            <% } else if (accountType === 'teacher') { %>
-                <a class="navButton" href="/inprofile">Instructor Profile</a>
+            <% } else if (accountType === 'teacher' && user) { %>
+                <!-- Include the user's _id in the href for the instructor profile link -->
+                <a class="navButton" href="/inprofile/<%= user._id %>">Instructor Profile</a>
                 <a class="navButton" href="/logout">Logout</a>
             <% } %>
         <% } else { %>
