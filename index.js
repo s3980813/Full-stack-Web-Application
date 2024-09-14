@@ -86,41 +86,41 @@ mongoose.connect(mongoURI)
   .catch((error) => console.log(error.message));
 
 
-  app.get('/', async (req, res) => {
-    const user = req.session.user;
-    const accountType = req.session.accountType;
-    const message = req.session.message || null; // Check for any message in the session
+app.get('/', async (req, res) => {
+  const user = req.session.user;
+  const accountType = req.session.accountType;
+  const message = req.session.message || null; // Check for any message in the session
 
-    try {
-        // Fetch new instructors (limit to 5 for demonstration purposes)
-        const newInstructors = await Teacher.find().sort({ dateCreated: -1 }).limit(5);
+  try {
+    // Fetch new instructors (limit to 5 for demonstration purposes)
+    const newInstructors = await Teacher.find().sort({ dateCreated: -1 }).limit(5);
 
-        // Fetch new courses (limit to 5 for demonstration purposes)
-        const newCourses = await Course.find().sort({ dateCreated: -1 }).populate('instructor').limit(5);
+    // Fetch new courses (limit to 5 for demonstration purposes)
+    const newCourses = await Course.find().sort({ dateCreated: -1 }).populate('instructor').limit(5);
 
-        // Fetch featured instructors (this could be a subset of instructors based on criteria)
-        const featuredInstructors = await Teacher.find().limit(3); // Modify query as needed
+    // Fetch featured instructors (this could be a subset of instructors based on criteria)
+    const featuredInstructors = await Teacher.find().limit(3); // Modify query as needed
 
-        // Fetch featured courses (this could be a subset of courses based on criteria)
-        const featuredCourses = await Course.find().populate('instructor').limit(3); // Modify query as needed
+    // Fetch featured courses (this could be a subset of courses based on criteria)
+    const featuredCourses = await Course.find().populate('instructor').limit(3); // Modify query as needed
 
-        // Clear the message from the session after displaying it
-        req.session.message = null;
+    // Clear the message from the session after displaying it
+    req.session.message = null;
 
-        // Render the home page with real data
-        res.render('home', {
-            user,
-            accountType,
-            message,
-            newInstructors,
-            newCourses,
-            featuredInstructors,
-            featuredCourses
-        });
-    } catch (error) {
-        console.error('Error fetching data for homepage:', error);
-        res.status(500).send('Server Error');
-    }
+    // Render the home page with real data
+    res.render('home', {
+      user,
+      accountType,
+      message,
+      newInstructors,
+      newCourses,
+      featuredInstructors,
+      featuredCourses
+    });
+  } catch (error) {
+    console.error('Error fetching data for homepage:', error);
+    res.status(500).send('Server Error');
+  }
 });
 
 
@@ -143,18 +143,18 @@ app.get('/addCourse', async (req, res) => {
   const userID = req.session.userID;
 
   try {
-      if (accountType === 'teacher') {
-          const teachers = await Teacher.findOne({ _id: userID });
-          if (!teachers) {
-              return res.status(404).render('addCourse', { error: 'Teacher not found', accountType, user });
-          }
-          res.render('addCourse', { teachers, accountType, user });
-      } else {
-          res.redirect('/'); // Redirect if not a teacher
+    if (accountType === 'teacher') {
+      const teachers = await Teacher.findOne({ _id: userID });
+      if (!teachers) {
+        return res.status(404).render('addCourse', { error: 'Teacher not found', accountType, user });
       }
+      res.render('addCourse', { teachers, accountType, user });
+    } else {
+      res.redirect('/'); // Redirect if not a teacher
+    }
   } catch (err) {
-      console.error(err);
-      res.status(500).render('addCourse', { error: 'Cannot load the page', accountType, user });
+    console.error(err);
+    res.status(500).render('addCourse', { error: 'Cannot load the page', accountType, user });
   }
 });
 
@@ -270,34 +270,6 @@ app.get('/FAQs', (req, res) => {
   res.render('FAQs', { user, accountType });
 });
 
-// app.get('/inprofile', async (req, res) => {
-//   const accountType = req.session.accountType;
-//   const userID = req.session.userID;
-
-//   try {
-//     if (accountType === 'teacher') {
-//       // Fetch the teacher's details
-//       const teachers = await Teacher.findOne({ _id: userID });
-
-//       if (!teachers) {
-//         return res.status(404).render('inprofile', { error: 'Teacher not found', teachers: null, courses: [] });
-//       }
-
-//       // Fetch all courses by this teacher
-//       const courses = await Course.find({ instructor: userID });
-
-//       // Render the profile page with teacher and course details
-//       res.render('inprofile', { teachers, courses });
-//     } else {
-//       res.status(403).send('Access denied. Only teachers can view this page.');
-//     }
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).render('inprofile', { error: 'Error retrieving data', teachers: null, courses: [] });
-//   }
-// });
-
-
 app.get('/profile', async (req, res) => {
   const learner = req.session.user;  // Use req.session.user
   const accountType = req.session.accountType;
@@ -309,43 +281,30 @@ app.get('/profile', async (req, res) => {
   res.render('profile', { learner, accountType });  // Pass learner to the view
 });
 
-// app.get('/inprofile', (req, res) => {
-//   const teacher = {
-//     firstName: 'John',
-//     lastName: 'Doe',
-//     picture: 'default-avatar.jpg',
-//     jobTitle: 'Instructor',
-//     specialization: ['Programming', 'Web Development']
-//   };
-
-//   // Ensure the 'teacher' object is passed correctly
-//   res.render('inprofile', { teacher });
-// });
-
 app.get('/inprofile/:teacherId', async (req, res) => {
   const teacherId = req.params.teacherId;
 
   try {
-      // Fetch the teacher's details
-      const teacher = await Teacher.findById(teacherId);
-      if (!teacher) {
-          return res.status(404).render('inprofile', { error: 'Teacher not found', teacher: null, newCourses: [], allCourses: [] });
-      }
+    // Fetch the teacher's details
+    const teacher = await Teacher.findById(teacherId);
+    if (!teacher) {
+      return res.status(404).render('inprofile', { error: 'Teacher not found', teacher: null, newCourses: [], allCourses: [] });
+    }
 
-      // Fetch all courses by this teacher
-      const allCourses = await Course.find({ instructor: teacherId }).sort({ dateCreated: -1 });
+    // Fetch all courses by this teacher
+    const allCourses = await Course.find({ instructor: teacherId }).sort({ dateCreated: -1 });
 
-      // Divide into newCourses (latest 5) and allCourses
-      const newCourses = allCourses.slice(0, 5);  // Get up to 5 newest courses
+    // Divide into newCourses (latest 5) and allCourses
+    const newCourses = allCourses.slice(0, 5);  // Get up to 5 newest courses
 
-      // Check if the current user is the owner of this profile
-      const isOwner = req.session.accountType === 'teacher' && req.session.userID.toString() === teacherId.toString();
+    // Check if the current user is the owner of this profile
+    const isOwner = req.session.accountType === 'teacher' && req.session.userID.toString() === teacherId.toString();
 
-      // Render the profile page with teacher and course details
-      res.render('inprofile', { teacher, newCourses, allCourses, isOwner });
+    // Render the profile page with teacher and course details
+    res.render('inprofile', { teacher, newCourses, allCourses, isOwner });
   } catch (err) {
-      console.error('Error:', err);
-      res.status(500).render('inprofile', { error: 'Error retrieving data', teacher: null, newCourses: [], allCourses: [] });
+    console.error('Error:', err);
+    res.status(500).render('inprofile', { error: 'Error retrieving data', teacher: null, newCourses: [], allCourses: [] });
   }
 });
 
@@ -656,18 +615,18 @@ app.post('/thankyou', async (req, res) => {
   const { courseId } = req.body;
 
   try {
-      // Fetch the course data and populate instructor details
-      const course = await Course.findById(courseId).populate('instructor');
+    // Fetch the course data and populate instructor details
+    const course = await Course.findById(courseId).populate('instructor');
 
-      if (!course) {
-          return res.status(404).send('Course not found');
-      }
+    if (!course) {
+      return res.status(404).send('Course not found');
+    }
 
-      // Render the thankyou page with course and instructor details
-      res.render('thankyou', { course });
+    // Render the thankyou page with course and instructor details
+    res.render('thankyou', { course });
   } catch (error) {
-      console.error('Error fetching course for thank you page:', error);
-      res.status(500).send('Server Error');
+    console.error('Error fetching course for thank you page:', error);
+    res.status(500).send('Server Error');
   }
 });
 

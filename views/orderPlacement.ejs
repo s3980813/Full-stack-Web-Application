@@ -114,19 +114,40 @@
             </div>
 
             <script>
+                let creditCard = document.getElementById('CreditCard'),
+                    eWallet = document.getElementById('E-wallet'),
+                    Paypal = document.getElementById('Paypal'),
+                    cardDetails = document.querySelector('.PaymentMethods form');
+
+                function pay_by_Card() {
+                    cardDetails.style.display = 'block'
+                }
+
+                function pay_by_E_wallet() {
+                    cardDetails.style.display = 'none'
+                }
+
+                function pay_by_Paypal() {
+                    cardDetails.style.display = 'none'
+                }
+
+                function goBack() {
+                    window.history.back()
+                }
+
                 function redirect() {
                     // Create a form to submit the order
                     const form = document.createElement('form');
                     form.method = 'POST';
                     form.action = '/thankyou';
-            
+
                     // Create a hidden input for courseId
                     const input = document.createElement('input');
                     input.type = 'hidden';
                     input.name = 'courseId';
                     input.value = '<%= course._id %>';
                     form.appendChild(input);
-            
+
                     // Append the form to the body and submit
                     document.body.appendChild(form);
                     form.submit();
