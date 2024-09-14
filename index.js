@@ -319,36 +319,32 @@ app.get('/profile', async (req, res) => {
 //   res.render('inprofile', { teacher });
 // });
 
-app.get('/inprofile', async (req, res) => {
-  const accountType = req.session.accountType;
+app.get('/inprofile/:teacherId', async (req, res) => {
   const userID = req.session.userID;
+  const accountType = req.session.accountType;
+  const teacherId = req.params.teacherId;
 
   try {
-    if (accountType === 'teacher') {
       // Fetch the teacher's details
-      const teacher = await Teacher.findOne({ _id: userID });
-
-      // Add a log to check if teacher data is retrieved
-      console.log('Teacher Data:', teacher);
-
+      const teacher = await Teacher.findById(teacherId);
       if (!teacher) {
-        return res.status(404).render('inprofile', { error: 'Teacher not found', teacher: null, newCourses: [], allCourses: [] });
+          return res.status(404).render('inprofile', { error: 'Teacher not found', teacher: null, newCourses: [], allCourses: [] });
       }
 
       // Fetch all courses by this teacher
-      const allCourses = await Course.find({ instructor: userID }).sort({ dateCreated: -1 });
+      const allCourses = await Course.find({ instructor: teacherId }).sort({ dateCreated: -1 });
 
       // Divide into newCourses (latest 5) and allCourses
       const newCourses = allCourses.slice(0, 5);  // Get up to 5 newest courses
 
+      // Check if the current user is the owner of this profile
+      const isOwner = accountType === 'teacher' && userID.toString() === teacherId.toString();
+
       // Render the profile page with teacher and course details
-      res.render('inprofile', { teacher, newCourses, allCourses });
-    } else {
-      res.status(403).send('Access denied. Only teachers can view this page.');
-    }
+      res.render('inprofile', { teacher, newCourses, allCourses, isOwner });
   } catch (err) {
-    console.error('Error:', err);
-    res.status(500).render('inprofile', { error: 'Error retrieving data', teacher: null, newCourses: [], allCourses: [] });
+      console.error('Error:', err);
+      res.status(500).render('inprofile', { error: 'Error retrieving data', teacher: null, newCourses: [], allCourses: [] });
   }
 });
 

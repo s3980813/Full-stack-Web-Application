@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= teacher.firstName %> Profile</title>
+    <title>
+        <%= teacher.firstName %> Profile
+    </title>
     <link rel="stylesheet" href="/css/inprofile.css">
 </head>
+
 <body>
     <!-- Unique Header for Instructor -->
     <header class="teacher-header">
@@ -13,8 +17,13 @@
             <img src="<%= teacher.picture %>" alt="<%= teacher.firstName %> Profile Picture">
         </div>
         <div class="teacher-info">
-            <h1><%= teacher.firstName %> <%= teacher.lastName %></h1>
-            <p><%= teacher.jobTitle %></p>
+            <h1>
+                <%= teacher.firstName %>
+                    <%= teacher.lastName %>
+            </h1>
+            <p>
+                <%= teacher.jobTitle %>
+            </p>
         </div>
         <div class="header-nav">
             <button class="home-button" onclick="redirectToHome()">Home</button>
@@ -70,9 +79,11 @@
         </section>
 
         <!-- Add Course Button -->
+        <% if (isOwner) { %>
         <section class="add-course-section">
             <button class="add-course-button" onclick="redirectToAddCourse()">Add New Course</button>
         </section>
+        <% } %>
     </main>
 
     <!-- Footer Partial -->
@@ -80,12 +91,8 @@
 
     <script>
         function redirectToAddCourse() {
-            window.location.href = '/addCourse';
-        }
-
-        function redirectToHome() {
-            window.location.href = '/';
-        }
-    </script>
+            window.location.href = ' /addCourse';
+        } function redirectToHome() { window.location.href = '/'; } </script>
 </body>
+
 </html>
