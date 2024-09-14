@@ -655,6 +655,24 @@ app.get('/orderPlacement/:courseId', async (req, res) => {
   }
 });
 
+app.post('/thankyou', async (req, res) => {
+  const { courseId } = req.body;
+
+  try {
+      // Fetch the course data and populate instructor details
+      const course = await Course.findById(courseId).populate('instructor');
+
+      if (!course) {
+          return res.status(404).send('Course not found');
+      }
+
+      // Render the thankyou page with course and instructor details
+      res.render('thankyou', { course });
+  } catch (error) {
+      console.error('Error fetching course for thank you page:', error);
+      res.status(500).send('Server Error');
+  }
+});
 
 
 app.get('/learner/coursedetail', (req, res) => {

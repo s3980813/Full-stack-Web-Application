@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/CSS/thankyou.css" type="text/css">
+    <link rel="stylesheet" href="/css/thankyou.css" type="text/css">
     <title></title>
 </head>
 
@@ -38,19 +38,21 @@
 
                 <div class="OrderSummary">
                     <div class="courseInfo">
-                        <img src="#" alt="<%= user.name %> Profile picture">
+                        <img src="<%= course.instructor.picture %>"
+                            alt="<%= course.instructor.firstName %> Profile picture">
                         <br>
                         <div class="courseDetails">
                             <h3 id="courseName">
-                                <%= courseModel.name %>
+                                <%= course.name %>
                             </h3>
                             <p id="Instructor">
-                                <%= Teacher.firstName + Teacher.lastName %>
+                                <%= course.instructor.firstName %>
+                                    <%= course.instructor.lastName %>
                             </p>
                         </div>
                     </div>
                     <label for="Total" id="Total">Total:</label>
-                    <label for="coursePrice" id="Price">$<%= courseModel.price %></label>
+                    <label for="coursePrice" id="Price">$<%= course.price %></label>
                     <br>
                     <label for="PaymentMethod" id="MethodDetails">Payment Method:</label>
                     <label for="MethodChoice" id="MethodChoice">Credit card</label>
@@ -62,7 +64,7 @@
         <%- include("partials/footer.ejs") %>
             <script>
                 function redirectMainPage() {
-                    window.location.assign("home.ejs")
+                    window.location.assign("/"); // Redirect to the homepage
                 }
             </script>
 </body>
