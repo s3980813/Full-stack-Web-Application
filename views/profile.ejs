@@ -15,22 +15,22 @@
 
         <!-- My Account Content -->
         <div class="account-container" id="accountContainer">
-            <% if (learners) { %>
+            <% if (learner) { %> <!-- Updated from learners to learner -->
                 <!-- If user is logged in -->
                 <div class="account-info">
-                    <img src="<%= learners.picture %>" alt="Profile Picture" class="profile-picture">
+                    <img src="<%= learner.picture %>" alt="Profile Picture" class="profile-picture">
                     <h2>
-                        <%= learners.firstName %>
-                            <%= learners.lastName %>
+                        <%= learner.firstName %>
+                            <%= learner.lastName %>
                     </h2>
                     <p><strong>Email:</strong>
-                        <%= learners.email %>
+                        <%= learner.email %>
                     </p>
                     <p><strong>Phone:</strong>
-                        <%= learners.phone %>
+                        <%= learner.phone %>
                     </p>
                     <p><strong>Address:</strong>
-                        <%= learners.address %>
+                        <%= learner.address %>
                     </p>
                 </div>
                 <% } else { %>

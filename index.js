@@ -296,14 +296,14 @@ app.get('/FAQs', (req, res) => {
 
 
 app.get('/profile', async (req, res) => {
-  const learners = req.session.learners;  // Get learner data from session
+  const learner = req.session.user;  // Use req.session.user
   const accountType = req.session.accountType;
 
-  if (!learners) {
+  if (!learner) {
     return res.redirect('/login');  // Redirect to login if not logged in
   }
 
-  res.render('profile', { learners, accountType });  // Pass learners and accountType
+  res.render('profile', { learner, accountType });  // Pass learner to the view
 });
 
 // app.get('/inprofile', (req, res) => {
