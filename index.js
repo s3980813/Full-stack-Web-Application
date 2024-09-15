@@ -77,7 +77,6 @@ const upload = multer({ storage: storage });
 // app.use(learnerRoutes);
 // app.use('/teacher',teacherRoutes);
 
-
 // Database Connection
 const mongoURI = 'mongodb+srv://Creasic:wY3v3xh7FuM059vM@cluster0.c0ofkzi.mongodb.net/test';
 
