@@ -30,7 +30,7 @@ const teacherSchema = new mongoose.Schema({
     },
     picture: {
         type: String,
-        default: 'default-avatar.jpg'
+        default: 'profile-1.png'
     },
     address: { type: String, required: true },
     schoolName: {
