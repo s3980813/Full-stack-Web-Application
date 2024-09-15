@@ -43,10 +43,12 @@
                 <% if (accountType === 'learner') { %>
                     <button class="trial-button" onclick="startTrial()">Trial For 2-Day</button>
                     <button class="enroll-button" onclick="enrollCourse()">Enroll</button>
-                <% } else if (accountType === 'teacher') { %>
+                <% } else if (accountType === 'teacher' && user && user._id.toString() === course.instructor._id.toString()) { %>
+                    <!-- Only show these buttons if the logged-in teacher is the owner of the course -->
                     <button class="edit-button" id="openEditModal">Edit Course</button>
                     <button class="delete-button" onclick="deleteCourse()">Delete Course</button>
-                <% } else { %>
+                <% } else if (!user) { %>
+                    <!-- This section is only for guests -->
                     <p>Guests cannot enroll in or edit this course.</p>
                 <% } %>
             </div>

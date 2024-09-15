@@ -315,6 +315,24 @@ app.get('/thankyou', (req, res) => {
   res.render('thankyou', { user, accountType });
 });
 
+app.get('/copyright', (req, res) => {
+  const user = req.session.user;
+  const accountType = req.session.accountType;
+  res.render('copyright', { user, accountType });
+});
+
+app.get('/tos', (req, res) => {
+  const user = req.session.user;
+  const accountType = req.session.accountType;
+  res.render('tos', { user, accountType });
+});
+
+app.get('/privacypolicy', (req, res) => {
+  const user = req.session.user;
+  const accountType = req.session.accountType;
+  res.render('privacypolicy', { user, accountType });
+});
+
 app.get('/browseCourse', (req, res) => {
   const user = req.session.user;
   const accountType = req.session.accountType;

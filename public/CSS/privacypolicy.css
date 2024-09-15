@@ -129,49 +129,6 @@
     /* Resets the lift effect when active */
 }
 
-#search {
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 10;
-    display: none;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-
-#search {
-    background-color: rgba(0, 0, 0, 0.5);
-    ;
-}
-
-#search:target {
-    display: flex;
-}
-
-.search_button {
-    display: block;
-    border-radius: 15px;
-    position: relative;
-    border-style: none;
-    padding: 10px;
-    width: 100%;
-}
-
-.close_search {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    cursor: default;
-}
-
-.search_body {
-    width: 20%;
-}
-
 /*Pricing*/
 .pricing-table {
     display: none;

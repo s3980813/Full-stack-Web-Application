@@ -1,3 +1,3 @@
-function redirectMainPage() {
-    window.location.assign("#")
-}
+// function redirectMainPage() {
+//     window.location.assign("#")
+// }
