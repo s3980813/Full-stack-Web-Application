@@ -276,7 +276,7 @@ footer {
     text-decoration: underline;
 }
 
-/* Responsive Styles */
+/* Responsive Styles
 @media (max-width: 1199px) {
     .navBar {
         flex-wrap: wrap;
@@ -328,4 +328,4 @@ footer {
         width: 1200px;
         margin: 0 auto;
     }
-}
+} */

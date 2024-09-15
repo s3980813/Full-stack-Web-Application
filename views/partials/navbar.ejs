@@ -1,27 +1,24 @@
 <nav class="navBar">
-    <div class="logo">
-        <a href="/"><img src="/images/A_small_cup_of_coffee.JPG" alt="coffee cup"></a>
-    </div>
-    <div class="menu-toggle" id="menu-toggle">
-        <span>&#9776;</span>
-    </div>
-    <div class="nav" id="nav-menu">
+    <div class="logo"><a href="/"><img src="/images/A_small_cup_of_coffee.JPG" alt="coffee cup"></a></div>
+    <div class="nav">
         <a class="navButton" href="/">Home</a>
         <a class="navButton" href="/aboutUs">About Us</a>
+        <a class="navButton" id="pricing-btn" href="#">Pricing</a>
         <a class="navButton" id="browse-btn" href="/browseCourse">Browse</a>
         <a class="navButton" href="/FAQs">FAQ</a>
         <a class="navButton" href="/contact">Contact</a>
-        <% if (typeof accountType !=='undefined' ) { %>
-            <% if (accountType==='learner' ) { %>
+        <% if (typeof accountType !== 'undefined') { %>
+            <% if (accountType === 'learner') { %>
                 <a class="navButton" href="/profile">My Profile</a>
                 <a class="navButton" href="/logout">Logout</a>
-                <% } else if (accountType==='teacher' && user) { %>
-                    <a class="navButton" href="/inprofile/<%= user._id %>">Instructor Profile</a>
-                    <a class="navButton" href="/logout">Logout</a>
-                    <% } %>
-                        <% } else { %>
-                            <a class="navButton" href="/login">Login</a>
-                            <% } %>
+            <% } else if (accountType === 'teacher' && user) { %>
+                <!-- Include the user's _id in the href for the instructor profile link -->
+                <a class="navButton" href="/inprofile/<%= user._id %>">Instructor Profile</a>
+                <a class="navButton" href="/logout">Logout</a>
+            <% } %>
+        <% } else { %>
+            <a class="navButton" href="/login">Login</a>
+        <% } %>
     </div>
 </nav>
 
@@ -64,21 +61,14 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const menuToggle = document.getElementById('menu-toggle');
-        const navMenu = document.getElementById('nav-menu');
-        const browseBtn = document.getElementById('browse-btn');
+        const pricingBtn = document.getElementById('pricing-btn');
         const pricingTable = document.getElementById('pricing-table');
         const closeBtn = document.getElementById('close-pricing-btn');
 
-        // Toggle the menu visibility on smaller screens
-        menuToggle.addEventListener('click', function () {
-            navMenu.classList.toggle('show');
-        });
-
-        // Show the pricing table when the "Browse" button is clicked
-        browseBtn.addEventListener('click', function (e) {
+        // Show the pricing table when the "Pricing" button is clicked
+        pricingBtn.addEventListener('click', function (e) {
             e.preventDefault();  // Prevent default behavior
-            pricingTable.classList.add('show-table');
+            pricingTable.classList.add('show-table');  // Assuming you have CSS to show/hide this
         });
 
         // Hide the pricing table when the "Close" button is clicked
