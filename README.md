@@ -9,16 +9,12 @@ The Course Selling Website is an online platform designed to connect learners an
 
 💻 Key Features
 
-For Learners:
+- For Learners:
 Browse and search for courses by name or category.
 View detailed course information and instructor profiles.
 Purchase courses and track progress.
 
-For Instructors:
-
-Create and manage courses with detailed descriptions and images.
-Edit and update course content.
-Access a personalized instructor dashboard.
+- For Instructors: Create and manage courses with detailed descriptions and images. Edit and update course content. Access a personalized instructor dashboard.
 
 ⚙️ Tools and Technology
 
