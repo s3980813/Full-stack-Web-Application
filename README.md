@@ -26,3 +26,16 @@ NPM Libraries
 Quan Hùng - s3980813 (Full Stack Developer)
 Nguyễn Thành Đạt - s3830318 (Front-end Developer)
 Trương Phạm Minh Khang - s3966150 (Front-end Developer)
+
+## 🛠️ How to Run
+First, you need to install NPM Libraries required for this project
+```
+npm install
+```
+
+Then, to run the web application, run Node
+```
+node index.js
+```
+
+After that, go to http://localhost:8000 to view it in your browser!
