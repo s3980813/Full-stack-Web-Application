@@ -38,6 +38,13 @@ p {
     animation: AnimationName 30s ease infinite;
 }
 
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+
 .logo img {
     width: 70px;
     height: 70px;
@@ -74,8 +81,7 @@ p {
     border-radius: 4px;
 }
 
-
-/*Pricing*/
+/* Pricing */
 .pricing-table {
     display: none;
     position: fixed;
@@ -270,18 +276,37 @@ footer {
     text-decoration: underline;
 }
 
-@media (max-width: 800px) {
+/* Responsive Styles */
+@media (max-width: 1199px) {
     .navBar {
-        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .menu-toggle {
+        display: block;
     }
 
     .nav {
         flex-direction: column;
+        width: 100%;
+        display: none;
+    }
+
+    .nav.show {
+        display: flex;
     }
 
     .navButton {
         width: 100%;
         text-align: center;
+    }
+
+    .quote-section h2 {
+        font-size: 30px;
+    }
+
+    .quote-text p {
+        font-size: 18px;
     }
 
     .container {
