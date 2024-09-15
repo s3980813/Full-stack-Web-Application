@@ -42,6 +42,18 @@ Step 4: Open any browser and go to this address:
 
                                 http://localhost:8000
 
+Test accounts:
+
+- Learner:
+  - username/email: mongo@gmail.com
+  - password: password1 
+
+- Instructor:
+  - username/email: s3980813@rmit.edu.vn
+  - password: password1!
+
+Note: In the login section, you need to select either learner or instructor radio buttons to login and access to the main page afterwards.
+
 🌟 Authors
 
 - Đặng Trung Hiếu - s3911594 (Full Stack Developer)
@@ -53,3 +65,5 @@ Step 4: Open any browser and go to this address:
 - Trương Phạm Minh Khang - s3966150 (Front-end Developer)
 
 Demonstration of the web application: https://youtu.be/cYXDXrjfxx0
+
+Contribution: The contribution score among team members is attached in part 11 - Peer Evaluation in the report 

@@ -10,20 +10,13 @@ const cookieParser = require('cookie-parser');
 const Agenda = require('agenda');
 const bodyParser = require('body-parser')
 
-// Importing routes
-const authRoutes = require('./src/routes/authRoutes');
-const courseRoutes = require('./src/routes/courseRoutes');
-const learnerRoutes = require('./src/routes/learnerRoutes');
-const teacherRoutes = require('./src/routes/teacherRoutes');
-
-
 // Importing models
 const Learner = require('./src/models/learnerModel');
 const Teacher = require('./src/models/teacherModel');
 const Course = require('./src/models/courseModel');
 const { errorMonitor } = require('events');
 
-
+//Setting up HTTPS port
 const app = express();
 const port = 8000;
 
@@ -37,10 +30,6 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set("views", "./views");
 app.use(express.static('public'));
-
-
-// // Checking user for all routes
-// app.get('*', checkUser);
 
 // Setting up session
 app.use(
@@ -61,21 +50,12 @@ const storage = multer.diskStorage({
     cb(null, 'public/images');
   },
   filename: function (req, file, cb) {
-    // const date = new Date();
-    // const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`;
-    // const newFilename = `${formattedDate}-${file.originalname}`;
     cb(null, file.originalname);  // Save file with timestamp
   }
 });
 
 // File upload middleware
 const upload = multer({ storage: storage });
-
-// Setting up routes
-// app.use(authRoutes);
-// app.use(courseRoutes);
-// app.use(learnerRoutes);
-// app.use('/teacher',teacherRoutes);
 
 // Database Connection
 const mongoURI = 'mongodb+srv://Creasic:wY3v3xh7FuM059vM@cluster0.c0ofkzi.mongodb.net/test';
